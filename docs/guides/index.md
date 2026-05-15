@@ -3,6 +3,7 @@
 Bedrock no es solo un conjunto de herramientas SASS — también propone una forma de trabajar. Estas guías recogen patrones y convenciones que el framework promueve para que los proyectos que lo consumen sean más consistentes, mantenibles y predecibles.
 
 No son reglas estrictas, pero sí decisiones de diseño intencionadas: cada guía explica el **qué**, el **por qué** y, cuando aplica, el **cuándo no seguirla**.
+
 > [!WARNING]
 > **Este framework está en desarrollo activo y no debe usarse en producción.**
 > Actualmente estoy recopilando y añadiendo el catálogo de buenas prácticas, espera cambios importantes en esta sección.

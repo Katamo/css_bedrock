@@ -1,0 +1,15 @@
+@use '../../../setup/typography' as *;
+@use 'sass:map';
+
+@mixin autoAliasing($props) {
+  $font-size: 0;
+
+  @if $props {
+    $font-size: map.get($props, font-size);
+  }
+
+  @if $font-aliasing-threshold and $font-size >= $font-aliasing-threshold {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

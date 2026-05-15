@@ -1,0 +1,11 @@
+@use '../../../core' as *;
+
+@mixin buttonColor($border-color, $background-color, $text-color) {
+  border-color: $border-color;
+  background-color: $background-color;
+  color: $text-color;
+
+  .arrow {
+    @include svgTint($text-color);
+  }
+}

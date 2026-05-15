@@ -1,0 +1,21 @@
+@use '../../../core' as *;
+
+.c-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    flex-shrink: 0;
+    cursor: inherit;
+  }
+
+  .label {
+    display: inline-block;
+  }
+
+  @include attr(disabled) {
+    cursor: default;
+    pointer-events: none;
+  }
+}

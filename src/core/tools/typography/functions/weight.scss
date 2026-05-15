@@ -1,0 +1,10 @@
+@use "sass:map";
+@use '../../../setup/typography' as *;
+
+@function weight($weight) {
+  @if map.has-key($font-weight, $weight) {
+    @return map.get($font-weight, $weight);
+  } @else {
+    @error "Weight #{$weight} not found";
+  }
+}

@@ -1,0 +1,151 @@
+@use 'sass:meta';
+@use 'sass:list';
+
+/// Aplica estilos cuando el elemento es descendiente de un ancestro con `data-*`.
+/// Funciona como `attr` pero el selector generado es `[data-x] &` en lugar de `&[data-x]`.
+///
+/// @param {String}           $name  — Nombre del atributo del ancestro (sin prefijo `data-`)
+/// @param {null|String|List} $value — Valor único, lista de valores, o null para check de presencia
+/// @param {String}           $mode  — Operador lógico cuando $value es lista: 'or' | 'and' | 'nor' | 'xor'
+///
+/// ─── Presencia (sin valor) ───────────────────────────────────────────────────
+///
+///   @include context('background');
+///   → [data-background] & { }
+///
+/// ─── Valor único ─────────────────────────────────────────────────────────────
+///
+///   @include context('background', 'dark');
+///   → [data-background="dark"] & { }
+///
+/// ─── OR — al menos uno de los valores (default) ──────────────────────────────
+///
+///   @include context('background', ('dark', 'light'));
+///   @include context('background', ('dark', 'light'), 'or');
+///   → [data-background="dark"] &,
+///      [data-background="light"] & { }
+///
+/// ─── AND — todos los valores encadenados en el mismo ancestro ─────────────────
+///   ⚠ Un elemento solo puede tener un valor por atributo, por lo que este
+///     selector nunca coincidirá en runtime para el mismo atributo.
+///
+///   @include context('background', ('dark', 'light'), 'and');
+///   → [data-background="dark"][data-background="light"] & { }
+///
+/// ─── NOR — ninguno de los valores en el ancestro ─────────────────────────────
+///
+///   @include context('background', ('dark', 'light'), 'nor');
+///   → :not([data-background="dark"]):not([data-background="light"]) & { }
+///
+///   Con tres valores:
+///   @include context('background', ('dark', 'light', 'grey'), 'nor');
+///   → :not([data-background="dark"]):not([data-background="light"]):not([data-background="grey"]) & { }
+///
+/// ─── XOR — exactamente uno de los valores en el ancestro ─────────────────────
+///
+///   @include context('background', ('dark', 'light'), 'xor');
+///   → [data-background="dark"]:not([data-background="light"]) &,
+///      [data-background="light"]):not([data-background="dark"]) & { }
+///
+///   Con tres valores:
+///   @include context('background', ('dark', 'light', 'grey'), 'xor');
+///   → [data-background="dark"]:not([data-background="light"]):not([data-background="grey"]) &,
+///      [data-background="light"]:not([data-background="dark"]):not([data-background="grey"]) &,
+///      [data-background="grey"]:not([data-background="dark"]):not([data-background="light"]) & { }
+
+@mixin context($name, $value: null, $mode: 'or') {
+
+  // ── Presencia (sin valor) ──────────────────────────────────────────────────
+  @if not $value {
+    [data-#{$name}] & {
+      @content;
+    }
+  }
+
+  // ── Valor único ────────────────────────────────────────────────────────────
+  @else if meta.type-of($value) != list or list.length($value) == 1 {
+    $v: $value;
+    @if meta.type-of($value) == list {
+      $v: list.nth($value, 1);
+    }
+    [data-#{$name}="#{$v}"] & {
+      @content;
+    }
+  }
+
+  // ── Múltiples valores ──────────────────────────────────────────────────────
+  @else {
+
+    @if $mode == 'or' {
+      $selectors: ();
+      @each $v in $value {
+        $selectors: list.append($selectors, '[data-#{$name}="#{$v}"] &', comma);
+      }
+      #{$selectors} {
+        @content;
+      }
+    }
+
+    @else if $mode == 'and' {
+      $ancestor: '';
+      @each $v in $value {
+        $ancestor: $ancestor + '[data-#{$name}="#{$v}"]';
+      }
+      #{$ancestor} & {
+        @content;
+      }
+    }
+
+    @else if $mode == 'nor' {
+      $ancestor: '';
+      @each $v in $value {
+        $ancestor: $ancestor + ':not([data-#{$name}="#{$v}"])';
+      }
+      #{$ancestor} & {
+        @content;
+      }
+    }
+
+    @else if $mode == 'xor' {
+      $branches: ();
+      @each $current in $value {
+        $ancestor: '[data-#{$name}="#{$current}"]';
+        @each $other in $value {
+          @if $other != $current {
+            $ancestor: $ancestor + ':not([data-#{$name}="#{$other}"])';
+          }
+        }
+        $branches: list.append($branches, '#{$ancestor} &', comma);
+      }
+      #{$branches} {
+        @content;
+      }
+    }
+
+  }
+}
+
+/// Encadena múltiples pares (atributo, valor) en un único selector de contexto.
+/// El ancestro debe tener todos los atributos simultáneamente.
+/// Cada par es una lista de 1 elemento (presencia) o 2 elementos (valor).
+///
+///   @include context-join(('background', 'dark'), ('theme', 'brand')) { }
+///   → [data-background="dark"][data-theme="brand"] & { }
+///
+///   @include context-join(('disabled',), ('background', 'dark')) { }
+///   → [data-disabled][data-background="dark"] & { }
+
+@mixin context-join($pairs...) {
+  $ancestor: '';
+  @each $pair in $pairs {
+    $name: list.nth($pair, 1);
+    @if list.length($pair) >= 2 {
+      $ancestor: $ancestor + '[data-#{$name}="#{list.nth($pair, 2)}"]';
+    } @else {
+      $ancestor: $ancestor + '[data-#{$name}]';
+    }
+  }
+  #{$ancestor} & {
+    @content;
+  }
+}

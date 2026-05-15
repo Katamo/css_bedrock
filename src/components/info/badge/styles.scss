@@ -1,0 +1,21 @@
+@use '../../../core' as *;
+
+.c-badge {
+  display: inline-flex;
+  align-items: center;
+
+  .icon {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .text {
+    display: inline-block;
+  }
+
+  @include attr(disabled) {
+    cursor: default;
+    pointer-events: none;
+  }
+}

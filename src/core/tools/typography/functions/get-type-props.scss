@@ -1,0 +1,52 @@
+@use "sass:map";
+@use "sass:meta";
+@use '../../../setup/typography' as *;
+@use './font' as *;
+@use './weight' as *;
+@use './font-size' as *;
+
+@function getTypeProps($type, $variant, $bp, $font-typeset: $font-typeset) {
+  @if not map.has-key($font-typeset, $type) {
+    @error "Unknown '#{$type}' typeset.";
+  }
+
+  $typeset: map.get($font-typeset, $type);
+  $props: map.get(map.get($typeset, bps), $bp);
+
+  @if $variant {
+    $variant-list: map.get($typeset, variants);
+
+    @if not $variant-list or not map.has-key($variant-list , $variant) {
+      @warn "Unknown '#{$variant}' variant in '#{$type}' variants list.";
+    } @else {
+      $variant-props: map.get(map.get($variant-list, $variant), $bp);
+
+      @if $variant-props {
+        $props: map.merge($props, $variant-props);
+      }
+    }
+  }
+
+  @if $props and map.has-key($props, font-family) {
+    $ff: map.get($props, font-family);
+    @if meta.type-of($ff) == string and map.has-key($font-family, $ff) {
+      $props: map.set($props, font-family, font($ff));
+    }
+  }
+
+  @if $props and map.has-key($props, font-weight) {
+    $fw: map.get($props, font-weight);
+    @if meta.type-of($fw) == string and map.has-key($font-weight, $fw) {
+      $props: map.set($props, font-weight, weight($fw));
+    }
+  }
+
+  @if $props and map.has-key($props, font-size) {
+    $fs: map.get($props, font-size);
+    @if meta.type-of($fs) == string and map.has-key($font-size, $fs) {
+      $props: map.set($props, font-size, font-size($fs));
+    }
+  }
+
+  @return $props;
+}

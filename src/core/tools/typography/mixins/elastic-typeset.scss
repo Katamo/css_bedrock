@@ -1,0 +1,72 @@
+@use '../../../setup/typography' as *;
+@use '../../utils/functions/elastic-value' as *;
+@use '../../utils/mixins/expand-props' as *;
+@use '../../utils/mixins/direction' as *;
+@use '../../breakpoints/mixins/bp-from' as *;
+@use 'auto-aliasing' as *;
+@use 'sass:map';
+@use '../../mutations/index' as *;
+
+@mixin elasticTypeset($elastic-typeset, $ch: null, $font-typeset-elastic: $font-typeset-elastic) {
+  @include defaultDIR {
+    @include expandElasticTypeset($elastic-typeset, $ch, $font-typeset-elastic);
+  }
+
+  @include RTL {
+    @include expandElasticTypeset($elastic-typeset, $ch, $font-typeset-elastic-ar);
+  }
+}
+
+@mixin expandElasticTypeset($elastic-typeset, $ch: null, $font-typeset-elastic: $font-typeset-elastic) {
+
+  $props: map.get($font-typeset-elastic, $elastic-typeset);
+
+  @if not $props {
+    @error "#{$elastic-typeset} is not present in the list of elastic typesets";
+  }
+
+  $default-props: map.get($props, defaultProps);
+
+  $bps: map.get($props, bps);
+
+  @if length($bps) < 2 or length($bps) > 2 {
+    @error "elasticTypeset mixin needs an elastic typeset with 2 breakpoints";
+  }
+
+  // Get breakpoints sizes
+  $keys: map.keys($bps);
+
+  // Get elements at a given index in a list
+  $bp-min: nth($keys, 1);
+  $bp-max: nth($keys, 2);
+
+  // Get props for breakpoints
+  $min-props: map.get($bps, $bp-min);
+  $max-props: map.get($bps, $bp-max);
+
+  // Default static properties
+  @include expandProps($default-props);
+  @include autoAliasing($default-props);
+  --hz-elastic-typeset: #{$elastic-typeset};
+
+  @include bpFrom($bp-min) {
+    @if $ch {
+      width: #{$ch}ch;
+    }
+
+    @each $prop, $value in $min-props {
+      $value-min: $value;
+      $value-max: map.get($max-props, #{$prop});
+
+      #{$prop}: elasticValue((
+        #{$bp-min}: $value-min,
+        #{$bp-max}: $value-max
+      ));
+    }
+    @include autoAliasing($min-props);
+  }
+
+  @include bpFrom($bp-max) {
+    @include expandProps($max-props);
+  }
+}

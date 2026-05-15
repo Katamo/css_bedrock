@@ -1,0 +1,22 @@
+@use '../../../setup/typography' as *;
+@use 'expand-type-size' as *;
+@use '../../breakpoints/mixins/each-bp' as *;
+@use '../../mutations/index' as *;
+@use '../../utils/mixins/direction' as *;
+@use 'sass:map';
+
+@mixin typeset($typeset, $dir: null, $attr: null) {
+  --debug-typeset: #{$typeset};
+
+  @include eachBp using ($bp) {
+    @include defaultDIR {
+      @include expandTypeSize($typeset, $attr, $bp, $font-typeset);
+    }
+
+    @if map.has-key($font-typeset-ar, $typeset) {
+      @include RTL {
+        @include expandTypeSize($typeset, $attr, $bp, $font-typeset-ar);
+      }
+    }
+  }
+}

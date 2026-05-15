@@ -1,0 +1,8 @@
+@use '../../../setup/grid' as *;
+@use 'sass:math';
+
+@mixin offset($cols) {
+  // Empujamos el inicio de la celda a la línea correspondiente
+  $start-line: math.min($cols, $grid-cells) + 1;
+  grid-column-start: #{$start-line};
+}

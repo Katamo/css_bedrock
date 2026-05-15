@@ -1,0 +1,17 @@
+@use 'typeset' as *;
+@use 'elastic-typeset' as *;
+
+@mixin typesetsClasses($typesets, $elastic: false) {
+  @each $typeset, $value in $typesets {
+    @if not $elastic {
+      .cr-typography-#{$typeset} {
+        @include typeset($typeset);
+      }
+    }
+    @else {
+      .cr-typography-elastic-#{$typeset} {
+        @include elasticTypeset($typeset);
+      }
+    }
+  }
+}

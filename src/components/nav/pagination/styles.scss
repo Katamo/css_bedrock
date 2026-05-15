@@ -1,0 +1,38 @@
+@use '../../../core' as *;
+
+.c-pagination {
+  display: flex;
+  align-items: center;
+
+  .pages {
+    display: flex;
+    align-items: center;
+    list-style: none;
+  }
+
+  .prev,
+  .next {
+    cursor: pointer;
+    user-select: none;
+
+    @include attr(disabled) {
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  .page {
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+
+    @include attr(current) {
+      pointer-events: none;
+    }
+  }
+
+  @include attr(disabled) {
+    pointer-events: none;
+  }
+}

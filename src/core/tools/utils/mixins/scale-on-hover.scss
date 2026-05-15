@@ -1,0 +1,10 @@
+@use '../../animation/mixins/transition' as *;
+@use '../../selectors/mixins/hover' as *;
+
+@mixin scaleOnHover($scale-size: 1.1) {
+  @include transition((transform));
+
+  @include hover {
+    transform: scale3d($scale-size, $scale-size, 1);
+  }
+}

@@ -1,0 +1,12 @@
+@mixin childContext($name, $value: null) {
+  @if $value {
+    & [data-#{$name}="#{'' + $value}"] {
+      @content;
+    }
+  }
+  @else {
+    & [data-#{$name}] {
+      @content;
+    }
+  }
+}

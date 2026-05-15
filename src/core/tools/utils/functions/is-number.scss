@@ -1,0 +1,10 @@
+@use 'sass:meta';
+
+/**
+ * eval is a unit is a number or not
+ * @param $value the unit to be evaluated
+ * @return true if is a number, false otherwise
+ */
+@function is-number($value) {
+  @return meta.type-of($value) == 'number';
+}

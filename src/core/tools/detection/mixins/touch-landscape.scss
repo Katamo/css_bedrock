@@ -1,0 +1,6 @@
+@mixin touchLandscape {
+  /* Landscape orientation for devices which primary pointer has limited accuracy (touch devices) */
+  @media screen and (orientation: landscape) and (pointer: coarse) {
+    @content;
+  }
+}

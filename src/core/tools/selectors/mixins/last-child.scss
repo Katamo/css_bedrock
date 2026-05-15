@@ -1,0 +1,5 @@
+@mixin lastChild {
+  &:last-child {
+    @content;
+  }
+}

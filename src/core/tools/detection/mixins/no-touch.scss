@@ -1,0 +1,6 @@
+@mixin noTouch {
+  /* Primary input is an accuracy input device (mouse/stylus). Also IE11 */
+  @media screen and (pointer: fine), screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    @content;
+  }
+}

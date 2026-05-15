@@ -1,0 +1,22 @@
+@use '../../../setup/colors' as *;
+@use 'sass:map';
+@use 'sass:meta';
+
+@function color($color, $variation: base, $colors: $colors) {
+  @if meta.type-of($color) == color {
+    @return $color;
+  }
+
+  @if not map.has-key($colors, $color) {
+    @error "Unknown #{$color} color";
+  }
+
+  $colorSet: map.get($colors, $color);
+
+  @if not map.has-key($colorSet, $variation) {
+    @warn "Unknown #{$variation} variation in #{$color}";
+    @return map.get($colorSet, base);
+  }
+
+  @return map.get($colorSet, $variation);
+}

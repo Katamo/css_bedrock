@@ -1,0 +1,17 @@
+@use "sass:map";
+@use 'sass:meta';
+@use '../../../setup/animation' as *;
+
+@function speed($speed) {
+  @if meta.type-of($speed) == number {
+    @return $speed;
+  }
+
+  @if not map.has-key($transition-times, $speed) {
+    @warn "Unknown #{$speed} speed time";
+    @return map.get($transition-times, base);
+  }
+  
+  @return map.get($transition-times, $speed);
+}
+  

@@ -1,0 +1,7 @@
+@mixin state($name) {
+  @warn "The state mixin will be deprecated in next versions";
+
+  &[data-is-#{'' + $name}] {
+    @content;
+  }
+}

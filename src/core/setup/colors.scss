@@ -1,0 +1,29 @@
+// Colores de marca (primary, secondary…) se definen en el proyecto consumidor.
+// Ejecuta `bedrock-init` para generar un archivo de configuración con ejemplos.
+$colors: (
+  // Neutros universales
+  white: ( base: #ffffff ),
+  black: ( base: #000000 ),
+  greys: (
+    base:    #999999,
+    light:   #e6e6e6,
+    lighter: #f0f0f0,
+    dark:    #666666,
+  ),
+
+  // Semántica de UI
+  line: (
+    base: #e6e6e6,
+    dark: #cccccc,
+  ),
+  text: (
+    base:     #333333,
+    muted:    #666666,
+    inverted: #ffffff,
+  ),
+
+  // Feedback
+  error:   ( base: #dc3545 ),
+  success: ( base: #28a745 ),
+  warning: ( base: #ffc107 ),
+) !default;

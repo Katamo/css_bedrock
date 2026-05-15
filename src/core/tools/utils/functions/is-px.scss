@@ -1,0 +1,11 @@
+@use 'is-number' as *;
+@use 'sass:math';
+
+/**
+ * Evals if a value is set in px
+ * @param $value the prop to be evaluated
+ * @return true if the value is set in pixels, false otherwise
+ */
+@function is-px($value) {
+  @return is-number($value) and math.unit($value) == 'px';
+}

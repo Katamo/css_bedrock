@@ -1,0 +1,11 @@
+@use '../../../setup/typography' as *;
+@use '../functions/get-type-props' as *;
+@use '../../utils/mixins/expand-props' as *;
+@use 'auto-aliasing' as *;
+
+@mixin expandTypeSize($typeset, $attr, $bp, $font-typeset: $font-typeset) {
+  $props: getTypeProps($typeset, $attr, $bp, $font-typeset);
+
+  @include expandProps($props);
+  @include autoAliasing($props);
+}

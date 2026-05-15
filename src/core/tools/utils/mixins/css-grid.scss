@@ -1,0 +1,24 @@
+// HELPER MIXINS TO DECLARE AND ACCESS CSS GRID ELEMENTS
+
+/**
+ * grid-layout
+ * Applies grid styles to the element or its descendant that matches the layout name.
+ * Automatically applies 'display: grid'.
+ */
+@mixin grid-layout($layout) {
+  & [data-grid-layout="#{$layout}"] {
+    display: grid;
+    @content;
+  }
+}
+
+/**
+ * grid-area
+ * Assigns the element or its descendant to the specified grid area.
+ */
+@mixin grid-area($area) {
+  & > [data-grid-area="#{$area}"] {
+    grid-area: #{$area};
+    @content;
+  }
+}

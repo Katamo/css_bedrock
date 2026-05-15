@@ -1,0 +1,44 @@
+
+@use '../../../setup/typography' as *;
+@use 'strip-unit' as *;
+@use 'sass:math';
+@use 'sass:list';
+
+/**
+ * Private function Convert a single value to rem, this function is meant to be internal, use pxToRem instead
+ * @param $value the value to convert
+ * @param $base-value the default value to calculate the rems 16px by default
+ * @return the value converted to rems
+ */
+@function -convert-to-rem($value, $base-value: $rem-base)  {
+  $value: math.div(strip-unit($value), strip-unit($base-value)) * 1rem;
+  // Turn 0rem into 0
+  @if ($value == 0rem) { 
+    $value: 0; 
+  } 
+  @return $value;
+}
+
+
+/**
+ * Converts series of values from px to rem
+ * Usage: padding: pxToRem(24px 24px); -> padding: 1.25rem 1.25rem;
+ *
+ * @param $values set of values to convert, useful for example for groups of units
+ * @param $base-value the default value to calculate the rems 16px by default
+ * @return the set of values converted to rems
+ */
+@function pxToRem($values, $base-value: $rem-base) {
+  $max: list.length($values);
+  
+  @if $max == 1 { 
+    @return -convert-to-rem(list.nth($values, 1), $base-value);
+  }
+  $remValues: ();
+
+  @for $i from 1 through $max {
+    $remValues: list.append($remValues, -convert-to-rem(list.nth($values, $i), $base-value));
+  }
+  
+  @return $remValues;
+}

@@ -1,0 +1,10 @@
+@use "sass:map";
+@use '../../../setup/typography' as *;
+
+@function font-size($size) {
+  @if map.has-key($font-size, $size) {
+    @return map.get($font-size, $size);
+  } @else {
+    @error "Size #{$size} not found";
+  }
+}

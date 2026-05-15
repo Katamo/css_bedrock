@@ -1,0 +1,22 @@
+@use './transition' as *;
+@use '../functions/speed' as *;
+@use '../../detection/index' as *;
+@use '../../mutations/mixins/context' as *;
+
+@mixin transition-reveal {
+  @include transition((opacity), speed(slow));
+
+  // disable transitions for reduced motion preference
+  @include reducedMotion {
+    transition: none;
+  }
+
+  @include context(not-revealed) {
+    opacity: 0;
+
+    // disable transitions for reduced motion preference
+    @include reducedMotion {
+      opacity: 1;
+    }
+  }
+}

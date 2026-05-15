@@ -1,0 +1,27 @@
+@use '../../../setup/typography' as *;
+@use '../../breakpoints/mixins/bp-from' as *;
+@use 'sass:map';
+
+@mixin cropLines($typeset, $lines, $forceHeight: false, $font-typeset: $font-typeset) {
+  overflow: hidden;
+
+  $bps: map.get($font-typeset, $typeset, bps);
+
+  @each $bp, $values in $bps {
+    @include bpFrom($bp) {
+      $lineHeight: map.get($values, line-height);
+
+      @if not $lineHeight {
+        $lineHeight: 1;
+      }
+
+      $height: #{$lineHeight * $lines};
+
+      max-height: $height;
+
+      @if $forceHeight {
+        height: $height;
+      }
+    }
+  }
+}

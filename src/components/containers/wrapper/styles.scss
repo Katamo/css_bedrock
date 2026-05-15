@@ -1,0 +1,8 @@
+@use '../../../core' as *;
+
+.c-wrapper {
+  display: block;
+  width: 100%;
+  margin-inline: auto;
+  box-sizing: border-box;
+}

@@ -1,0 +1,10 @@
+@use '../functions/px-to-rem' as *;
+@use '../../colors/functions/color' as *;
+
+@mixin dot($color: #{color(black)}, $size: 11) {
+  background-color: $color;
+  width: pxToRem($size);
+  height: pxToRem($size);
+  min-width: pxToRem($size);
+  border-radius: 50%;
+}

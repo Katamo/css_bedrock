@@ -1,0 +1,8 @@
+@use '../functions/build-transition' as *;
+@use '../../detection/index' as *;
+
+@mixin transition($properties, $speed: base, $delay: 0ms, $curve: (quad, in-out)) {
+  @include canAnimate {
+    transition: buildTransition($properties, $speed, $delay, $curve);
+  }
+}

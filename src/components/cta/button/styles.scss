@@ -1,0 +1,16 @@
+@use '../../../core' as *;
+@use 'mixins' as *;
+
+.c-button {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  white-space: nowrap;
+
+  // State — disabled
+  @include attr(disabled) {
+    pointer-events: none;
+  }
+}

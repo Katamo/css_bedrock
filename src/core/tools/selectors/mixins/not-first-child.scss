@@ -1,0 +1,5 @@
+@mixin notFirstChild {
+  &:not(:first-child) {
+    @content;
+  }
+}

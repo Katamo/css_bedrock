@@ -1,0 +1,24 @@
+$transition-times: (
+  fast: 200ms,
+  base: 400ms,
+  slow: 800ms,
+) !default;
+
+$transition-curves: (
+  linear: (
+    base: cubic-bezier(.25, .25, .75, .75),
+  ),
+
+  ease: (
+    base: cubic-bezier(.25, .1, .25, 1),
+    in: cubic-bezier(.42, 0, 1, 1),
+    out: cubic-bezier(0, 0, .58, 1),
+    in-out: cubic-bezier(.42, 0, .58, 1),
+  ),
+
+  quad: (
+    in: cubic-bezier(.55, .085, .68, .53),
+    out: cubic-bezier(.25, .46, .45, .94),
+    in-out: cubic-bezier(.455, .03, .515, .955),
+  ),
+) !default;

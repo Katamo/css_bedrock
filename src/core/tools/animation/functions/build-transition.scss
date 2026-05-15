@@ -1,0 +1,13 @@
+@use 'sass:list';
+@use './speed' as *;
+@use './curve' as *;
+
+@function buildTransition($properties, $speed, $delay, $curve) {
+  $transitions: ();
+
+  @each $property in $properties {
+    $transitions: list.append($transitions, $property speed($speed) curve($curve) $delay, comma);
+  }
+
+  @return $transitions;
+}

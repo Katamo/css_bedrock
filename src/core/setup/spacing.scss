@@ -1,0 +1,4 @@
+// Unidad base del sistema de espaciado. Todos los valores de spacing() son múltiplos de esta unidad.
+// spacing(1) = 1 × $spacing-base  →  8px
+// spacing(4) = 4 × $spacing-base  →  32px
+$spacing-base: 8px !default;

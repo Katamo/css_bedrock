@@ -1,0 +1,9 @@
+@use '../../detection/index' as *;
+
+@mixin hover {
+  @include canHover {
+    &:hover {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@use '../../../core' as *;
+
+.c-field {
+  display: flex;
+  flex-direction: column;
+
+  .label {
+    display: block;
+  }
+
+  .control {
+    display: block;
+  }
+
+  @include attr(disabled) {
+    pointer-events: none;
+  }
+}

@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:list';
+@use '../../../setup/animation' as *;
+
+
+@function curve($curve) {
+  @if meta.type-of($curve) == string {
+    @return $curve;
+  }
+
+  // https://github.com/sass/sass/issues/679
+  // Sass considers single item lists as strings, so it is safe to asume list lenght will be at least two.
+
+  $type: list.nth($curve, 1);
+  $ease: list.nth($curve, 2);
+
+  @if not map.has-key($transition-curves, $type) {
+    @error "Unknown #{$type} curve";
+  }
+
+  $curve-type: map.get($transition-curves, $type);
+
+  @if not map.has-key($curve-type, $ease) {
+    @warn "Unknown #{$ease} time in #{$type} curve.";
+
+    @if map.has-key($curve-type , base) {
+      @return map.get($curve-type, base);
+
+    } @else if map.has-key($curve-type , in-out) {
+      @return map.get($curve-type, in-out);
+    }
+  }
+
+  @return map.get($curve-type, $ease);
+};

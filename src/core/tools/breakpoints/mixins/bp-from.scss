@@ -1,0 +1,19 @@
+@use '../../../setup/breakpoints' as *;
+@use '../functions/get-bp-min' as *;
+@use 'sass:map';
+
+@mixin bpFrom($size) {
+  @if not map.has-key($breakpoints, $size) {
+    @error "Unknown #{$size} breakpoint";
+  }
+
+  $bpSize: getBpMin($size);
+
+  @if $bpSize == 0 {
+    @content;
+  } @else {
+    @media (min-width: $bpSize) {
+      @content;
+    }
+  }
+}

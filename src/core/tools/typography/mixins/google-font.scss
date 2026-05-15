@@ -1,0 +1,12 @@
+// ⚠️  Este mixin emite un @import CSS nativo (no SASS) al compilar.
+//     Para que el navegador lo respete, debe quedar al inicio del CSS compilado,
+//     por lo que hay que llamarlo antes de cualquier otra regla.
+//
+//     Alternativa recomendada — añadir directamente en el <head> del HTML:
+//       <link rel="preconnect" href="https://fonts.googleapis.com">
+//       <link href="https://fonts.googleapis.com/css2?family={nombre}&display=swap" rel="stylesheet">
+//
+//     El enfoque con <link> es más rápido porque no bloquea el render.
+@mixin googleFont($family) {
+  @import url('https://fonts.googleapis.com/css2?family=#{$family}&display=swap');
+}

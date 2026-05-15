@@ -1,0 +1,25 @@
+@mixin RTL {
+  html[dir="rtl"] & {
+    @content;
+  }
+}
+
+@mixin notRTL {
+  html:not([dir="RTL"]) & {
+    @content;
+  }
+}
+
+@mixin LTR {
+  html[dir="ltr"] & {
+    @content;
+  }
+}
+
+@mixin defaultDIR {
+  html:not([dir]) &,
+  html[dir="auto"] &,
+  html[dir="ltr"] & {
+    @content;
+  }
+}

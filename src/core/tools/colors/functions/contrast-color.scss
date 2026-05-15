@@ -1,0 +1,10 @@
+@use './color' as *;
+
+@function contrastColor($color) {
+  @if(lightness($color) < 50%) {
+    @return color(white);
+  }
+  @else {
+    @return color(black);
+  }
+}

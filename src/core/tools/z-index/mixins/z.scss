@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use '../../../setup/z-index' as *;
+
+/// Devuelve el valor z-index de una capa definida en $z-layers.
+/// Lanza un @warn si la capa no existe en el mapa.
+@function z-layer($layer) {
+  @if not map.has-key($z-layers, $layer) {
+    @warn "No layer found for `#{$layer}` in $z-layers map. Property omitted.";
+  }
+
+  @return map.get($z-layers, $layer);
+}
+
+/// Devuelve el z-index una unidad por encima de la capa indicada.
+@function zAbove($layer) {
+  @return z-layer($layer) + 1;
+}
+
+/// Devuelve el z-index una unidad por debajo de la capa indicada.
+@function zBelow($layer) {
+  @return z-layer($layer) - 1;
+}

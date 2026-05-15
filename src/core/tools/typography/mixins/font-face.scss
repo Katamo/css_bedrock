@@ -1,0 +1,14 @@
+@mixin fontFace($family, $fileName, $weight, $style, $unicode-range:null) {
+  @font-face {
+    font-family: $family;
+    font-weight: $weight;
+    font-style: $style;
+
+    @if ($unicode-range) {
+      unicode-range: #{$unicode-range};
+    }
+
+    src: url('#{$fileName}.woff2') format('woff2');
+    //url('#{$fileName}.woff') format('woff');
+  }
+}

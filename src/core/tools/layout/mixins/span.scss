@@ -1,0 +1,8 @@
+@use '../../../setup/grid' as *;
+@use 'sass:math';
+
+@mixin span($cols) {
+  // Usamos grid-column-end para que no pise al offset
+  // Y la interpolación #{...} para forzar a SASS a calcular el número
+  grid-column-end: span #{math.min($cols, $grid-cells)};
+}

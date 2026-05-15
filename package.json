@@ -1,0 +1,50 @@
+{
+  "name": "@bedrock/core",
+  "version": "0.1.0",
+  "description": "SASS framework for modular UI components",
+  "main": "src/_core.scss",
+  "sass": "src/_core.scss",
+  "exports": {
+    ".": {
+      "sass": "./src/_core.scss",
+      "default": "./src/_core.scss"
+    },
+    "./reset": "./src/core/foundation/reset.scss",
+    "./wrapper": "./src/components/containers/wrapper/styles.scss",
+    "./vue": "./src/vue.js",
+    "./button": "./src/components/cta/button/styles.scss",
+    "./clickable-area": "./src/components/cta/clickable-area/styles.scss",
+    "./link": "./src/components/cta/link/styles.scss",
+    "./menu": "./src/components/nav/menu/styles.scss",
+    "./pagination": "./src/components/nav/pagination/styles.scss",
+    "./badge": "./src/components/info/badge/styles.scss",
+    "./image": "./src/components/media/image/styles.scss",
+    "./logo": "./src/components/brand/logo/styles.scss",
+    "./field": "./src/components/fields/field/styles.scss",
+    "./input": "./src/components/fields/input/styles.scss",
+    "./checkbox": "./src/components/fields/checkbox/styles.scss",
+    "./*": "./src/*"
+  },
+  "bin": {
+    "bedrock-init": "./scripts/init.js"
+  },
+  "scripts": {
+    "docs:dev":     "vitepress dev docs",
+    "docs:build":   "node -e \"require('fs').copyFileSync('CHANGELOG.md','docs/changelog.md')\" && vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "src/_core.scss",
+    "src/core",
+    "src/components",
+    "scripts",
+    "docs"
+  ],
+  "dependencies": {
+    "@vueuse/core": "^14.3.0"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  }
+}

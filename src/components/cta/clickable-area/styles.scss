@@ -1,0 +1,11 @@
+@use '../../../core' as *;
+
+.c-clickable-area {
+  outline: none;
+  cursor: pointer;
+
+  @include attr(disabled) {
+    cursor: default;
+    pointer-events: none;
+  }
+}

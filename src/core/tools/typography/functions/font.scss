@@ -1,0 +1,9 @@
+@use "sass:map";
+@use '../../../setup/typography' as *;
+@function font($family) {
+  @if not map.has-key($map: $font-family, $key: $family) {
+    @warn "Font `#{$family}` not found.";
+  }
+
+  @return map.get($map: $font-family, $key: $family);
+}

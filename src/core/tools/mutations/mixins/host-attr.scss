@@ -1,0 +1,12 @@
+@mixin hostAttr($name, $value: null) {
+  @if $value {
+    :host([data-#{$name}="#{'' + $value}"]) {
+      @content;
+    }
+  }
+  @else {
+    :host([data-#{$name}]) {
+      @content;
+    }
+  }
+}

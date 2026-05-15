@@ -1,0 +1,16 @@
+@use '../../../core' as *;
+
+.c-menu {
+  position: relative;
+
+  .links {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+
+    > li > a {
+      display: flex;
+      align-items: center;
+    }
+  }
+}

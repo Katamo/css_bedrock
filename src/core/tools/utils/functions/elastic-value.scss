@@ -1,0 +1,27 @@
+@use 'px-to-rem' as *;
+@use '../../breakpoints/functions/get-bp-min' as *;
+@use 'sass:map';
+
+@function elasticValue($values, $unit: vw) {
+
+  @if length($values) < 2 or length($values) > 2 {
+    @error "elasticValue mixin needs 2 breakpoints";
+  }
+
+  $keys: map.keys($values);
+
+  //
+  $bp-min: nth($keys, 1);
+  $bp-max: nth($keys, 2);
+
+  //
+  $min-value: pxToRem(map.get($values, $bp-min));
+  $max-value: pxToRem(map.get($values, $bp-max));
+
+  //
+  $bp-min-size: pxToRem(getBpMin($bp-min));
+  $bp-max-size: pxToRem(getBpMin($bp-max));
+
+  $ratio: (($min-value - $max-value) / ($bp-min-size - $bp-max-size));
+  @return calc(#{$min-value} - ( #{$bp-min-size} * #{$ratio} ) + (100 * #{$ratio}#{$unit}));
+}

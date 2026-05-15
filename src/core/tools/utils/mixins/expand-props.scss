@@ -1,0 +1,7 @@
+@use './prop-to-rem' as *;
+
+@mixin expandProps($props) {
+  @each $prop, $value in $props {
+    @include propToRem($prop, $value);
+  }
+}

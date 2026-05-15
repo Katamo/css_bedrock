@@ -1,0 +1,16 @@
+@use '../../animation/mixins/transition' as *;
+
+@mixin svgTint($color, $prop: stroke, $transitionSpeed: base) {
+  svg {
+    path,
+    rect,
+    line,
+    circle,
+    polygon,
+    polyline,
+    ellipse {
+      @include transition((#{$prop}), #{$transitionSpeed});
+      #{$prop}: $color;
+    }
+  }
+}

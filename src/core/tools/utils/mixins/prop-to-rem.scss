@@ -1,0 +1,10 @@
+@use '../functions/is-px' as *;
+@use '../functions/px-to-rem' as *;
+
+@mixin propToRem($prop, $value) {
+  @if is-px($value) {
+    #{$prop}: pxToRem($value);
+  } @else {
+    #{$prop}: $value;
+  }
+}

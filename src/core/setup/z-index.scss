@@ -1,0 +1,9 @@
+// Mapa de capas de profundidad (Z-Index)
+$z-layers: (
+  dropdown: 50,
+  sticky: 100,
+  header: 200,
+  backdrop: 300,
+  modal: 400,
+  tooltip: 500,
+) !default;

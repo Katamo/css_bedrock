@@ -1,0 +1,14 @@
+@use '../../../core' as *;
+
+.c-logo {
+  position: relative;
+
+  @include attr(has-pointer) {
+    cursor: pointer;
+  }
+
+  @include attr(disabled) {
+    cursor: default;
+    pointer-events: none;
+  }
+}

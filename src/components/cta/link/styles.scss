@@ -1,0 +1,22 @@
+@use '../../../core' as *;
+
+.c-link {
+  position: relative;
+  display: inline-block;
+
+  .text {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: underline;
+  }
+
+  @include attr(underline, none) {
+    .text {
+      text-decoration: none;
+    }
+  }
+
+  @include attr(disabled) {
+    pointer-events: none;
+  }
+}

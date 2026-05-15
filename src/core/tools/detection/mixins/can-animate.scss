@@ -1,0 +1,6 @@
+@mixin canAnimate {
+  /* Update media feature is still not supported by browsers, using screen for now */
+  @media screen {
+    @content;
+  }
+}

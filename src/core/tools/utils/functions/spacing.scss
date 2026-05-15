@@ -1,0 +1,10 @@
+@use '../../../setup/spacing' as *;
+
+/**
+ * Calcula el espaciado basado en un multiplicador
+ * @param {Number} $multiplier - Multiplicador del token base
+ * @return {Number} Valor calculado
+ */
+@function spacing($multiplier: 1) {
+  @return $spacing-base * $multiplier;
+}

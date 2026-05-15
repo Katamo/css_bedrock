@@ -1,0 +1,10 @@
+@use 'sass:math';
+
+/**
+ * Removes unit from a css value prop
+ * @params $num the value to strip
+ * @returns the value without unit
+ */
+@function strip-unit($num) {
+  @return math.div($num, $num * 0 + 1);
+}

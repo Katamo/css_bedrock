@@ -1,0 +1,10 @@
+@use '../../../setup/breakpoints' as *;
+@use 'sass:map';
+
+@function getBpMin($size) {
+  @if not map.has-key($breakpoints, $size) {
+    @error "Unknown #{$size} breakpoint";
+  }
+
+  @return map.get($breakpoints, $size);
+}

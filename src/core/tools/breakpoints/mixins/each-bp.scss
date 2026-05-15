@@ -1,0 +1,13 @@
+@use '../../../setup/breakpoints' as *;
+@use 'bp-from' as *;
+@use 'sass:map';
+
+@mixin eachBp {
+  $bp-names: map.keys($breakpoints);
+
+  @each $bp in $bp-names {
+    @include bpFrom($bp) {
+      @content($bp);
+    }
+  }
+}

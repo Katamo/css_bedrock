@@ -1,0 +1,155 @@
+@use 'sass:meta';
+@use 'sass:list';
+
+/// Aplica estilos condicionados a un atributo `data-*`.
+///
+/// @param {String}        $name  — Nombre del atributo (sin el prefijo `data-`)
+/// @param {null|String|List} $value — Valor único, lista de valores, o null para check de presencia
+/// @param {String}        $mode  — Operador lógico cuando $value es lista: 'or' | 'and' | 'nor' | 'xor'
+///
+/// ─── Presencia (sin valor) ───────────────────────────────────────────────────
+///
+///   @include attr('active');
+///   → &[data-active] { }
+///
+/// ─── Valor único ─────────────────────────────────────────────────────────────
+///
+///   @include attr('color', 'primary');
+///   → &[data-color="primary"] { }
+///
+/// ─── OR — al menos uno de los valores (default) ──────────────────────────────
+///
+///   @include attr('color', ('primary', 'secondary'));
+///   @include attr('color', ('primary', 'secondary'), 'or');
+///   → &[data-color="primary"],
+///      &[data-color="secondary"] { }
+///
+/// ─── AND — todos los valores encadenados ─────────────────────────────────────
+///   ⚠ Un elemento solo puede tener un valor por atributo, por lo que este
+///     selector nunca coincidirá en runtime. Útil para generar selectores
+///     combinados entre atributos distintos pasados como cadena compuesta.
+///
+///   @include attr('color', ('primary', 'secondary'), 'and');
+///   → &[data-color="primary"][data-color="secondary"] { }
+///
+///   Con tres valores:
+///   @include attr('color', ('primary', 'secondary', 'ghost'), 'and');
+///   → &[data-color="primary"][data-color="secondary"][data-color="ghost"] { }
+///
+/// ─── NOR — ninguno de los valores ────────────────────────────────────────────
+///
+///   @include attr('color', ('primary', 'secondary'), 'nor');
+///   → &:not([data-color="primary"]):not([data-color="secondary"]) { }
+///
+///   Con tres valores:
+///   @include attr('color', ('primary', 'secondary', 'ghost'), 'nor');
+///   → &:not([data-color="primary"]):not([data-color="secondary"]):not([data-color="ghost"]) { }
+///
+/// ─── XOR — exactamente uno de los valores ────────────────────────────────────
+///   Cada rama incluye un valor y excluye todos los demás.
+///
+///   @include attr('color', ('primary', 'secondary'), 'xor');
+///   → &[data-color="primary"]:not([data-color="secondary"]),
+///      &[data-color="secondary"]:not([data-color="primary"]) { }
+///
+///   Con tres valores:
+///   @include attr('color', ('primary', 'secondary', 'ghost'), 'xor');
+///   → &[data-color="primary"]:not([data-color="secondary"]):not([data-color="ghost"]),
+///      &[data-color="secondary"]:not([data-color="primary"]):not([data-color="ghost"]),
+///      &[data-color="ghost"]:not([data-color="primary"]):not([data-color="secondary"]) { }
+
+
+@mixin attr($name, $value: null, $mode: 'or') {
+
+  // ── Presencia (sin valor) ──────────────────────────────────────────────────
+  @if not $value {
+    &[data-#{$name}] {
+      @content;
+    }
+  }
+
+  // ── Valor único ────────────────────────────────────────────────────────────
+  @else if meta.type-of($value) != list or list.length($value) == 1 {
+    $v: $value;
+    @if meta.type-of($value) == list {
+      $v: list.nth($value, 1);
+    }
+    &[data-#{$name}="#{$v}"] {
+      @content;
+    }
+  }
+
+  // ── Múltiples valores ──────────────────────────────────────────────────────
+  @else {
+
+    @if $mode == 'or' {
+      $selectors: ();
+      @each $v in $value {
+        $selectors: list.append($selectors, '&[data-#{$name}="#{$v}"]', comma);
+      }
+      #{$selectors} {
+        @content;
+      }
+    }
+
+    @else if $mode == 'and' {
+      $selector: '&';
+      @each $v in $value {
+        $selector: $selector + '[data-#{$name}="#{$v}"]';
+      }
+      #{$selector} {
+        @content;
+      }
+    }
+
+    @else if $mode == 'nor' {
+      $selector: '&';
+      @each $v in $value {
+        $selector: $selector + ':not([data-#{$name}="#{$v}"])';
+      }
+      #{$selector} {
+        @content;
+      }
+    }
+
+    @else if $mode == 'xor' {
+      $branches: ();
+      @each $current in $value {
+        $branch: '&[data-#{$name}="#{$current}"]';
+        @each $other in $value {
+          @if $other != $current {
+            $branch: $branch + ':not([data-#{$name}="#{$other}"])';
+          }
+        }
+        $branches: list.append($branches, $branch, comma);
+      }
+      #{$branches} {
+        @content;
+      }
+    }
+
+  }
+}
+
+/// Encadena múltiples pares (atributo, valor) en un único selector.
+/// Cada par es una lista de 1 elemento (presencia) o 2 elementos (valor).
+///
+///   @include attr-join(('disabled',), ('color', 'primary'), ('sabor', 'dulce')) { }
+///   → &[data-disabled][data-color="primary"][data-sabor="dulce"] { }
+///
+///   @include attr-join(('disabled',), ('active',)) { }
+///   → &[data-disabled][data-active] { }
+@mixin attr-join($pairs...) {
+  $selector: '&';
+  @each $pair in $pairs {
+    $name: list.nth($pair, 1);
+    @if list.length($pair) >= 2 {
+      $selector: $selector + '[data-#{$name}="#{list.nth($pair, 2)}"]';
+    } @else {
+      $selector: $selector + '[data-#{$name}]';
+    }
+  }
+  #{$selector} {
+    @content;
+  }
+}

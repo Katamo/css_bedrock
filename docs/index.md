@@ -4,7 +4,7 @@ layout: home
 hero:
   name: Bedrock
   text: Framework CSS/SASS modular para Vue 3
-  tagline: Componentes sin estilos, arquitectura BCM, y herramientas SASS para proyectos escalables.
+  tagline: Componentes sin estilos, arquitectura CM, y herramientas SASS para proyectos escalables.
   actions:
     - theme: brand
       text: Empezar
@@ -16,7 +16,7 @@ hero:
 features:
   - title: Sin estilos impuestos
     details: Los componentes proveen estructura HTML y atributos data-*. El proyecto consumidor define el aspecto visual completo.
-  - title: Arquitectura BCM
+  - title: Arquitectura CM
     details: Bloques, Componentes y Módulos con separación clara de responsabilidades y encapsulación por capas.
   - title: SASS nativo
     details: Mixins para attr(), context(), grid-layout y más. Compatible con Dart Sass sin dependencias de runtime.

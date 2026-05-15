@@ -1,6 +1,6 @@
 # Wrapper
 
-El componente `CWrapper` es una primitiva de layout diseñada para proporcionar contenedores con padding horizontal responsivo y centrado automático. Es la evolución del `b-wrapper` original, adaptada para integraciones nativas como Vue 3.
+El componente `CWrapper` es una primitiva de layout diseñada para proporcionar contenedores con padding horizontal responsivo y centrado automático.
 
 ---
 
@@ -29,37 +29,9 @@ import { CWrapper } from '@bedrock/core/vue';
 
 ---
 
-## 2. Uso con Mixins SASS (Avanzado)
+## 2. Configuración
 
-Si prefieres usar elementos HTML estándar, puedes aplicar la funcionalidad mediante el mixin `wrapper`.
-
-### Marcado HTML
-
-```html
-<div class="my-custom-container" data-wrapper-type="default">
-  ...
-</div>
-```
-
-### SCSS
-
-```scss
-@use '@bedrock/core' as *;
-
-.my-custom-container {
-  // El mixin aplica automáticamente el padding responsivo según el config
-  @include wrapper(default) {
-    // Puedes añadir estilos extra aquí
-    background-color: color(greys, grey01);
-  }
-}
-```
-
----
-
-## 3. Configuración
-
-Los wrappers se configuran llamando al mixin `setup-wrappers()`. La clave es que el archivo donde lo llames importe `bedrock-config`, lo que hace disponibles `spacing()`, `color()`, `font()` y el resto de funciones.
+Los wrappers se configuran llamando al mixin `setup-wrappers()`. La clave es que el archivo donde lo llames importe `bedrock-config`, lo que hace disponibles `spacing()`, `color()` y el resto de funciones.
 
 ### Patrón recomendado: archivo dedicado
 
@@ -104,7 +76,7 @@ El archivo `_wrappers.scss` importa `bedrock-config` por su cuenta — no depend
 
 ---
 
-## 4. Referencia de Mixins
+## 3. Referencia de Mixins
 
 ### `wrapper($type)`
 Aplica los estilos base de contenedor (`margin-inline: auto`, `width: 100%`) y las propiedades responsivas definidas para ese `$type` en la configuración. Busca el atributo `data-wrapper-type="$type"` tanto en el elemento actual como en sus hijos.

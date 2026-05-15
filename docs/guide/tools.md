@@ -172,7 +172,7 @@ $tablet-width: getBpMin(md); // 768px
 
 ## 4. Layout (Grid)
 
-Para que `span()` y `offset()` funcionen, el elemento debe estar dentro de un `<b-grid>` (que genera un `display: grid` con las columnas configuradas).
+Para que `span()` y `offset()` funcionen, el elemento debe estar dentro de un contenedor con `display: grid` y las columnas configuradas (por ejemplo, `CGridLayout`).
 
 ### `@include span($cols)`
 
@@ -180,7 +180,7 @@ Hace que el elemento ocupe `$cols` columnas dentro del grid. Equivale a `grid-co
 
 ```scss
 .c-card {
-  // Móvil: ocupa todo el ancho (por defecto en b-grid)
+  // Móvil: ocupa todo el ancho por defecto
 
   @include bpFrom(md) {
     @include span(6);   // tablet: mitad del grid (6/12)
@@ -192,7 +192,7 @@ Hace que el elemento ocupe `$cols` columnas dentro del grid. Equivale a `grid-co
 }
 ```
 
-> `span()` está diseñado para usarse directamente en el componente, evitando la necesidad de `<b-cell>` como wrapper intermedio.
+> `span()` está diseñado para usarse directamente en el componente, sin necesidad de wrappers intermedios.
 
 ---
 
@@ -299,24 +299,6 @@ La inversa de `context()`. Aplica estilos a un **descendiente** del componente q
 
 ---
 
-### `@include hostAttr($name, $value?)`
-
-Versión de `attr()` para Web Components. Genera selectores `:host([data-...])`. Solo relevante si usas shadow DOM.
-
----
-
-### `@include hostContext($name, $value?)`
-
-Versión de `context()` para Web Components. Genera selectores `:host-context([data-...])`. Solo relevante si usas shadow DOM.
-
----
-
-### `@include state($name)` ⚠️ Deprecado
-
-Genera `&[data-is-{name}]`. **No usar en código nuevo**, usar `attr()` en su lugar.
-
----
-
 ## 6. Selectores
 
 ### `@include hover`
@@ -382,36 +364,9 @@ Selectores de posición para todos los hijos excepto el primero o el último. Ú
 
 ## 7. Tipografía
 
-### `font($family)`
+### `@include typeset($name)` — uso recomendado
 
-Devuelve la familia tipográfica del mapa `$font-family`.
-
-```scss
-.c-heading {
-  font-family: font(heading);
-}
-.c-body {
-  font-family: font(base);
-}
-```
-
----
-
-### `weight($name)`
-
-Devuelve el valor numérico del peso tipográfico del mapa `$font-weight`.
-
-```scss
-.c-label {
-  font-weight: weight(semi-bold);  // 600
-}
-```
-
----
-
-### `@include typeset($name)`
-
-Aplica un typeset completo (tamaño, altura de línea, familia, etc.) a través de todos los breakpoints. También aplica la versión RTL automáticamente si `$font-typeset-ar` está configurado.
+Aplica un typeset completo (tamaño, altura de línea, familia, peso, etc.) a través de todos los breakpoints. Es la forma recomendada de aplicar estilos tipográficos. También aplica la versión RTL automáticamente si `$font-typeset-ar` está configurado.
 
 ```scss
 .c-hero-title {
@@ -424,6 +379,14 @@ Aplica un typeset completo (tamaño, altura de línea, familia, etc.) a través 
 ```
 
 Los typesets se definen en tu archivo de configuración. Ver [Tipografía](typography.md).
+
+---
+
+### `font($family)` y `weight($name)` — uso interno
+
+`font()` y `weight()` son funciones de acceso bajo nivel a los mapas de configuración tipográfica. **No deben usarse directamente en los estilos de componentes o módulos** — para eso existe `typeset()`, que agrupa familia, peso, tamaño y line-height en una sola llamada coherente con el sistema.
+
+Su uso está reservado para la definición interna de typesets dentro del archivo de configuración.
 
 ---
 

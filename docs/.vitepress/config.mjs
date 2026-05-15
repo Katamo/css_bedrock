@@ -9,7 +9,7 @@ export default defineConfig({
     nav: [
       { text: 'Guía',        link: '/guide/installation' },
       { text: 'Componentes', link: '/components/' },
-      { text: 'Prácticas',   link: '/guides/encapsulacion' },
+      { text: 'Prácticas',   link: '/guides/' },
       { text: 'Changelog',   link: '/changelog' },
       {
         text: 'GitHub',
@@ -28,7 +28,6 @@ export default defineConfig({
             { text: 'Herramientas',   link: '/guide/tools' },
             { text: 'Tipografía',     link: '/guide/typography' },
             { text: 'Layout',         link: '/guide/layout' },
-            { text: 'Animaciones',    link: '/guide/animations' },
           ],
         },
       ],
@@ -57,7 +56,10 @@ export default defineConfig({
         {
           text: 'Buenas prácticas',
           items: [
-            { text: 'Encapsulación', link: '/guides/encapsulacion' },
+            { text: 'Introducción',         link: '/guides/' },
+            { text: 'Encapsulación',        link: '/guides/encapsulacion' },
+            { text: 'Propiedades lógicas',  link: '/guides/propiedades-logicas' },
+            { text: 'Tipografía',           link: '/guides/tipografia' },
           ],
         },
       ],

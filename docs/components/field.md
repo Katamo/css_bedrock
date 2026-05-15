@@ -116,18 +116,17 @@ import { CField } from '@bedrock/core/vue';
   gap: spacing(1);
 
   .label {
-    font-size: 0.875rem;
-    font-weight: 500;
+    @include typeset(field-label);
     color: color(text);
   }
 
   .hint {
-    font-size: 0.75rem;
+    @include typeset(field-hint);
     color: color(text, subtle);
   }
 
   .error {
-    font-size: 0.75rem;
+    @include typeset(field-hint);
     color: color(error);
   }
 

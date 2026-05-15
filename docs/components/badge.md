@@ -97,14 +97,11 @@ import { CBadge } from '@bedrock/core/vue';
 @use '@bedrock/core/badge';
 
 .c-badge {
-  padding: spacing(0.5) spacing(3);
+  padding-block: spacing(1);
+  padding-inline: spacing(3);
   border-radius: spacing(1);
   border: 1px solid transparent;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  line-height: 1;
+  @include typeset(badge);
 
   // Variante de color (data-color="primary")
   @include attr(color, primary) {
@@ -128,7 +125,7 @@ import { CBadge } from '@bedrock/core/vue';
   // Espaciado del icono cuando está presente
   @include attr(has-icon) {
     .icon {
-      margin-right: spacing(1.5);
+      margin-inline-end: spacing(1.5);
     }
   }
 }
@@ -138,7 +135,14 @@ import { CBadge } from '@bedrock/core/vue';
 
 ## Patrón: badge con variante de color via prop personalizada
 
-Si tu proyecto usa badges con variantes tipadas, crea un envoltorio:
+Si no necesitas tipado, puedes pasar el atributo `data-color` directamente a `CBadge` sin crear ningún envoltorio:
+
+```html
+<CBadge data-color="primary">Nuevo</CBadge>
+<CBadge data-color="secondary">En revisión</CBadge>
+```
+
+Si tu proyecto usa badges con variantes tipadas y quieres una prop con validación, crea un envoltorio:
 
 ```js
 // src/components/info/AppBadge.js

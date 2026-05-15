@@ -35,17 +35,17 @@ Crea este archivo en tu proyecto y modifica solo los valores que necesites cambi
   // ==========================================
   // 4. COLORES (Sobrescritura de mapas)
   // ==========================================
-  // $colors: (
-  //   white: ( base: #ffffff ),
-  //   black: ( base: #000000 ),
-  //   greys: ( base: #999999, light: #e6e6e6, lighter: #f0f0f0, dark: #666666 ),
-  //   primary: ( base: #ff5500 ), // <--- Ejemplo: cambiamos el color de marca
-  //   line: ( base: #e6e6e6, dark: #cccccc ),
-  //   text: ( base: #333333, muted: #666666, inverted: #ffffff ),
-  //   error: ( base: #dc3545 ),
-  //   success: ( base: #28a745 ),
-  //   warning: ( base: #ffc107 )
-  // )
+  $colors: (
+     light: ( base: #ffffff ),
+     dark: ( base: #000000 ),
+     greys: ( base: #999999, light: #e6e6e6, lighter: #f0f0f0, dark: #666666 ),
+     primary: ( base: #ff5500 ), // <--- Ejemplo: cambiamos el color de marca
+     line: ( base: #e6e6e6, dark: #cccccc ),
+     text: ( base: #333333, muted: #666666, inverted: #ffffff ),
+     error: ( base: #dc3545 ),
+     success: ( base: #28a745 ),
+     warning: ( base: #ffc107 )
+  )
 );
 ```
 
@@ -64,8 +64,8 @@ Para resolverlo, define `$colors` en tu archivo de configuración incluyendo tod
 @forward '@bedrock/core' with (
   $colors: (
     // Neutros (incluye los que uses)
-    white:   ( base: #ffffff ),
-    black:   ( base: #000000 ),
+    light:   ( base: #ffffff ),
+    dark:   ( base: #000000 ),
     greys:   ( base: #999999, light: #e6e6e6, lighter: #f0f0f0, dark: #666666 ),
 
     // Marca del proyecto

@@ -1,5 +1,0 @@
-@mixin hostContext($name, $value: null) {
-  :host-context([data-#{$name}="#{'' + $value}"]) {
-    @content;
-  }
-}

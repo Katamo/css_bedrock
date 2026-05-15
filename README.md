@@ -83,9 +83,6 @@ Luego en tu archivo de entrada, donde `spacing()` y el resto de funciones ya est
 @use 'bedrock-config' as *;         // herramientas + tokens configurados
 
 @use '@bedrock/core/reset';         // CSS reset (opcional)
-@use '@bedrock/core/wrapper';       // primitiva <b-wrapper>
-@use '@bedrock/core/grid';          // primitiva <b-grid>
-@use '@bedrock/core/cell';          // primitiva <b-cell>
 ```
 
 ### 5. Usar las herramientas
@@ -137,5 +134,4 @@ Todas las capas importan solo `bedrock-config` para acceder a las herramientas. 
 | [Tipografía y Typesets](https://katamo.github.io/css_bedrock/guide/typography) | Sistema de escalas tipográficas responsive |
 | [Layout y Grid](https://katamo.github.io/css_bedrock/guide/layout) | Wrappers, columnas, z-index |
 | [Componentes](https://katamo.github.io/css_bedrock/components/) | Catálogo de componentes de Bedrock (Wrapper, Grid Layout, etc.) |
-| [Animaciones](https://katamo.github.io/css_bedrock/guide/animations) | Tiempos, curvas y mixins de transición |
 

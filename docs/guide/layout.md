@@ -6,7 +6,7 @@ Bedrock incluye un sistema de layout fluido y predecible, pensado para trabajar 
 
 ## 1. Contenedores (Wrappers)
 
-Los wrappers se configuran con el mixin `setup-wrappers()`, que se llama en un archivo que importe `bedrock-config` — lo que hace disponibles `spacing()`, `color()`, `font()` y el resto de funciones.
+Los wrappers se configuran con el mixin `setup-wrappers()`, que se llama en un archivo que importe `bedrock-config` — lo que hace disponibles `spacing()`, `color()` y el resto de funciones.
 
 El patrón recomendado es un **archivo dedicado** `_wrappers.scss` dentro de tu carpeta de setup:
 
@@ -43,39 +43,12 @@ El patrón recomendado es un **archivo dedicado** `_wrappers.scss` dentro de tu 
 @use 'setup/bedrock-config' as *;
 @use 'setup/wrappers';
 
-@use '@bedrock/core/wrapper';
+@use '@bedrock/core/wrapper'; // estilos base de CWrapper
 ```
 
 ---
 
-## 2. Sistema de Columnas (Grid)
-Bedrock permite personalizar completamente la estructura de tu cuadrícula. Por defecto, es un sistema de 12 columnas.
-
-Puedes modificar la cantidad de columnas, el margen inferior por defecto de los bloques de grid, y el tamaño de los huecos (gutters) de separación entre las celdas:
-
-```scss
-// _bedrock-config.scss
-@forward '@bedrock/core' with (
-  // Número total de columnas del layout
-  $grid-cells: 12,
-
-  // Margen inferior por defecto de un contenedor grid
-  $grid-margin-bottom: 32px,
-
-  // Separación entre columnas (gutters) escalable por breakpoint
-  $grid-gutters: (
-    default: (
-      xxs: 16px, // Gutters en móvil
-      md: 24px,  // Gutters en tablet
-      lg: 32px   // Gutters en desktop
-    )
-  )
-);
-``` 
-
----
-
-## 3. Capas de Profundidad (Z-Index)
+## 2. Capas de Profundidad (Z-Index)
 Para evitar la clásica "guerra de z-index" (donde un modal queda accidentalmente por debajo de un header), Bedrock centraliza el manejo del eje Z en un único mapa.
 
 Bedrock incluye una escala genérica por defecto (dropdown, sticky, header, backdrop, modal, tooltip), pero puedes sobrescribirla o ampliarla en tu configuración:
@@ -110,49 +83,88 @@ Para aplicar estas capas en tus estilos, puedes utilizar la función de utilidad
 }
 ```
 
---- 
-## 4. Consumo en HTML y SASS (Primitivas)
-Bedrock proporciona componentes primitivos (etiquetas HTML personalizadas) para estructurar tu página sin ensuciar el HTML con atributos de presentación. Asegúrate de haber importado los estilos de estos básicos en tu main.scss (ej. @use '@bedrock/core/grid'; y @use '@bedrock/core/wrapper';).
+---
 
-Uso de b-wrapper
-Para aplicar márgenes laterales a una sección, envuélvela en la etiqueta `<b-wrapper>` indicando en el atributo type el nombre de la configuración que quieres usar:
+## 4. Componentes de layout en Vue 3
 
-```html
-<!-- Usa el padding que configuraste como 'default' -->
-<b-wrapper type="default">
-  <section class="m-hero">...</section>
-</b-wrapper>
+Bedrock proporciona tres componentes primitivos de layout para Vue 3: `CWrapper`, `CGridLayout` y `CGridArea`. No emiten estilos visuales por sí solos — su apariencia la define el proyecto consumidor mediante SASS.
+
+### CWrapper
+
+Aplica el padding horizontal configurado con `setup-wrappers()`. El prop `type` selecciona qué configuración usar.
+
+```vue
+<template>
+  <CWrapper type="default">
+    <div class="m-hero">...</div>
+  </CWrapper>
+
+  <CWrapper type="full">
+    <div class="m-banner">...</div>
+  </CWrapper>
+</template>
+
+<script setup>
+import { CWrapper } from '@bedrock/core/vue';
+</script>
 ```
-Uso de b-grid y el mixin span()
-El sistema de cuadrícula se basa en un contenedor `<b-grid>` y celdas `<b-cell>`. Por defecto, cada celda ocupa el 100% del ancho. Para cambiar su tamaño responsivamente, no utilices clases en el HTML; usa el mixin span() en la hoja de estilos de tu componente.
 
-El HTML (Estructural y limpio):
+El `type` debe coincidir con una clave definida en `setup-wrappers()`. Ver [sección 1](#_1-contenedores-wrappers) para la configuración.
 
-```html
-<b-grid>
-  <article class="c-card">1</article>
-  <article class="c-card">2</article>
-  <article class="c-card">3</article>
-</b-grid>
+---
 
+### CGridLayout y CGridArea
+
+`CGridLayout` define un contenedor de CSS Grid identificado por nombre. `CGridArea` ubica su contenido en un área concreta de ese grid.
+
+```vue
+<template>
+  <CGridLayout layout="header">
+    <CGridArea area="logo">
+      <CLogo src="/logo.svg" href="/" />
+    </CGridArea>
+    <CGridArea area="nav">
+      <CMenu>...</CMenu>
+    </CGridArea>
+  </CGridLayout>
+</template>
+
+<script setup>
+import { CGridLayout, CGridArea, CLogo, CMenu } from '@bedrock/core/vue';
+</script>
 ```
 
-Nota: Al usar el mixin span() directamente en tu componente .c-card, puedes prescindir de la etiqueta intermedia `<b-cell>`.
-
-### El SASS (Lógica de presentación y layout):
+El layout se define completamente en SASS mediante los mixins `grid-layout()` y `grid-area()`:
 
 ```scss
-@use 'bedrock-config' as bedrock;
+// m-header.scss
+@use 'bedrock-config' as *;
 
-.c-card {
-  // En móvil ocupa todo el ancho por defecto
-  
-  @include bedrock.bpFrom(md) {
-    @include bedrock.span(6); // Tablet: ocupa 6 columnas de 12 (50%)
+.m-header {
+  @include grid-layout(header) {
+    grid-template-areas: "logo nav";
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: spacing(4);
   }
-  @include bedrock.bpFrom(lg) {
-    @include bedrock.span(4); // Desktop: ocupa 4 columnas de 12 (33.3%)
+
+  @include grid-area(logo) {
+    grid-area: logo;
+    justify-self: start;
+  }
+
+  @include grid-area(nav) {
+    grid-area: nav;
+    justify-self: end;
   }
 }
-
 ```
+
+Cada módulo define su propio layout con un nombre único. Varios módulos pueden usar `CGridLayout` con layouts distintos sin interferir entre sí.
+
+---
+
+Para la referencia completa de props, slots y atributos generados consulta:
+
+- [CWrapper](/components/wrapper)
+- [CGridLayout + CGridArea](/components/grid-layout)

@@ -17,6 +17,13 @@ Los componentes de Bedrock están diseñados para ser:
 | [Clickable Area](clickable-area.md) | Convierte cualquier elemento en accionable con accesibilidad de teclado. |
 | [Link](link.md) | Enlace de texto sin estilos, con estructura `.text` lista para estilizar con SASS. |
 | [Menu](menu.md) | Menú de navegación semántico con estructura `nav > ul.links`, contenido por slots. |
+| [Badge](badge.md) | Etiqueta de estado o categoría con contenido por slot. |
+| [Field](field.md) | Contenedor de campo de formulario con label, descripción y mensaje de error. |
+| [Input](input.md) | Campo de texto nativo con soporte para tipos, estados y accesibilidad. |
+| [Checkbox](checkbox.md) | Checkbox nativo accesible con label integrado. |
+| [Pagination](pagination.md) | Navegación por páginas con control de página actual y total. |
+| [Image](image.md) | Imagen responsiva con soporte para aspect ratio y carga lazy. |
+| [Logo](logo.md) | Logotipo con imagen y slot opcional para texto o tagline. |
 
 ---
 

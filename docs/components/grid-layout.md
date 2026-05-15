@@ -1,29 +1,26 @@
 # Grid Layout
 
-El sistema `grid-layout` es una primitiva de estructura diseñada para gestionar layouts basados en **CSS Grid** de forma declarativa mediante el mapeo de `grid-template-areas`.
-
-Bedrock ofrece dos formas principales de utilizar este sistema: mediante la **Integración con Vue 3** (recomendado para proyectos Vue) o mediante **Mixins SASS** (máxima flexibilidad).
+`CGridLayout` y `CGridArea` son primitivas de estructura para gestionar layouts basados en **CSS Grid** de forma declarativa. El grid se define completamente en SASS — los componentes Vue solo añaden los atributos `data-*` que los mixins necesitan para generar el CSS correcto.
 
 ---
 
-## 1. Uso con Vue 3 (Integración Nativa)
+## 1. Marcado en Vue
 
-Si trabajas con Vue 3, Bedrock proporciona componentes nativos en JS que evitan los warnings de Custom Elements y ofrecen una experiencia de desarrollo fluida con soporte para DevTools y reactividad total.
-
-### Importación
-
-```javascript
-import { CGridLayout, CGridArea } from '@bedrock/core/vue';
-```
-
-### Marcado en Vue
-
-```html
+```vue
 <template>
-  <CGridLayout layout="hero-split" tag="section" class="my-custom-hero">
-    <CGridArea area="image">...</CGridArea>
-    <CGridArea area="content">...</CGridArea>
-  </CGridLayout>
+  <div class="m-page">
+    <CGridLayout layout="page">
+      <CGridArea area="header">
+        <AppHeader />
+      </CGridArea>
+      <CGridArea area="main">
+        <slot />
+      </CGridArea>
+      <CGridArea area="footer">
+        <AppFooter />
+      </CGridArea>
+    </CGridLayout>
+  </div>
 </template>
 
 <script setup>
@@ -31,89 +28,138 @@ import { CGridLayout, CGridArea } from '@bedrock/core/vue';
 </script>
 ```
 
-**Ventajas de la integración con Vue:**
-- **Sin configuración extra:** No necesitas tocar `isCustomElement` en Vite.
-- **Transparencia:** Soporta herencia de atributos (`class`, `id`, `@click`) automáticamente.
-- **Etiqueta dinámica:** Puedes usar la prop `tag` para cambiar el elemento HTML renderizado (por defecto `div`).
+**Props de `CGridLayout`:**
+- `layout` — nombre del grid, debe coincidir con el usado en `grid-layout()`.
+- `tag` — etiqueta HTML a renderizar (por defecto `div`).
+
+**Props de `CGridArea`:**
+- `area` — nombre del área, debe coincidir con el usado en `grid-area()`.
+- `tag` — etiqueta HTML a renderizar (por defecto `div`).
 
 ---
 
-## 2. Uso con Mixins SASS (Avanzado)
+## 2. Definir el grid en SASS
 
-Si prefieres no usar componentes o necesitas aplicar grid a elementos existentes (como un `main` o un `section`), puedes usar los mixins directamente.
-
-### Marcado HTML
-
-```html
-<section class="m-hero" data-grid-layout="hero-split">
-  <div class="visual" data-grid-area="image">...</div>
-  <div class="text" data-grid-area="content">...</div>
-</section>
-```
-
-### SCSS
+El mixin `grid-layout()` activa `display: grid` y aplica las propiedades solo cuando el elemento tiene el atributo correspondiente. Los `grid-area()` se anidan dentro del bloque del layout:
 
 ```scss
-@use '@bedrock/core' as *;
+@use 'bedrock-config' as *;
 
+.m-page {
+  @include grid-layout('page') {
+    grid-template-areas:
+      "header"
+      "main"
+      "footer";
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+
+    @include grid-area('header') { }
+    @include grid-area('main') { }
+    @include grid-area('footer') { }
+  }
+}
+```
+
+---
+
+## 3. Cambiar el grid según el breakpoint
+
+El layout puede cambiar completamente en función del viewport. Los breakpoints se definen dentro del bloque `grid-layout()` con `bpFrom()`.
+
+### Ejemplo: hero que pasa de apilado a dos columnas
+
+En móvil, imagen y texto se apilan. A partir de `md`, se colocan en paralelo. A partir de `lg`, la imagen ocupa más espacio.
+
+```scss
 .m-hero {
-  // El mixin grid-layout activa automáticamente display: grid
-  @include grid-layout(hero-split) {
-    grid-template-areas: "image content";
-    grid-template-columns: 1fr 1fr;
-    gap: spacing(4);
+  @include grid-layout('hero') {
+    grid-template-areas:
+      "image"
+      "content";
+
+    @include bpFrom(md) {
+      grid-template-areas: "image content";
+      grid-template-columns: 1fr 1fr;
+      gap: spacing(8);
+    }
 
     @include bpFrom(lg) {
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 3fr 2fr;
+    }
+
+    @include grid-area('image') { }
+    @include grid-area('content') {
+      align-self: center;
     }
   }
 }
-
-// Posicionamiento de las áreas
-.visual { @include grid-area(image); }
-.text   { @include grid-area(content); }
 ```
 
----
+### Ejemplo: panel con sidebar lateral
 
-## 3. Referencia de Mixins
+En móvil, el contenido aparece primero y el sidebar debajo. A partir de `md`, se colocan en paralelo con una columna fija para el sidebar.
 
-### `grid-layout($name)`
-Aplica reglas de estilo solo cuando el elemento tiene `data-grid-layout="$name"`. **Activa automáticamente `display: grid`**.
+```scss
+.m-dashboard {
+  @include grid-layout('dashboard') {
+    grid-template-areas:
+      "main"
+      "sidebar";
 
-### `grid-area($name)`
-Asigna el elemento a la `grid-area` correspondiente buscando el atributo `data-grid-area="$name"`.
+    @include bpFrom(md) {
+      grid-template-areas: "sidebar main";
+      grid-template-columns: 240px 1fr;
+    }
 
----
+    @include bpFrom(lg) {
+      grid-template-columns: 320px 1fr;
+    }
 
-## 4. Ejemplo completo en Vue
-
-```vue
-<template>
-  <CGridLayout layout="dashboard" class="c-dashboard">
-    <CGridArea area="sidebar">...</CGridArea>
-    <CGridArea area="main">...</CGridArea>
-  </CGridLayout>
-</template>
-
-<style lang="scss">
-@use '@bedrock/core' as *;
-
-.c-dashboard {
-  min-height: 100vh;
-
-  @include grid-layout(dashboard) {
-    grid-template-areas: "sidebar main";
-    grid-template-columns: 300px 1fr;
+    @include grid-area('sidebar') { }
+    @include grid-area('main') { }
   }
 }
-</style>
+```
+
+### Ejemplo: grid de galería que aumenta columnas
+
+Un grid de cards que pasa de 1 columna a 2 y luego a 3 conforme crece la pantalla.
+
+```scss
+.m-gallery {
+  @include grid-layout('gallery') {
+    grid-template-areas: "card";
+    grid-template-columns: 1fr;
+    gap: spacing(4);
+
+    @include bpFrom(sm) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include bpFrom(lg) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include grid-area('card') { }
+  }
+}
 ```
 
 ---
 
-## 5. Ventajas de la arquitectura Bedrock
+## 4. Referencia de mixins
 
-1.  **Soporte para descendientes:** Los mixins `grid-layout` y `grid-area` buscan el atributo tanto en el elemento actual como en sus hijos. Esto permite envolver componentes (como en tu `Shell.vue`) sin romper el vínculo con el CSS.
-2.  **Transparencia:** Al no usar Shadow DOM, todos tus mixins globales (`spacing`, `color`, `typography`) funcionan dentro de los componentes sin restricciones.
-3.  **Sincronización Automática:** Los componentes traducen las props (`layout`, `area`) a atributos `data-*` automáticamente, manteniendo el CSS como única fuente de verdad para el diseño.
+### `grid-layout($name)`
+Aplica reglas de estilo solo cuando el elemento tiene `data-grid-layout="$name"`. Activa automáticamente `display: grid`. Recibe un bloque `@content` con las propiedades del grid y los `grid-area()` anidados.
+
+### `grid-area($name)`
+Asigna el elemento a la `grid-area` correspondiente, buscando el atributo `data-grid-area="$name"` en el elemento o sus descendientes directos.
+
+---
+
+## 5. Notas
+
+- **Cada módulo define su propio layout con un nombre único.** Varios módulos pueden usar `CGridLayout` con layouts distintos sin interferir entre sí.
+- **Sin Shadow DOM.** Los mixins globales (`spacing()`, `color()`, `typeset()`) funcionan dentro de los componentes sin restricciones.
+- **El CSS es la única fuente de verdad.** Los componentes Vue solo añaden atributos `data-*`; toda la lógica visual vive en SASS.

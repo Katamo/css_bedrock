@@ -149,9 +149,9 @@ import { CPagination } from '@bedrock/core/vue';
     border-radius: spacing(1);
     background: none;
     cursor: pointer;
-    font-size: 0.875rem;
+    @include typeset(label);
 
-    &[data-current] {
+    @include attr(current) {
       background-color: color(primary);
       color: color(white);
       border-color: color(primary);

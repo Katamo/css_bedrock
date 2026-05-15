@@ -169,36 +169,28 @@ Una página se construye apilando módulos, cada uno envuelto en su propia estru
 
 ```html
 <!-- Página típica -->
-<page>
+<CWrapper type="full">
+  <div class="m-main-hero">...</div>
+</CWrapper>
 
-  <!-- Módulo 1: hero, ocupa todo el ancho -->
-  <b-wrapper type="full">
-    <div class="m-main-hero">...</div>
-  </b-wrapper>
-
-  <!-- Módulo 2: sección con padding estándar -->
-  <b-wrapper type="default">
-    <div class="m-featured-event">
-      <!-- El módulo orquesta el grid internamente -->
-      <b-grid>
-        <b-cell width-xxs="12" width-lg="8">
-          <div class="c-card-cover">...</div>
-        </b-cell>
-        <b-cell width-xxs="12" width-lg="4">
-          <div class="c-tag">...</div>
-        </b-cell>
-      </b-grid>
-    </div>
-  </b-wrapper>
-
-  <!-- Módulo 3: footer, fondo oscuro -->
-  <div class="m-footer">
-    <b-wrapper type="default">
-      <div class="c-menu">...</div>
-    </b-wrapper>
+<CWrapper type="default">
+  <div class="m-featured-event">
+    <CGridLayout layout="featured">
+      <CGridArea area="main">
+        <div class="c-card-cover">...</div>
+      </CGridArea>
+      <CGridArea area="aside">
+        <div class="c-tag">...</div>
+      </CGridArea>
+    </CGridLayout>
   </div>
+</CWrapper>
 
-</page>
+<div class="m-footer">
+  <CWrapper type="default">
+    <div class="c-menu">...</div>
+  </CWrapper>
+</div>
 ```
 
 Los módulos son independientes entre sí. El orden y combinación de módulos en una página es responsabilidad de la capa de aplicación (Vue, template HTML, etc.), no del sistema de estilos.

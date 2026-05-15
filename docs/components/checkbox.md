@@ -119,7 +119,7 @@ import { CCheckbox } from '@bedrock/core/vue';
   }
 
   .label {
-    font-size: 0.875rem;
+    @include typeset(label);
     color: color(text);
     user-select: none;
   }

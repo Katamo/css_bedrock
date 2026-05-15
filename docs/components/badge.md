@@ -97,11 +97,11 @@ import { CBadge } from '@bedrock/core/vue';
 @use '@bedrock/core/badge';
 
 .c-badge {
+  @include typeset(badge);
   padding-block: spacing(1);
   padding-inline: spacing(3);
   border-radius: spacing(1);
   border: 1px solid transparent;
-  @include typeset(badge);
 
   // Variante de color (data-color="primary")
   @include attr(color, primary) {

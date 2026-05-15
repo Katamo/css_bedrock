@@ -149,12 +149,10 @@ El layout se define completamente en SASS mediante los mixins `grid-layout()` y 
   }
 
   @include grid-area(logo) {
-    grid-area: logo;
     justify-self: start;
   }
 
   @include grid-area(nav) {
-    grid-area: nav;
     justify-self: end;
   }
 }

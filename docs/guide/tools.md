@@ -15,14 +15,13 @@ Con el alias `*` todas las herramientas están disponibles directamente sin pref
 1. [Espaciado](#1-espaciado)
 2. [Colores](#2-colores)
 3. [Breakpoints](#3-breakpoints)
-4. [Layout (Grid)](#4-layout-grid)
-5. [Mutations — Variaciones de estado](#5-mutations--variaciones-de-estado)
-6. [Selectores](#6-selectores)
-7. [Tipografía](#7-tipografía)
-8. [Animación](#8-animación)
-9. [Z-Index](#9-z-index)
-10. [Detection — Media queries de capacidad](#10-detection--media-queries-de-capacidad)
-11. [Utils — Utilidades generales](#11-utils--utilidades-generales)
+4. [Mutations — Variaciones de estado](#4-mutations--variaciones-de-estado)
+5. [Selectores](#5-selectores)
+6. [Tipografía](#6-tipografía)
+7. [Animación](#7-animación)
+8. [Z-Index](#8-z-index)
+9. [Detection — Media queries de capacidad](#9-detection--media-queries-de-capacidad)
+10. [Utils — Utilidades generales](#10-utils--utilidades-generales)
 
 ---
 
@@ -35,7 +34,7 @@ Calcula un espaciado multiplicando `$multiplier` por `$spacing-base` (por defect
 ```scss
 .c-card {
   padding: spacing(3);        // 24px
-  margin-bottom: spacing(5);  // 40px
+  margin-block-end: spacing(5);  // 40px
   gap: spacing(1);            // 8px
 }
 ```
@@ -170,50 +169,7 @@ $tablet-width: getBpMin(md); // 768px
 
 ---
 
-## 4. Layout (Grid)
-
-Para que `span()` y `offset()` funcionen, el elemento debe estar dentro de un contenedor con `display: grid` y las columnas configuradas (por ejemplo, `CGridLayout`).
-
-### `@include span($cols)`
-
-Hace que el elemento ocupe `$cols` columnas dentro del grid. Equivale a `grid-column-end: span N`.
-
-```scss
-.c-card {
-  // Móvil: ocupa todo el ancho por defecto
-
-  @include bpFrom(md) {
-    @include span(6);   // tablet: mitad del grid (6/12)
-  }
-
-  @include bpFrom(lg) {
-    @include span(4);   // desktop: un tercio (4/12)
-  }
-}
-```
-
-> `span()` está diseñado para usarse directamente en el componente, sin necesidad de wrappers intermedios.
-
----
-
-### `@include offset($cols)`
-
-Desplaza el elemento `$cols` columnas desde la izquierda. Equivale a `grid-column-start: N+1`.
-
-```scss
-.c-aside {
-  @include bpFrom(lg) {
-    @include span(3);    // ocupa 3 columnas
-    @include offset(9);  // empieza en la columna 10 (salta las primeras 9)
-  }
-}
-```
-
-> `span()` y `offset()` pueden combinarse en el mismo elemento. El orden no importa ya que usan propiedades distintas (`grid-column-end` y `grid-column-start`).
-
----
-
-## 5. Mutations — Variaciones de estado
+## 4. Mutations — Variaciones de estado
 
 Los mixins de mutations generan selectores CSS encapsulados dentro de la clase raíz del componente. Son la forma estándar de declarar variaciones en Bedrock.
 
@@ -299,7 +255,7 @@ La inversa de `context()`. Aplica estilos a un **descendiente** del componente q
 
 ---
 
-## 6. Selectores
+## 5. Selectores
 
 ### `@include hover`
 
@@ -362,7 +318,7 @@ Selectores de posición para todos los hijos excepto el primero o el último. Ú
 
 ---
 
-## 7. Tipografía
+## 6. Tipografía
 
 ### `@include typeset($name)` — uso recomendado
 
@@ -465,7 +421,7 @@ Genera clases CSS `.cr-typography-{nombre}` para cada typeset del mapa. Útil pa
 
 ---
 
-## 8. Animación
+## 7. Animación
 
 ### `speed($name)`
 
@@ -534,7 +490,7 @@ Respeta automáticamente `prefers-reduced-motion`: si el usuario prefiere reduci
 
 ---
 
-## 9. Z-Index
+## 8. Z-Index
 
 ### `z-layer($layer)`
 
@@ -568,7 +524,7 @@ Devuelven el z-index una unidad por encima o por debajo de la capa indicada. Út
 
 ---
 
-## 10. Detection — Media queries de capacidad
+## 9. Detection — Media queries de capacidad
 
 Estos mixins encapsulan media queries de detección de capacidades del dispositivo. Permiten escribir CSS progresivo y accesible sin repetir las media queries manualmente.
 
@@ -632,7 +588,7 @@ Se aplica cuando las animaciones están habilitadas. Actualmente equivale a `@me
 
 ---
 
-## 11. Utils — Utilidades generales
+## 10. Utils — Utilidades generales
 
 ### `pxToRem($values)`
 

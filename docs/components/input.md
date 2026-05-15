@@ -81,12 +81,13 @@ Cualquier atributo adicional (`id`, `name`, `placeholder`, `autocomplete`, `maxl
 @use '@bedrock/core/input';
 
 .c-input {
+  @include typeset(input);
   width: 100%;
   height: spacing(10);
-  padding: 0 spacing(3);
+  padding-block: 0;
+  padding-inline: spacing(3);
   border: 1px solid color(border);
   border-radius: spacing(1);
-  font-size: 1rem;
   color: color(text);
   background-color: color(surface);
   outline: none;

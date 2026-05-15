@@ -58,6 +58,28 @@ Los typesets se definen en la configuración de Bedrock, junto al resto de token
 
 ---
 
+## Orden de los includes
+
+`@include typeset()` debe ser siempre la **primera declaración** dentro de un selector. El typeset establece la base tipográfica del elemento; el resto de propiedades (color, spacing, layout…) se leen más fácilmente cuando saben sobre qué base tipográfica trabajan.
+
+```scss
+// BIEN
+.c-label {
+  @include typeset(label);
+  color: color(text, subtle);
+  padding-inline: spacing(2);
+}
+
+// MAL
+.c-label {
+  color: color(text, subtle);
+  padding-inline: spacing(2);
+  @include typeset(label);
+}
+```
+
+---
+
 ## Cómo aplicarlos
 
 ```scss

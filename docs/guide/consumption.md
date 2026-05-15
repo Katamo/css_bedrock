@@ -15,12 +15,23 @@ Todas las herramientas quedan disponibles directamente, sin prefijo. Es la forma
 ```scss
 @use 'bedrock-config' as *;
 
-.mi-componente {
-  padding: spacing(3);
-  z-index: z-layer(header);
+.c-button {
+  @include typeset(button);
+  padding-block: spacing(2);
+  padding-inline: spacing(4);
+  background-color: color(primary);
 
   @include bpFrom(md) {
-    padding: spacing(6);
+    padding-inline: spacing(6);
+  }
+
+  @include hover {
+    background-color: color(primary, dark);
+  }
+
+  @include attr(variant, ghost) {
+    background-color: transparent;
+    border: 1px solid color(primary);
   }
 }
 ```
@@ -32,17 +43,28 @@ Todas las llamadas se prefijan con `bedrock.`. Útil cuando conviven varias libr
 ```scss
 @use 'bedrock-config' as bedrock;
 
-.mi-componente {
-  padding: bedrock.spacing(3);
-  z-index: bedrock.z-layer(header);
+.c-button {
+  @include bedrock.typeset(button);
+  padding-block: bedrock.spacing(2);
+  padding-inline: bedrock.spacing(4);
+  background-color: bedrock.color(primary);
 
   @include bedrock.bpFrom(md) {
-    padding: bedrock.spacing(6);
+    padding-inline: bedrock.spacing(6);
+  }
+
+  @include bedrock.hover {
+    background-color: bedrock.color(primary, dark);
+  }
+
+  @include bedrock.attr(variant, ghost) {
+    background-color: transparent;
+    border: 1px solid bedrock.color(primary);
   }
 }
 ```
 
-El namespace puede ser cualquier nombre, no necesariamente `bedrock`.
+El namespace puede ser cualquier nombre, no necesariamente `bedrock`. Ambos ejemplos producen exactamente el mismo CSS.
 
 ## Sobre la emisión de CSS
 

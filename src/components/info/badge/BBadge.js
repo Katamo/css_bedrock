@@ -1,8 +1,8 @@
-import { h, defineComponent } from 'vue';
-import CClickableArea from '../../cta/clickable-area/CClickableArea.js';
+﻿import { h, defineComponent } from 'vue';
+import BClickableArea from '../../cta/clickable-area/BClickableArea.js';
 
 export default defineComponent({
-  name: 'CBadge',
+  name: 'BBadge',
   inheritAttrs: false,
   props: {
     href: { type: String, default: null },
@@ -14,11 +14,11 @@ export default defineComponent({
       const hasIcon = !!slots.icon;
 
       return h('span', {
-        class: ['c-badge', extraClass],
+        class: ['b-badge', extraClass],
         ...(props.disabled && { 'data-disabled': '' }),
         ...(hasIcon && { 'data-has-icon': '' }),
       },
-        h(CClickableArea, {
+        h(BClickableArea, {
           ...restAttrs,
           href: props.href,
           disabled: props.disabled,

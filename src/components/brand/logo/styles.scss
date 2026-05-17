@@ -1,6 +1,6 @@
-@use '../../../core' as *;
+﻿@use '../../../core' as *;
 
-.c-logo {
+.b-logo {
   position: relative;
 
   @include attr(has-pointer) {

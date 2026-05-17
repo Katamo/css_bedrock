@@ -1,13 +1,13 @@
-# Field
+﻿# Field
 
-`CField` es la carcasa de un campo de formulario. Proporciona la estructura semántica (label, control, hint, error) y los atributos de datos de estado. No incluye el control en sí — éste se inyecta en el slot `default`.
+`BField` es la carcasa de un campo de formulario. Proporciona la estructura semántica (label, control, hint, error) y los atributos de datos de estado. No incluye el control en sí — éste se inyecta en el slot `default`.
 
 ---
 
 ## Importación
 
 ```js
-import { CField } from '@bedrock/core/vue';
+import { BField } from '@bedrock/core/vue';
 ```
 
 ```scss
@@ -30,7 +30,7 @@ import { CField } from '@bedrock/core/vue';
 
 | Slot      | Descripción |
 |-----------|-------------|
-| `default` | El control del campo: `CInput`, `CCheckbox`, `<select>` nativo, etc. |
+| `default` | El control del campo: `BInput`, `BCheckbox`, `<select>` nativo, etc. |
 | `label`   | Texto del label. Si está presente, se renderiza un `<label>` vinculado al control via `fieldId`. |
 | `hint`    | Texto de ayuda mostrado bajo el control. |
 | `error`   | Mensaje de error. Su presencia también aplica `data-error` al elemento raíz. |
@@ -50,7 +50,7 @@ import { CField } from '@bedrock/core/vue';
 ## Estructura HTML generada
 
 ```html
-<div class="c-field">
+<div class="b-field">
   <label class="label" for="my-input">Email</label>
   <div class="control">
     <!-- slot default -->
@@ -64,42 +64,42 @@ import { CField } from '@bedrock/core/vue';
 
 ## Ejemplos de uso
 
-### Campo básico con CInput
+### Campo básico con BInput
 
 ```html
-<CField field-id="email">
+<BField field-id="email">
   <template #label>Email</template>
-  <CInput id="email" v-model="email" type="email" />
-</CField>
+  <BInput id="email" v-model="email" type="email" />
+</BField>
 ```
 
 ### Con hint
 
 ```html
-<CField field-id="password">
+<BField field-id="password">
   <template #label>Contraseña</template>
-  <CInput id="password" v-model="password" type="password" />
+  <BInput id="password" v-model="password" type="password" />
   <template #hint>Mínimo 8 caracteres.</template>
-</CField>
+</BField>
 ```
 
 ### Con error
 
 ```html
-<CField field-id="username" :required="true">
+<BField field-id="username" :required="true">
   <template #label>Usuario</template>
-  <CInput id="username" v-model="username" />
+  <BInput id="username" v-model="username" />
   <template #error>El nombre de usuario ya existe.</template>
-</CField>
+</BField>
 ```
 
 ### Deshabilitado
 
 ```html
-<CField :disabled="true">
+<BField :disabled="true">
   <template #label>Plan actual</template>
-  <CInput v-model="plan" :disabled="true" />
-</CField>
+  <BInput v-model="plan" :disabled="true" />
+</BField>
 ```
 
 ---
@@ -110,7 +110,7 @@ import { CField } from '@bedrock/core/vue';
 @use 'bedrock-config' as *;
 @use '@bedrock/core/field';
 
-.c-field {
+.b-field {
   display: flex;
   flex-direction: column;
   gap: spacing(1);

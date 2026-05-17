@@ -1,4 +1,4 @@
-# CSS Bedrock — Sistema de componentes y variaciones de estilo
+﻿# CSS Bedrock — Sistema de componentes y variaciones de estilo
 
 ## Índice
 
@@ -32,7 +32,7 @@ Todas las capas cargan `core.scss` usando `@use`, que inyecta las herramientas (
 // Patrón estándar en cualquier archivo de estilos
 @use '../../../core' as *;
 
-.c-button { ... }
+.b-button { ... }
 ```
 
 ---
@@ -130,7 +130,7 @@ src/modules/
   .navigation-bar {
     .navigation-bar-wrapper {
       // El módulo orquesta el layout interno de sus componentes
-      .menu { margin: spacing(9) 0; }  // .c-menu vive aquí
+      .menu { margin: spacing(9) 0; }  // .b-menu vive aquí
 
       .bottom-wrapper {
         .social-buttons {
@@ -159,7 +159,7 @@ src/modules/
 | Prefijo de clase | `.c-` | `.m-` |
 | Complejidad | Unidad atómica de UI | Composición de varios componentes |
 | Autonomía semántica | Parcial (necesita contexto) | Total (sección de página completa) |
-| Ejemplo | `.c-button`, `.c-tag` | `.m-footer`, `.m-main-hero` |
+| Ejemplo | `.b-button`, `.c-tag` | `.m-footer`, `.m-main-hero` |
 
 ---
 
@@ -169,27 +169,27 @@ Una página se construye apilando módulos, cada uno envuelto en su propia estru
 
 ```html
 <!-- Página típica -->
-<CWrapper type="full">
+<BWrapper type="full">
   <div class="m-main-hero">...</div>
-</CWrapper>
+</BWrapper>
 
-<CWrapper type="default">
+<BWrapper type="default">
   <div class="m-featured-event">
-    <CGridLayout layout="featured">
-      <CGridArea area="main">
+    <BGridLayout layout="featured">
+      <BGridArea area="main">
         <div class="c-card-cover">...</div>
-      </CGridArea>
-      <CGridArea area="aside">
+      </BGridArea>
+      <BGridArea area="aside">
         <div class="c-tag">...</div>
-      </CGridArea>
-    </CGridLayout>
+      </BGridArea>
+    </BGridLayout>
   </div>
-</CWrapper>
+</BWrapper>
 
 <div class="m-footer">
-  <CWrapper type="default">
-    <div class="c-menu">...</div>
-  </CWrapper>
+  <BWrapper type="default">
+    <div class="b-menu">...</div>
+  </BWrapper>
 </div>
 ```
 
@@ -251,7 +251,7 @@ Sistema mobile-first: los estilos base son para móvil, los breakpoints añaden 
 **Los breakpoints pueden anidarse dentro de atributos** para afinar una variación en un rango específico:
 
 ```scss
-.c-button {
+.b-button {
   @include bpFrom(md) {
     .container { height: spacing(12); }
 
@@ -282,15 +282,15 @@ Los atributos son la forma de declarar **variantes de un mismo componente**: tip
 **Uso en HTML:**
 
 ```html
-<div class="c-button" data-type="link">...</div>
-<div class="c-button" data-size="large">...</div>
-<div class="c-button" data-disabled>...</div>
+<div class="b-button" data-type="link">...</div>
+<div class="b-button" data-size="large">...</div>
+<div class="b-button" data-disabled>...</div>
 ```
 
-**Ejemplo completo — `.c-button`:**
+**Ejemplo completo — `.b-button`:**
 
 ```scss
-.c-button {
+.b-button {
   // Estilo base: botón con fondo sunrise
   .container {
     border-color: color(primary, sunrise);
@@ -376,17 +376,17 @@ El contexto es la forma de hacer que un componente **se adapte automáticamente*
 <div data-background="dark">
 
   <!-- Los componentes hijos reaccionan automáticamente -->
-  <div class="c-button">...</div>   <!-- se vuelve oscuro -->
-  <div class="c-menu">...</div>     <!-- links en blanco -->
+  <div class="b-button">...</div>   <!-- se vuelve oscuro -->
+  <div class="b-menu">...</div>     <!-- links en blanco -->
   <div class="c-section">...</div>  <!-- títulos en blanco -->
 
 </div>
 ```
 
-**Ejemplo — `.c-button` que reacciona al contexto oscuro:**
+**Ejemplo — `.b-button` que reacciona al contexto oscuro:**
 
 ```scss
-.c-button {
+.b-button {
   .container {
     background-color: color(primary, sunrise);
     color: color(black);
@@ -471,7 +471,7 @@ Es la inversa del contexto: permite que el componente padre controle el estilo d
 **Mixin:** `hover` — envuelve automáticamente en `@include canHover { &:hover { ... } }`, evitando que el hover se active en dispositivos táctiles.
 
 ```scss
-.c-button {
+.b-button {
   .container { background-color: color(primary, sunrise); }
 
   // Solo en dispositivos con puntero fino (no táctiles)
@@ -498,7 +498,7 @@ Para casos donde se quiere hover incondicional (sin detección de capacidad), ex
 **Mixins:** `RTL`, `LTR`, `defaultDIR`, `notRTL` — permiten declarar estilos específicos de dirección de escritura dentro del componente.
 
 ```scss
-.c-menu {
+.b-menu {
   // Estilos base (neutral)
   .link::before {
     transform-origin: 100% 50%;

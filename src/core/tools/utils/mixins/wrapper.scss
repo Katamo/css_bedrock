@@ -1,4 +1,4 @@
-@use 'sass:map';
+﻿@use 'sass:map';
 @use '../../../../core/setup' as *;
 @use '../../breakpoints' as *;
 
@@ -16,7 +16,7 @@
 // Call this mixin in your entry point (main.scss) after importing bedrock-config,
 // where spacing(), color(), font() and all other functions are available.
 @mixin setup-wrappers($config) {
-  .c-wrapper {
+  .b-wrapper {
     @each $type, $type-config in $config {
       &[type="#{$type}"] {
         @include apply-wrapper-props($type-config);

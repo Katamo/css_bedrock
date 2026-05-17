@@ -1,7 +1,7 @@
-import CGridLayout from './CGridLayout.js';
-import CGridArea from './CGridArea.js';
+﻿import BGridLayout from './BGridLayout.js';
+import BGridArea from './BGridArea.js';
 
 export {
-  CGridLayout,
-  CGridArea
+  BGridLayout,
+  BGridArea
 };

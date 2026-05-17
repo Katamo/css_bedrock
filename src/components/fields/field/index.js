@@ -1,3 +1,3 @@
-import CField from './CField.js';
+﻿import BField from './BField.js';
 
-export { CField, CField as default };
+export { BField, BField as default };

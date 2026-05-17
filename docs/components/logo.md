@@ -1,13 +1,13 @@
-# Logo
+﻿# Logo
 
-`CLogo` es un componente de marca para mostrar el logotipo de la web. Envuelve `CImage` y opcionalmente convierte el logo en un enlace. Acepta un slot para inyectar contenido adicional (nombre de marca, tagline) junto a la imagen.
+`BLogo` es un componente de marca para mostrar el logotipo de la web. Envuelve `BImage` y opcionalmente convierte el logo en un enlace. Acepta un slot para inyectar contenido adicional (nombre de marca, tagline) junto a la imagen.
 
 ---
 
 ## Importación
 
 ```js
-import { CLogo } from '@bedrock/core/vue';
+import { BLogo } from '@bedrock/core/vue';
 ```
 
 ```scss
@@ -49,18 +49,18 @@ import { CLogo } from '@bedrock/core/vue';
 
 ```html
 <!-- Sin href, sin slot -->
-<div class="c-logo">
+<div class="b-logo">
   <div class="logo">
-    <figure class="c-image" data-fit="contain">
+    <figure class="b-image" data-fit="contain">
       <img src="..." alt="..." loading="eager" draggable="false" />
     </figure>
   </div>
 </div>
 
 <!-- Con href y slot -->
-<div class="c-logo" data-has-pointer data-has-text>
+<div class="b-logo" data-has-pointer data-has-text>
   <a class="logo" href="/">
-    <figure class="c-image" data-fit="contain">
+    <figure class="b-image" data-fit="contain">
       <img src="..." alt="..." loading="eager" draggable="false" />
     </figure>
     <span>LeMenu</span>
@@ -75,45 +75,45 @@ import { CLogo } from '@bedrock/core/vue';
 ### Logo simple
 
 ```html
-<CLogo src="/logo.svg" alt="Mi marca" />
+<BLogo src="/logo.svg" alt="Mi marca" />
 ```
 
 ### Logo como enlace a la home
 
 ```html
-<CLogo src="/logo.svg" alt="Mi marca" href="/" />
+<BLogo src="/logo.svg" alt="Mi marca" href="/" />
 ```
 
 ### Logo con nombre de marca
 
 ```html
-<CLogo src="/logo.svg" alt="" href="/">
+<BLogo src="/logo.svg" alt="" href="/">
   <span class="brand-name">Mi marca</span>
-</CLogo>
+</BLogo>
 ```
 
 ### Logo con imagen y tagline
 
 ```html
-<CLogo src="/logo.svg" alt="" href="/">
+<BLogo src="/logo.svg" alt="" href="/">
   <div class="brand-text">
     <span class="name">Mi marca</span>
     <span class="tagline">Tu solución</span>
   </div>
-</CLogo>
+</BLogo>
 ```
 
 ---
 
 ## Estilos en el proyecto consumidor
 
-`CLogo` no impone ningún estilo visual. El proyecto consumidor define dimensiones, layout y variantes.
+`BLogo` no impone ningún estilo visual. El proyecto consumidor define dimensiones, layout y variantes.
 
 ```scss
 @use 'bedrock-config' as *;
 @use '@bedrock/core/logo';
 
-.c-logo {
+.b-logo {
   display: block;
 
   .logo {
@@ -124,7 +124,7 @@ import { CLogo } from '@bedrock/core/vue';
     color: inherit;
   }
 
-  .c-image {
+  .b-image {
     width: spacing(10);
     height: spacing(10);
     flex-shrink: 0;
@@ -141,13 +141,13 @@ Si el módulo header necesita un logo horizontal (imagen + texto en fila) y el f
 ```vue
 <!-- src/components/AppLogo.vue -->
 <template>
-  <CLogo class="app-logo" :src="src" :href="href" :data-layout="layout">
+  <BLogo class="app-logo" :src="src" :href="href" :data-layout="layout">
     <slot />
-  </CLogo>
+  </BLogo>
 </template>
 
 <script setup>
-import { CLogo } from '@bedrock/core/vue';
+import { BLogo } from '@bedrock/core/vue';
 defineProps({ src: String, href: String, layout: String });
 </script>
 
@@ -171,4 +171,4 @@ defineProps({ src: String, href: String, layout: String });
 </AppLogo>
 ```
 
-> Ver [Guía 01 — Encapsulación](/guides/encapsulacion) para entender por qué el módulo no debe estilar directamente dentro de `CLogo`.
+> Ver [Guía 01 — Encapsulación](/guides/encapsulacion) para entender por qué el módulo no debe estilar directamente dentro de `BLogo`.

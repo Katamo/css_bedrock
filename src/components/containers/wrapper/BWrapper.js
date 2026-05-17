@@ -1,12 +1,12 @@
-import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent } from 'vue';
 
 /**
- * CWrapper
+ * BWrapper
  * Vue 3 Wrapper component.
  * Maps 'type' prop to 'type' attribute to match Bedrock's b-wrapper CSS.
  */
 export default defineComponent({
-  name: 'CWrapper',
+  name: 'BWrapper',
   inheritAttrs: false,
   props: {
     type: {
@@ -24,7 +24,7 @@ export default defineComponent({
       {
         ...attrs,
         'type': props.type,
-        class: ['c-wrapper', attrs.class]
+        class: ['b-wrapper', attrs.class]
       },
       slots.default ? slots.default() : []
     );

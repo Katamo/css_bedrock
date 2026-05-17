@@ -1,8 +1,8 @@
-import { h, defineComponent } from 'vue';
-import CImage from '../../media/image/CImage.js';
+﻿import { h, defineComponent } from 'vue';
+import BImage from '../../media/image/BImage.js';
 
 export default defineComponent({
-  name: 'CLogo',
+  name: 'BLogo',
   inheritAttrs: false,
   props: {
     src:      { type: String, required: true },
@@ -18,7 +18,7 @@ export default defineComponent({
 
       return h('div', {
         ...restAttrs,
-        class: ['c-logo', extraClass],
+        class: ['b-logo', extraClass],
         ...(isLink    && { 'data-has-pointer': '' }),
         ...(hasText   && { 'data-has-text':    '' }),
         ...(props.disabled && { 'data-disabled': '' }),
@@ -27,7 +27,7 @@ export default defineComponent({
           class: 'logo',
           ...(isLink && { href: props.href }),
         }, [
-          h(CImage, {
+          h(BImage, {
             src:     props.src,
             alt:     props.alt,
             loading: 'eager',

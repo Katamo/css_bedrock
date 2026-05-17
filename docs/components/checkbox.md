@@ -1,13 +1,13 @@
-# Checkbox
+﻿# Checkbox
 
-`CCheckbox` es un checkbox nativo con su label, compatible con `v-model` booleano. Renderiza un `<label>` que envuelve el `<input type="checkbox">` y el texto del label en `<span class="label">`.
+`BCheckbox` es un checkbox nativo con su label, compatible con `v-model` booleano. Renderiza un `<label>` que envuelve el `<input type="checkbox">` y el texto del label en `<span class="label">`.
 
 ---
 
 ## Importación
 
 ```js
-import { CCheckbox } from '@bedrock/core/vue';
+import { BCheckbox } from '@bedrock/core/vue';
 ```
 
 ```scss
@@ -24,7 +24,7 @@ import { CCheckbox } from '@bedrock/core/vue';
 | `disabled`   | `Boolean` | `false` | Deshabilita el checkbox y aplica `data-disabled`. |
 | `value`      | `String`  | `null`  | Valor HTML del input. Útil en grupos de checkboxes. |
 | `name`       | `String`  | `null`  | Nombre del campo para envío de formulario. |
-| `id`         | `String`  | `null`  | ID del input nativo. Necesario si se usa fuera de `CField`. |
+| `id`         | `String`  | `null`  | ID del input nativo. Necesario si se usa fuera de `BField`. |
 
 ---
 
@@ -55,7 +55,7 @@ import { CCheckbox } from '@bedrock/core/vue';
 ## Estructura HTML generada
 
 ```html
-<label class="c-checkbox">
+<label class="b-checkbox">
   <input type="checkbox" />
   <span class="label">Acepto los términos</span>
 </label>
@@ -68,19 +68,19 @@ import { CCheckbox } from '@bedrock/core/vue';
 ### Básico con v-model
 
 ```html
-<CCheckbox v-model="aceptado">Acepto los términos y condiciones</CCheckbox>
+<BCheckbox v-model="aceptado">Acepto los términos y condiciones</BCheckbox>
 ```
 
 ### Deshabilitado
 
 ```html
-<CCheckbox v-model="valor" :disabled="true">Opción no disponible</CCheckbox>
+<BCheckbox v-model="valor" :disabled="true">Opción no disponible</BCheckbox>
 ```
 
 ### Grupo de checkboxes
 
 ```html
-<CCheckbox
+<BCheckbox
   v-for="opcion in opciones"
   :key="opcion.value"
   v-model="seleccionados"
@@ -88,13 +88,13 @@ import { CCheckbox } from '@bedrock/core/vue';
   name="preferencias"
 >
   {{ opcion.label }}
-</CCheckbox>
+</BCheckbox>
 ```
 
 ### Sin label visible
 
 ```html
-<CCheckbox v-model="activo" :id="'toggle-activo'" aria-label="Activar notificaciones" />
+<BCheckbox v-model="activo" :id="'toggle-activo'" aria-label="Activar notificaciones" />
 ```
 
 ---
@@ -105,7 +105,7 @@ import { CCheckbox } from '@bedrock/core/vue';
 @use 'bedrock-config' as *;
 @use '@bedrock/core/checkbox';
 
-.c-checkbox {
+.b-checkbox {
   display: inline-flex;
   align-items: center;
   gap: spacing(2);

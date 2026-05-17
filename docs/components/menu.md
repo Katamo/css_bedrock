@@ -1,6 +1,6 @@
-# Menu
+﻿# Menu
 
-`CMenu` es un componente de navegación sin estilos visuales propios. Proporciona la estructura semántica `div.c-menu > nav > ul.links` y deja al proyecto consumidor el control total sobre el contenido de cada ítem.
+`BMenu` es un componente de navegación sin estilos visuales propios. Proporciona la estructura semántica `div.b-menu > nav > ul.links` y deja al proyecto consumidor el control total sobre el contenido de cada ítem.
 
 ---
 
@@ -9,13 +9,13 @@
 ### JavaScript (Vue 3)
 
 ```js
-import { CMenu } from '@bedrock/core/vue';
+import { BMenu } from '@bedrock/core/vue';
 ```
 
 ### SCSS
 
 ```scss
-// Emite los estilos base de .c-menu
+// Emite los estilos base de .b-menu
 @use '@bedrock/core/menu';
 ```
 
@@ -40,7 +40,7 @@ import { CMenu } from '@bedrock/core/vue';
 ## Estructura renderizada
 
 ```html
-<div class="c-menu">
+<div class="b-menu">
   <nav>
     <ul class="links">
       <!-- slot: <li> elementos del consumidor -->
@@ -56,11 +56,11 @@ import { CMenu } from '@bedrock/core/vue';
 ### Menú básico
 
 ```html
-<CMenu>
+<BMenu>
   <li><a href="/inicio"><span class="text">Inicio</span></a></li>
   <li><a href="/sobre"><span class="text">Sobre nosotros</span></a></li>
   <li><a href="/contacto"><span class="text">Contacto</span></a></li>
-</CMenu>
+</BMenu>
 ```
 
 ### Con ítem activo
@@ -68,41 +68,41 @@ import { CMenu } from '@bedrock/core/vue';
 Marca el ítem activo con `data-active` en el `<li>`. El proyecto consumidor lo estiliza con `@include attr(active)`.
 
 ```html
-<CMenu>
+<BMenu>
   <li data-active><a href="/inicio"><span class="text">Inicio</span></a></li>
   <li><a href="/sobre"><span class="text">Sobre nosotros</span></a></li>
-</CMenu>
+</BMenu>
 ```
 
-### Usando CLink como ítem
+### Usando BLink como ítem
 
 ```html
-<CMenu>
-  <li data-active><CLink href="/inicio">Inicio</CLink></li>
-  <li><CLink href="/sobre">Sobre nosotros</CLink></li>
-</CMenu>
+<BMenu>
+  <li data-active><BLink href="/inicio">Inicio</BLink></li>
+  <li><BLink href="/sobre">Sobre nosotros</BLink></li>
+</BMenu>
 ```
 
 ### Como elemento `<nav>` directo
 
 ```html
-<CMenu tag="nav">
+<BMenu tag="nav">
   <li><a href="/inicio"><span class="text">Inicio</span></a></li>
-</CMenu>
+</BMenu>
 ```
 
 ---
 
 ## Estilos en el proyecto consumidor
 
-`CMenu` emite únicamente la estructura flex de la lista y el `display: flex` en los enlaces. El proyecto consumidor define tipografía, colores, espaciado y estados.
+`BMenu` emite únicamente la estructura flex de la lista y el `display: flex` en los enlaces. El proyecto consumidor define tipografía, colores, espaciado y estados.
 
 ```scss
 // src/components/nav/_menu.scss
 @use 'bedrock-config' as *;
 @use '@bedrock/core/menu';
 
-.c-menu {
+.b-menu {
   .links {
     gap: spacing(7);
 

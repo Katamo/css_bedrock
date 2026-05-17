@@ -1,7 +1,7 @@
-import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent } from 'vue';
 
 /**
- * CClickableArea
+ * BClickableArea
  * Converts any element into an actionable one.
  * Renders as <a> when href is provided, <div> otherwise.
  *
@@ -9,7 +9,7 @@ import { h, defineComponent } from 'vue';
  * Enter-key support automatically for accessibility.
  */
 export default defineComponent({
-  name: 'CClickableArea',
+  name: 'BClickableArea',
   inheritAttrs: false,
   props: {
     href:     { type: String,  default: null },
@@ -27,7 +27,7 @@ export default defineComponent({
 
       const domProps = {
         ...attrs,
-        class: ['c-clickable-area', attrs.class],
+        class: ['b-clickable-area', attrs.class],
         ...(props.id       && { id: props.id }),
         ...(props.disabled && { 'data-disabled': '' }),
         ...(isLink

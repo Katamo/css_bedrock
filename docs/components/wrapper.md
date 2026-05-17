@@ -1,6 +1,6 @@
-# Wrapper
+﻿# Wrapper
 
-El componente `CWrapper` es una primitiva de layout diseñada para proporcionar contenedores con padding horizontal responsivo y centrado automático.
+El componente `BWrapper` es una primitiva de layout diseñada para proporcionar contenedores con padding horizontal responsivo y centrado automático.
 
 ---
 
@@ -9,17 +9,17 @@ El componente `CWrapper` es una primitiva de layout diseñada para proporcionar 
 ### Importación
 
 ```javascript
-import { CWrapper } from '@bedrock/core/vue';
+import { BWrapper } from '@bedrock/core/vue';
 ```
 
 ### Marcado en Vue
 
 ```html
 <template>
-  <CWrapper type="default" tag="section">
+  <BWrapper type="default" tag="section">
     <h1>Contenido envuelto</h1>
     <p>Este contenido tendrá los márgenes laterales configurados.</p>
-  </CWrapper>
+  </BWrapper>
 </template>
 ```
 

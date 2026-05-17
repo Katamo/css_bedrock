@@ -1,3 +1,3 @@
-import CCheckbox from './CCheckbox.js';
+﻿import BCheckbox from './BCheckbox.js';
 
-export { CCheckbox, CCheckbox as default };
+export { BCheckbox, BCheckbox as default };

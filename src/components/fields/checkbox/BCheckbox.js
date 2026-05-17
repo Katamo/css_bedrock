@@ -1,15 +1,15 @@
-import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent } from 'vue';
 
 /**
- * CCheckbox
+ * BCheckbox
  * Checkbox input with its label, v-model compatible.
- * Renders: label.c-checkbox > input[type="checkbox"] + span.label
+ * Renders: label.b-checkbox > input[type="checkbox"] + span.label
  *
  * The label text goes in the default slot.
  * Supports v-model (boolean) via modelValue + update:modelValue.
  */
 export default defineComponent({
-  name: 'CCheckbox',
+  name: 'BCheckbox',
   inheritAttrs: false,
   props: {
     modelValue: { type: Boolean, default: false },
@@ -24,7 +24,7 @@ export default defineComponent({
       const { class: extraClass, ...restAttrs } = attrs;
 
       return h('label', {
-        class: ['c-checkbox', extraClass],
+        class: ['b-checkbox', extraClass],
         ...(props.disabled && { 'data-disabled': '' }),
       }, [
         h('input', {

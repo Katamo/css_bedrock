@@ -1,4 +1,4 @@
-# Bedrock
+﻿# Bedrock
 
 **[Documentación →](https://katamo.github.io/css_bedrock/)**
 
@@ -88,7 +88,7 @@ Luego en tu archivo de entrada, donde `spacing()` y el resto de funciones ya est
 ### 5. Usar las herramientas
 
 ```scss
-.c-button {
+.b-button {
   padding: spacing(2) spacing(4);
   background-color: color(primary);
   font-family: font(base);
@@ -115,7 +115,7 @@ Luego en tu archivo de entrada, donde `spacing()` y el resto de funciones ya est
 Bedrock propone estructurar el proyecto consumidor en dos capas:
 
 ```
-Components  →  unidades de UI            .c-button, .c-tag, .c-menu…
+Components  →  unidades de UI            .b-button, .c-tag, .b-menu…
 Modules     →  bloques de página         .m-hero, .m-footer…
 ```
 

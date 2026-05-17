@@ -1,8 +1,8 @@
-# Link
+﻿# Link
 
-`CLink` es un componente de enlace de texto sin estilos visuales propios. Proporciona la estructura semántica necesaria — el elemento raíz `.c-link` y el elemento interno `.text` — para que el proyecto consumidor construya encima cualquier variante de enlace mediante SASS.
+`BLink` es un componente de enlace de texto sin estilos visuales propios. Proporciona la estructura semántica necesaria — el elemento raíz `.b-link` y el elemento interno `.text` — para que el proyecto consumidor construya encima cualquier variante de enlace mediante SASS.
 
-Internamente usa `CClickableArea`, por lo que hereda su comportamiento de accesibilidad de teclado (Enter activa el click en elementos no-link).
+Internamente usa `BClickableArea`, por lo que hereda su comportamiento de accesibilidad de teclado (Enter activa el click en elementos no-link).
 
 ---
 
@@ -11,13 +11,13 @@ Internamente usa `CClickableArea`, por lo que hereda su comportamiento de accesi
 ### JavaScript (Vue 3)
 
 ```js
-import { CLink } from '@bedrock/core/vue';
+import { BLink } from '@bedrock/core/vue';
 ```
 
 ### SCSS
 
 ```scss
-// Emite los estilos base de .c-link
+// Emite los estilos base de .b-link
 @use '@bedrock/core/link';
 ```
 
@@ -46,9 +46,9 @@ import { CLink } from '@bedrock/core/vue';
 ## Estructura renderizada
 
 ```html
-<div class="c-link">
-  <!-- CClickableArea: gestiona href, role, tabIndex y teclado -->
-  <a class="c-clickable-area" href="/ruta">
+<div class="b-link">
+  <!-- BClickableArea: gestiona href, role, tabIndex y teclado -->
+  <a class="b-clickable-area" href="/ruta">
     <span class="text">Texto del enlace</span>
   </a>
 </div>
@@ -63,39 +63,39 @@ El elemento `.text` existe para que el proyecto consumidor pueda aplicar estilos
 ### Enlace estándar
 
 ```html
-<CLink href="/articulo/123">Leer artículo</CLink>
+<BLink href="/articulo/123">Leer artículo</BLink>
 ```
 
 ### Sin subrayado
 
 ```html
-<CLink href="/pagina" underline="none">Ir a la página</CLink>
+<BLink href="/pagina" underline="none">Ir a la página</BLink>
 ```
 
 ### Con handler de click (sin href)
 
 ```html
-<CLink @click="handleClick">Acción</CLink>
+<BLink @click="handleClick">Acción</BLink>
 ```
 
 ### Deshabilitado
 
 ```html
-<CLink href="/ruta" :disabled="true">No disponible</CLink>
+<BLink href="/ruta" :disabled="true">No disponible</BLink>
 ```
 
 ---
 
 ## Estilos en el proyecto consumidor
 
-`CLink` emite únicamente estructura y el comportamiento de `text-decoration`. El proyecto consumidor define color, tipografía y estados en su propio SCSS.
+`BLink` emite únicamente estructura y el comportamiento de `text-decoration`. El proyecto consumidor define color, tipografía y estados en su propio SCSS.
 
 ```scss
 // src/components/cta/_link.scss
 @use 'bedrock-config' as *;
 @use '@bedrock/core/link';
 
-.c-link {
+.b-link {
   .text {
     @include typeset(body);
     color: color(text);

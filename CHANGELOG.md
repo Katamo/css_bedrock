@@ -1,4 +1,4 @@
-# Changelog
+﻿# Changelog
 
 Todos los cambios notables de este proyecto se documentan aquí.
 
@@ -34,20 +34,20 @@ Versión inicial del framework. Establece la arquitectura base, las herramientas
 - `@include animation($name)` — aplica una animación del sistema
 
 #### Componentes Vue 3
-- `CGridLayout` — contenedor de grid con `data-grid-layout`
-- `CGridArea` — celda de grid con `data-grid-area`
-- `CWrapper` — contenedor con padding responsivo via `data-wrapper`
-- `CButton` — botón/enlace sin estilos con `data-*` de estado
-- `CClickableArea` — área accionable accesible (teclado + pointer)
-- `CLink` — enlace de texto con estructura `.text`
-- `CMenu` — menú de navegación semántico por slots
-- `CField` — carcasa de campo de formulario (label + control + hint + error)
-- `CInput` — input nativo compatible con `v-model`
-- `CCheckbox` — checkbox con label, compatible con `v-model` booleano
-- `CPagination` — paginación con `v-model`, slots prev/next/page
-- `CBadge` — etiqueta de categoría/estado con slot de icono
-- `CImage` — figura semántica con `object-fit` y slot de caption
-- `CLogo` — logo de marca con enlace opcional y slot de contenido
+- `BGridLayout` — contenedor de grid con `data-grid-layout`
+- `BGridArea` — celda de grid con `data-grid-area`
+- `BWrapper` — contenedor con padding responsivo via `data-wrapper`
+- `BButton` — botón/enlace sin estilos con `data-*` de estado
+- `BClickableArea` — área accionable accesible (teclado + pointer)
+- `BLink` — enlace de texto con estructura `.text`
+- `BMenu` — menú de navegación semántico por slots
+- `BField` — carcasa de campo de formulario (label + control + hint + error)
+- `BInput` — input nativo compatible con `v-model`
+- `BCheckbox` — checkbox con label, compatible con `v-model` booleano
+- `BPagination` — paginación con `v-model`, slots prev/next/page
+- `BBadge` — etiqueta de categoría/estado con slot de icono
+- `BImage` — figura semántica con `object-fit` y slot de caption
+- `BLogo` — logo de marca con enlace opcional y slot de contenido
 
 #### Documentación
 - Site de documentación con VitePress en GitHub Pages

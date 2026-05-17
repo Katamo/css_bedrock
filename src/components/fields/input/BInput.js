@@ -1,16 +1,16 @@
-import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent } from 'vue';
 
 /**
- * CInput
+ * BInput
  * Native text input, v-model compatible.
- * Renders a single <input class="c-input">.
+ * Renders a single <input class="b-input">.
  *
  * Supports v-model via modelValue + update:modelValue.
  * All extra attrs (id, name, placeholder, autocomplete…)
  * are forwarded to the input element.
  */
 export default defineComponent({
-  name: 'CInput',
+  name: 'BInput',
   inheritAttrs: false,
   props: {
     modelValue: { type: [String, Number], default: '' },
@@ -21,7 +21,7 @@ export default defineComponent({
   setup(props, { attrs, emit }) {
     return () => h('input', {
       ...attrs,
-      class:    ['c-input', attrs.class],
+      class:    ['b-input', attrs.class],
       type:     props.type,
       value:    props.modelValue,
       disabled: props.disabled || undefined,

@@ -1,6 +1,6 @@
-# Grid Layout
+﻿# Grid Layout
 
-`CGridLayout` y `CGridArea` son primitivas de estructura para gestionar layouts basados en **CSS Grid** de forma declarativa. El grid se define completamente en SASS — los componentes Vue solo añaden los atributos `data-*` que los mixins necesitan para generar el CSS correcto.
+`BGridLayout` y `BGridArea` son primitivas de estructura para gestionar layouts basados en **CSS Grid** de forma declarativa. El grid se define completamente en SASS — los componentes Vue solo añaden los atributos `data-*` que los mixins necesitan para generar el CSS correcto.
 
 ---
 
@@ -9,30 +9,30 @@
 ```vue
 <template>
   <div class="m-page">
-    <CGridLayout layout="page">
-      <CGridArea area="header">
+    <BGridLayout layout="page">
+      <BGridArea area="header">
         <AppHeader />
-      </CGridArea>
-      <CGridArea area="main">
+      </BGridArea>
+      <BGridArea area="main">
         <slot />
-      </CGridArea>
-      <CGridArea area="footer">
+      </BGridArea>
+      <BGridArea area="footer">
         <AppFooter />
-      </CGridArea>
-    </CGridLayout>
+      </BGridArea>
+    </BGridLayout>
   </div>
 </template>
 
 <script setup>
-import { CGridLayout, CGridArea } from '@bedrock/core/vue';
+import { BGridLayout, BGridArea } from '@bedrock/core/vue';
 </script>
 ```
 
-**Props de `CGridLayout`:**
+**Props de `BGridLayout`:**
 - `layout` — nombre del grid, debe coincidir con el usado en `grid-layout()`.
 - `tag` — etiqueta HTML a renderizar (por defecto `div`).
 
-**Props de `CGridArea`:**
+**Props de `BGridArea`:**
 - `area` — nombre del área, debe coincidir con el usado en `grid-area()`.
 - `tag` — etiqueta HTML a renderizar (por defecto `div`).
 
@@ -160,6 +160,6 @@ Asigna el elemento a la `grid-area` correspondiente, buscando el atributo `data-
 
 ## 5. Notas
 
-- **Cada módulo define su propio layout con un nombre único.** Varios módulos pueden usar `CGridLayout` con layouts distintos sin interferir entre sí.
+- **Cada módulo define su propio layout con un nombre único.** Varios módulos pueden usar `BGridLayout` con layouts distintos sin interferir entre sí.
 - **Sin Shadow DOM.** Los mixins globales (`spacing()`, `color()`, `typeset()`) funcionan dentro de los componentes sin restricciones.
 - **El CSS es la única fuente de verdad.** Los componentes Vue solo añaden atributos `data-*`; toda la lógica visual vive en SASS.

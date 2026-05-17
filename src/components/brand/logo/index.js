@@ -1,3 +1,3 @@
-import CLogo from './CLogo.js';
+﻿import BLogo from './BLogo.js';
 
-export { CLogo, CLogo as default };
+export { BLogo, BLogo as default };

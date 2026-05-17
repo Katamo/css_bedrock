@@ -1,4 +1,4 @@
-# Consumo e Importación
+﻿# Consumo e Importación
 
 Bedrock utiliza el moderno sistema de módulos de SASS (`@use` y `@forward`). Ya no existe un "ámbito global"; todo debe importarse explícitamente donde se necesite.
 
@@ -15,7 +15,7 @@ Todas las herramientas quedan disponibles directamente, sin prefijo. Es la forma
 ```scss
 @use 'bedrock-config' as *;
 
-.c-button {
+.b-button {
   @include typeset(button);
   padding-block: spacing(2);
   padding-inline: spacing(4);
@@ -43,7 +43,7 @@ Todas las llamadas se prefijan con `bedrock.`. Útil cuando conviven varias libr
 ```scss
 @use 'bedrock-config' as bedrock;
 
-.c-button {
+.b-button {
   @include bedrock.typeset(button);
   padding-block: bedrock.spacing(2);
   padding-inline: bedrock.spacing(4);

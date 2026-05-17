@@ -1,7 +1,7 @@
-import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent } from 'vue';
 
 /**
- * CButton
+ * BButton
  * Vue 3 button/link component for Bedrock.
  * Renders as <button> by default, or <a> when href is provided.
  *
@@ -17,7 +17,7 @@ import { h, defineComponent } from 'vue';
  *   data-disabled ← disabled prop  (@include attr(disabled))
  */
 export default defineComponent({
-  name: 'CButton',
+  name: 'BButton',
   inheritAttrs: false,
   props: {
     color:    { type: String,  default: null },
@@ -34,7 +34,7 @@ export default defineComponent({
 
       const domProps = {
         ...attrs,
-        class: ['c-button', attrs.class],
+        class: ['b-button', attrs.class],
         ...(props.id       && { id: props.id }),
         ...(props.color    && { 'data-color':  props.color }),
         ...(props.width    && { 'data-width':  props.width }),

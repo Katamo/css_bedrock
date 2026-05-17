@@ -1,15 +1,15 @@
-import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent } from 'vue';
 
 /**
- * CGridArea
- * Vue 3 Wrapper for Bedrock Grid Area.
+ * BGridLayout
+ * Vue 3 Wrapper for Bedrock Grid Layout.
  * Provides a native Vue experience without Custom Element warnings.
  */
 export default defineComponent({
-  name: 'CGridArea',
+  name: 'BGridLayout',
   inheritAttrs: false,
   props: {
-    area: {
+    layout: {
       type: String,
       required: true
     },
@@ -23,8 +23,8 @@ export default defineComponent({
       props.tag,
       {
         ...attrs,
-        'data-grid-area': props.area,
-        class: ['c-grid-area', attrs.class]
+        'data-grid-layout': props.layout,
+        class: ['b-grid-layout', attrs.class]
       },
       slots.default ? slots.default() : []
     );

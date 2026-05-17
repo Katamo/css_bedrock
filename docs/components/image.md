@@ -1,13 +1,13 @@
-# Image
+﻿# Image
 
-`CImage` es un wrapper semántico sobre `<img>` que renderiza un `<figure>`. Gestiona el `object-fit`, la carga diferida, y permite inyectar un pie de foto mediante el slot `caption`. No impone ningún estilo visual.
+`BImage` es un wrapper semántico sobre `<img>` que renderiza un `<figure>`. Gestiona el `object-fit`, la carga diferida, y permite inyectar un pie de foto mediante el slot `caption`. No impone ningún estilo visual.
 
 ---
 
 ## Importación
 
 ```js
-import { CImage } from '@bedrock/core/vue';
+import { BImage } from '@bedrock/core/vue';
 ```
 
 ```scss
@@ -53,12 +53,12 @@ import { CImage } from '@bedrock/core/vue';
 
 ```html
 <!-- Sin caption -->
-<figure class="c-image" data-fit="cover">
+<figure class="b-image" data-fit="cover">
   <img src="..." alt="..." loading="lazy" draggable="false" />
 </figure>
 
 <!-- Con caption -->
-<figure class="c-image" data-has-caption>
+<figure class="b-image" data-has-caption>
   <img src="..." alt="..." loading="lazy" draggable="false" />
   <figcaption class="caption">Descripción de la imagen</figcaption>
 </figure>
@@ -71,33 +71,33 @@ import { CImage } from '@bedrock/core/vue';
 ### Básico
 
 ```html
-<CImage src="/foto.jpg" alt="Descripción de la foto" />
+<BImage src="/foto.jpg" alt="Descripción de la foto" />
 ```
 
 ### Con object-fit cover (para thumbnails)
 
 ```html
-<CImage src="/portada.jpg" alt="Portada" fit="cover" :width="800" :height="600" />
+<BImage src="/portada.jpg" alt="Portada" fit="cover" :width="800" :height="600" />
 ```
 
 ### Carga eager (above the fold)
 
 ```html
-<CImage src="/hero.jpg" alt="Hero" fit="cover" loading="eager" />
+<BImage src="/hero.jpg" alt="Hero" fit="cover" loading="eager" />
 ```
 
 ### Con pie de foto
 
 ```html
-<CImage src="/foto.jpg" alt="Paisaje">
+<BImage src="/foto.jpg" alt="Paisaje">
   <template #caption>Vista desde la cima del Tibidabo, Barcelona.</template>
-</CImage>
+</BImage>
 ```
 
 ### Responsiva con srcset
 
 ```html
-<CImage
+<BImage
   src="/imagen-800.jpg"
   alt="Imagen responsiva"
   srcset="/imagen-400.jpg 400w, /imagen-800.jpg 800w, /imagen-1200.jpg 1200w"
@@ -113,7 +113,7 @@ import { CImage } from '@bedrock/core/vue';
 @use 'bedrock-config' as *;
 @use '@bedrock/core/image';
 
-.c-image {
+.b-image {
   display: block;
   overflow: hidden;
   margin: 0;

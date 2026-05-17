@@ -1,4 +1,4 @@
-# Guía 02 — Propiedades lógicas: compatibilidad RTL/LTR
+﻿# Guía 02 — Propiedades lógicas: compatibilidad RTL/LTR
 
 ## Regla
 
@@ -57,7 +57,7 @@ Con propiedades lógicas, el mismo CSS funciona en ambas direcciones sin ningún
 ## Anti-patrón — propiedades físicas
 
 ```scss
-.c-badge {
+.b-badge {
   // ❌ Solo funciona en LTR
   .icon {
     margin-right: spacing(1.5);
@@ -75,7 +75,7 @@ Con propiedades lógicas, el mismo CSS funciona en ambas direcciones sin ningún
 ## Patrón correcto — propiedades lógicas
 
 ```scss
-.c-badge {
+.b-badge {
   // ✅ Funciona en LTR y RTL
   .icon {
     margin-inline-end: spacing(1.5);

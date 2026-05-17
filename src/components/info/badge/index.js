@@ -1,3 +1,3 @@
-import CBadge from './CBadge.js';
+﻿import BBadge from './BBadge.js';
 
-export { CBadge, CBadge as default };
+export { BBadge, BBadge as default };

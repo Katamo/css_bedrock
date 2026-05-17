@@ -1,3 +1,3 @@
-import CMenu from './CMenu.js';
+﻿import BMenu from './BMenu.js';
 
-export { CMenu, CMenu as default };
+export { BMenu, BMenu as default };

@@ -1,3 +1,3 @@
-import CButton from './CButton.js';
+﻿import BButton from './BButton.js';
 
-export { CButton, CButton as default };
+export { BButton, BButton as default };

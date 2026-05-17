@@ -1,3 +1,3 @@
-import CImage from './CImage.js';
+﻿import BImage from './BImage.js';
 
-export { CImage, CImage as default };
+export { BImage, BImage as default };

@@ -1,4 +1,4 @@
-# Guía 01 — Encapsulación: componentes y módulos son cerrados
+﻿# Guía 01 — Encapsulación: componentes y módulos son cerrados
 
 ## Regla
 
@@ -25,14 +25,14 @@ Todo lo que ocurre *dentro* del componente (su estructura HTML, sus clases inter
 <!-- AppHeader.vue -->
 <template>
   <header class="m-header">
-    <CLogo src="/logo.png" href="/" />
+    <BLogo src="/logo.png" href="/" />
   </header>
 </template>
 
 <style scoped>
 .m-header {
   /* ❌ El módulo conoce la clase interna del componente */
-  .c-logo {
+  .b-logo {
     width: 120px;
     flex-direction: row; /* intenta reorganizar los internos del componente */
   }
@@ -42,8 +42,8 @@ Todo lo que ocurre *dentro* del componente (su estructura HTML, sus clases inter
 
 Problemas:
 
-- El módulo depende del nombre de clase `.c-logo`, que es un detalle de implementación.
-- Si `CLogo` cambia su estructura interna, el módulo se rompe silenciosamente.
+- El módulo depende del nombre de clase `.b-logo`, que es un detalle de implementación.
+- Si `BLogo` cambia su estructura interna, el módulo se rompe silenciosamente.
 - Es imposible testear o reutilizar el componente de forma aislada porque su apariencia depende del contexto en que se usa.
 
 ---
@@ -57,17 +57,17 @@ Cuando el módulo necesita que un componente se comporte de una manera específi
 ```vue
 <!-- src/components/AppLogo.vue -->
 <template>
-  <CLogo
+  <BLogo
     class="app-logo"
     :src="src"
     :href="href"
   >
     <slot />
-  </CLogo>
+  </BLogo>
 </template>
 
 <script setup>
-import { CLogo } from '@bedrock/core/vue';
+import { BLogo } from '@bedrock/core/vue';
 defineProps({ src: String, href: String });
 </script>
 

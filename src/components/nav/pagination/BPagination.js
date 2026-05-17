@@ -1,7 +1,7 @@
-import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'CPagination',
+  name: 'BPagination',
   inheritAttrs: false,
   props: {
     currentPage: { type: Number, required: true },
@@ -61,7 +61,7 @@ export default defineComponent({
 
       return h('nav', {
         ...restAttrs,
-        class: ['c-pagination', extraClass],
+        class: ['b-pagination', extraClass],
         'aria-label': attrs['aria-label'] ?? 'Pagination',
         ...(props.disabled ? { 'data-disabled': '' } : {}),
       }, [

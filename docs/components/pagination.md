@@ -1,13 +1,13 @@
-# Pagination
+﻿# Pagination
 
-`CPagination` es un control de navegación por páginas compatible con `v-model`. Renderiza un `<nav>` con botones anterior/siguiente y una lista de páginas. No impone ningún estilo visual — el proyecto consumidor define el aspecto completo.
+`BPagination` es un control de navegación por páginas compatible con `v-model`. Renderiza un `<nav>` con botones anterior/siguiente y una lista de páginas. No impone ningún estilo visual — el proyecto consumidor define el aspecto completo.
 
 ---
 
 ## Importación
 
 ```js
-import { CPagination } from '@bedrock/core/vue';
+import { BPagination } from '@bedrock/core/vue';
 ```
 
 ```scss
@@ -58,7 +58,7 @@ import { CPagination } from '@bedrock/core/vue';
 ## Estructura HTML generada
 
 ```html
-<nav class="c-pagination" aria-label="Pagination">
+<nav class="b-pagination" aria-label="Pagination">
   <div class="prev" role="button" tabindex="0" aria-label="Previous page">‹</div>
   <ul class="pages">
     <li><button class="page" type="button">1</button></li>
@@ -76,32 +76,32 @@ import { CPagination } from '@bedrock/core/vue';
 ### Básico con v-model
 
 ```html
-<CPagination v-model:currentPage="page" :total-pages="10" />
+<BPagination v-model:currentPage="page" :total-pages="10" />
 ```
 
 ### Slots personalizados para prev/next
 
 ```html
-<CPagination v-model:currentPage="page" :total-pages="10">
+<BPagination v-model:currentPage="page" :total-pages="10">
   <template #prev>Anterior</template>
   <template #next>Siguiente</template>
-</CPagination>
+</BPagination>
 ```
 
 ### Slot de página con formato personalizado
 
 ```html
-<CPagination v-model:currentPage="page" :total-pages="10">
+<BPagination v-model:currentPage="page" :total-pages="10">
   <template #page="{ page, current }">
     <span :aria-label="`Página ${page}`">{{ page }}</span>
   </template>
-</CPagination>
+</BPagination>
 ```
 
 ### Deshabilitada
 
 ```html
-<CPagination v-model:currentPage="page" :total-pages="10" :disabled="true" />
+<BPagination v-model:currentPage="page" :total-pages="10" :disabled="true" />
 ```
 
 ---
@@ -112,7 +112,7 @@ import { CPagination } from '@bedrock/core/vue';
 @use 'bedrock-config' as *;
 @use '@bedrock/core/pagination';
 
-.c-pagination {
+.b-pagination {
   display: flex;
   align-items: center;
   gap: spacing(1);

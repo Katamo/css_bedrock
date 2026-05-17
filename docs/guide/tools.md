@@ -1,4 +1,4 @@
-# Referencia de Herramientas (Tools)
+﻿# Referencia de Herramientas (Tools)
 
 Al importar Bedrock, obtienes acceso a todas las funciones y mixins documentados aquí. Para usarlos en tu proyecto importa tu archivo de configuración:
 
@@ -54,7 +54,7 @@ Calcula un espaciado multiplicando `$multiplier` por `$spacing-base` (por defect
 Devuelve un color del mapa `$colors`. Si no se especifica variación, devuelve `base`.
 
 ```scss
-.c-button {
+.b-button {
   background-color: color(primary);         // primary.base
   color:            color(text, inverted);  // text.inverted
   border-color:     color(greys, light);    // greys.light
@@ -75,7 +75,7 @@ Si el color o la variante no existen, SASS lanza un error de compilación. Aseg�
 Devuelve `color(white)` o `color(black)` según la luminosidad del color recibido. Útil para garantizar legibilidad automática.
 
 ```scss
-.c-badge {
+.b-badge {
   $bg: color(primary);
   background-color: $bg;
   color: contrastColor($bg);  // blanco si primary es oscuro, negro si es claro
@@ -178,16 +178,16 @@ Los mixins de mutations generan selectores CSS encapsulados dentro de la clase r
 Aplica estilos cuando el **propio elemento** tiene el atributo `data-{name}` (o `data-{name}="value"`).
 
 ```scss
-.c-button {
+.b-button {
   background-color: color(primary);
 
-  // <div class="c-button" data-type="ghost">
+  // <div class="b-button" data-type="ghost">
   @include attr(type, ghost) {
     background-color: transparent;
     border: 1px solid color(primary);
   }
 
-  // <div class="c-button" data-disabled>
+  // <div class="b-button" data-disabled>
   @include attr(disabled) {
     opacity: 0.5;
     pointer-events: none;
@@ -197,8 +197,8 @@ Aplica estilos cuando el **propio elemento** tiene el atributo `data-{name}` (o 
 
 **CSS generado:**
 ```css
-.c-button[data-type="ghost"] { ... }
-.c-button[data-disabled] { ... }
+.b-button[data-type="ghost"] { ... }
+.b-button[data-disabled] { ... }
 ```
 
 ---
@@ -208,7 +208,7 @@ Aplica estilos cuando el **propio elemento** tiene el atributo `data-{name}` (o 
 Aplica estilos cuando el componente está **dentro de un ancestro** con `data-{name}="value"`. Permite que los componentes se adapten automáticamente a su entorno.
 
 ```scss
-.c-button {
+.b-button {
   color: color(black);
 
   // Dentro de: <section data-background="dark">
@@ -225,9 +225,9 @@ Aplica estilos cuando el componente está **dentro de un ancestro** con `data-{n
 
 **CSS generado:**
 ```css
-[data-background="dark"] .c-button { color: white; }
-[data-background="dark"] .c-button,
-[data-background="sky"]  .c-button { border-color: white; }
+[data-background="dark"] .b-button { color: white; }
+[data-background="dark"] .b-button,
+[data-background="sky"]  .b-button { border-color: white; }
 ```
 
 ---
@@ -262,7 +262,7 @@ La inversa de `context()`. Aplica estilos a un **descendiente** del componente q
 Aplica estilos `:hover` solo en dispositivos que **pueden hacer hover** (ratón o stylus). En dispositivos táctiles no se genera, evitando que los elementos queden "atascados" en estado hover tras un tap.
 
 ```scss
-.c-link {
+.b-link {
   color: color(primary);
 
   @include hover {
@@ -279,7 +279,7 @@ Aplica estilos `:hover` solo en dispositivos que **pueden hacer hover** (ratón 
 Aplica `:hover` **incondicionalmente**, sin detectar la capacidad del dispositivo. Úsalo cuando quieras que el hover funcione también en táctil.
 
 ```scss
-.c-button {
+.b-button {
   @include tapAndHover {
     opacity: 0.8;
   }

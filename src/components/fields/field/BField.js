@@ -1,13 +1,13 @@
-import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent } from 'vue';
 
 /**
- * CField
+ * BField
  * Shell for a form field: label + control + hint + error.
  * Provides structure and state data-attributes.
  * The control (input, select, etc.) goes in the default slot.
  *
  * Slots:
- *   default — the field control (CInput, CCheckbox, native select…)
+ *   default — the field control (BInput, BCheckbox, native select…)
  *   label   — label text
  *   hint    — helper text shown below the control
  *   error   — error message; also sets data-error on the root
@@ -15,7 +15,7 @@ import { h, defineComponent } from 'vue';
  * Accessibility: use fieldId to link the label to its input via for/id.
  */
 export default defineComponent({
-  name: 'CField',
+  name: 'BField',
   inheritAttrs: false,
   props: {
     fieldId:  { type: String,  default: null },
@@ -28,7 +28,7 @@ export default defineComponent({
 
       return h('div', {
         ...attrs,
-        class: ['c-field', attrs.class],
+        class: ['b-field', attrs.class],
         ...(props.disabled && { 'data-disabled': '' }),
         ...(props.required && { 'data-required': '' }),
         ...(hasError       && { 'data-error':    '' }),

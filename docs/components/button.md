@@ -1,6 +1,6 @@
-# Button
+﻿# Button
 
-`CButton` es un componente de botón/enlace sin estilos visuales propios. Proporciona la estructura, el comportamiento y los atributos de datos necesarios para que el proyecto consumidor construya encima cualquier variante de botón mediante SASS.
+`BButton` es un componente de botón/enlace sin estilos visuales propios. Proporciona la estructura, el comportamiento y los atributos de datos necesarios para que el proyecto consumidor construya encima cualquier variante de botón mediante SASS.
 
 Renderiza como `<button>` por defecto, o como `<a>` cuando se le pasa `href`.
 
@@ -11,13 +11,13 @@ Renderiza como `<button>` por defecto, o como `<a>` cuando se le pasa `href`.
 ### JavaScript (Vue 3)
 
 ```js
-import { CButton } from '@bedrock/core/vue';
+import { BButton } from '@bedrock/core/vue';
 ```
 
 ### SCSS
 
 ```scss
-// Emite los estilos base de .c-button
+// Emite los estilos base de .b-button
 @use '@bedrock/core/button';
 ```
 
@@ -46,24 +46,24 @@ import { CButton } from '@bedrock/core/vue';
 | `arrow`   | Icono trasero (después del texto, típicamente una flecha). |
 
 ```html
-<CButton color="primary">
+<BButton color="primary">
   <template #icon><img src="./icon.svg" /></template>
   Comprar
   <template #arrow><img src="./arrow.svg" /></template>
-</CButton>
+</BButton>
 ```
 
 ---
 
 ## Estilos en el proyecto consumidor
 
-`CButton` no impone ningún estilo visual. El proyecto consumidor define el aspecto completo en su propio SCSS usando la clase `.c-button` y los atributos de datos como puntos de variación.
+`BButton` no impone ningún estilo visual. El proyecto consumidor define el aspecto completo en su propio SCSS usando la clase `.b-button` y los atributos de datos como puntos de variación.
 
 ```scss
 // src/components/cta/_button.scss
 @use 'bedrock-config' as *;
 
-.c-button {
+.b-button {
   // Estilos base
   padding: spacing(2) spacing(5);
   border-radius: spacing(1);
@@ -102,22 +102,22 @@ Bedrock incluye un mixin de utilidad para aplicar los tres valores de color de u
 
 ## Extensión con props propias
 
-Si necesitas añadir props tipadas que no existen en `CButton`, crea un componente envoltorio en tu proyecto:
+Si necesitas añadir props tipadas que no existen en `BButton`, crea un componente envoltorio en tu proyecto:
 
 ```js
 // src/components/cta/AppButton.js
 import { h } from 'vue';
-import { CButton } from '@bedrock/core/vue';
+import { BButton } from '@bedrock/core/vue';
 
 export default {
   name: 'AppButton',
   inheritAttrs: false,
   props: {
-    ...CButton.props,
+    ...BButton.props,
     sabor: { type: String, default: null },
   },
   setup(props, { slots, attrs }) {
-    return () => h(CButton, {
+    return () => h(BButton, {
       color:    props.color,
       type:     props.type,
       disabled: props.disabled,
@@ -132,8 +132,8 @@ export default {
 };
 ```
 
-Para atributos puntuales sin necesidad de tipado, puedes pasarlos directamente — `CButton` los reenvía al elemento DOM:
+Para atributos puntuales sin necesidad de tipado, puedes pasarlos directamente — `BButton` los reenvía al elemento DOM:
 
 ```html
-<CButton data-sabor="dulce">Click</CButton>
+<BButton data-sabor="dulce">Click</BButton>
 ```

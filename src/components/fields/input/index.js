@@ -1,3 +1,3 @@
-import CInput from './CInput.js';
+﻿import BInput from './BInput.js';
 
-export { CInput, CInput as default };
+export { BInput, BInput as default };

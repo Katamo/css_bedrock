@@ -1,7 +1,7 @@
-import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'CImage',
+  name: 'BImage',
   inheritAttrs: false,
   props: {
     src:      { type: String,           required: true },
@@ -32,7 +32,7 @@ export default defineComponent({
 
       return h('figure', {
         ...restAttrs,
-        class: ['c-image', extraClass],
+        class: ['b-image', extraClass],
         ...(props.fit    && { 'data-fit': props.fit }),
         ...(hasCaption   && { 'data-has-caption': '' }),
       }, [

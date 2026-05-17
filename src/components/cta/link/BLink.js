@@ -1,10 +1,10 @@
-import { h, defineComponent } from 'vue';
-import CClickableArea from '../clickable-area/CClickableArea.js';
+﻿import { h, defineComponent } from 'vue';
+import BClickableArea from '../clickable-area/BClickableArea.js';
 
 /**
- * CLink
+ * BLink
  * Text link component for Bedrock.
- * Wraps CClickableArea and adds the .text inner element
+ * Wraps BClickableArea and adds the .text inner element
  * needed for CSS targeting (underline, color transitions).
  *
  * Slots:
@@ -16,7 +16,7 @@ import CClickableArea from '../clickable-area/CClickableArea.js';
  *   data-disabled  ← disabled prop
  */
 export default defineComponent({
-  name: 'CLink',
+  name: 'BLink',
   inheritAttrs: false,
   props: {
     href:      { type: String,  default: null },
@@ -30,7 +30,7 @@ export default defineComponent({
       const { class: extraClass, ...restAttrs } = attrs;
 
       const outerProps = {
-        class: ['c-link', extraClass],
+        class: ['b-link', extraClass],
         ...(props.color     && { 'data-color':     props.color }),
         ...(props.underline && { 'data-underline': props.underline }),
         ...(props.disabled  && { 'data-disabled':  '' }),
@@ -44,7 +44,7 @@ export default defineComponent({
       };
 
       return h('div', outerProps,
-        h(CClickableArea, areaProps,
+        h(BClickableArea, areaProps,
           { default: () => h('span', { class: 'text' }, slots.default?.()) }
         )
       );

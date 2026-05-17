@@ -1,3 +1,3 @@
-import CLink from './CLink.js';
+﻿import BLink from './BLink.js';
 
-export { CLink, CLink as default };
+export { BLink, BLink as default };

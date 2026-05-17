@@ -1,4 +1,4 @@
-# Tipografía con typesets
+﻿# Tipografía con typesets
 
 ## La regla
 
@@ -85,7 +85,7 @@ Los typesets se definen en la configuración de Bedrock, junto al resto de token
 ```scss
 @use 'bedrock-config' as *;
 
-.c-field {
+.b-field {
   .label {
     @include typeset(label);
     color: color(text);
@@ -114,7 +114,7 @@ Los typesets se definen en la configuración de Bedrock, junto al resto de token
 
 ```scss
 // MAL — propiedades sueltas, sin nombre ni relación con el sistema
-.c-field {
+.b-field {
   .label {
     font-size: 0.875rem;
     font-weight: 500;

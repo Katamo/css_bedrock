@@ -1,6 +1,6 @@
-# Clickable Area
+﻿# Clickable Area
 
-`CClickableArea` convierte cualquier elemento en accionable. Proporciona la estructura semántica y la accesibilidad de teclado necesarias para que el proyecto consumidor construya encima cualquier zona clicable mediante SASS.
+`BClickableArea` convierte cualquier elemento en accionable. Proporciona la estructura semántica y la accesibilidad de teclado necesarias para que el proyecto consumidor construya encima cualquier zona clicable mediante SASS.
 
 Renderiza como `<div>` por defecto, o como `<a>` cuando se le pasa `href`.
 
@@ -11,13 +11,13 @@ Renderiza como `<div>` por defecto, o como `<a>` cuando se le pasa `href`.
 ### JavaScript (Vue 3)
 
 ```js
-import { CClickableArea } from '@bedrock/core/vue';
+import { BClickableArea } from '@bedrock/core/vue';
 ```
 
 ### SCSS
 
 ```scss
-// Emite los estilos base de .c-clickable-area
+// Emite los estilos base de .b-clickable-area
 @use '@bedrock/core/clickable-area';
 ```
 
@@ -59,38 +59,38 @@ Esto garantiza que el elemento sea completamente accesible sin configuración ad
 ### Área clicable básica
 
 ```html
-<CClickableArea @click="handleClick">
+<BClickableArea @click="handleClick">
   <img src="./imagen.jpg" alt="Descripción" />
-</CClickableArea>
+</BClickableArea>
 ```
 
 ### Como enlace
 
 ```html
-<CClickableArea href="/detalle/123">
+<BClickableArea href="/detalle/123">
   <div class="c-card">...</div>
-</CClickableArea>
+</BClickableArea>
 ```
 
 ### Deshabilitada
 
 ```html
-<CClickableArea :disabled="true" @click="handleClick">
+<BClickableArea :disabled="true" @click="handleClick">
   Contenido no clicable
-</CClickableArea>
+</BClickableArea>
 ```
 
 ---
 
 ## Estilos en el proyecto consumidor
 
-`CClickableArea` solo emite `cursor: pointer` y el comportamiento de estado deshabilitado. El proyecto consumidor añade cualquier estilo visual adicional en su propio SCSS.
+`BClickableArea` solo emite `cursor: pointer` y el comportamiento de estado deshabilitado. El proyecto consumidor añade cualquier estilo visual adicional en su propio SCSS.
 
 ```scss
 // src/components/cta/_clickable-area.scss
 @use 'bedrock-config' as *;
 
-.c-clickable-area {
+.b-clickable-area {
   display: block;
   position: relative;
 
@@ -110,13 +110,13 @@ Esto garantiza que el elemento sea completamente accesible sin configuración ad
 Un caso habitual es envolver una tarjeta entera para hacerla clicable sin perder la semántica interna:
 
 ```html
-<CClickableArea href="/evento/123" class="c-card-cover">
+<BClickableArea href="/evento/123" class="c-card-cover">
   <img src="./portada.jpg" alt="Nombre del evento" />
   <div class="c-card-cover__content">
     <h3 class="c-card-cover__title">Nombre del evento</h3>
     <span class="c-tag">Conferencia</span>
   </div>
-</CClickableArea>
+</BClickableArea>
 ```
 
 ```scss

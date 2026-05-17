@@ -1,5 +1,5 @@
-import CWrapper from './CWrapper.js';
+﻿import BWrapper from './BWrapper.js';
 
 export {
-  CWrapper
+  BWrapper
 };

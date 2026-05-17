@@ -1,13 +1,13 @@
-# Input
+﻿# Input
 
-`CInput` es un `<input>` nativo compatible con `v-model`. Renderiza un único elemento `input.c-input` sin estructura adicional. Se usa típicamente dentro de `CField`.
+`BInput` es un `<input>` nativo compatible con `v-model`. Renderiza un único elemento `input.b-input` sin estructura adicional. Se usa típicamente dentro de `BField`.
 
 ---
 
 ## Importación
 
 ```js
-import { CInput } from '@bedrock/core/vue';
+import { BInput } from '@bedrock/core/vue';
 ```
 
 ```scss
@@ -41,35 +41,35 @@ Cualquier atributo adicional (`id`, `name`, `placeholder`, `autocomplete`, `maxl
 ### Básico con v-model
 
 ```html
-<CInput v-model="nombre" placeholder="Tu nombre" />
+<BInput v-model="nombre" placeholder="Tu nombre" />
 ```
 
 ### Tipo email
 
 ```html
-<CInput v-model="email" type="email" autocomplete="email" />
+<BInput v-model="email" type="email" autocomplete="email" />
 ```
 
 ### Tipo password
 
 ```html
-<CInput v-model="password" type="password" autocomplete="current-password" />
+<BInput v-model="password" type="password" autocomplete="current-password" />
 ```
 
 ### Deshabilitado
 
 ```html
-<CInput v-model="valor" :disabled="true" />
+<BInput v-model="valor" :disabled="true" />
 ```
 
-### Dentro de CField
+### Dentro de BField
 
 ```html
-<CField field-id="email">
+<BField field-id="email">
   <template #label>Email</template>
-  <CInput id="email" v-model="email" type="email" />
+  <BInput id="email" v-model="email" type="email" />
   <template #hint>Te enviaremos el acceso aquí.</template>
-</CField>
+</BField>
 ```
 
 ---
@@ -80,7 +80,7 @@ Cualquier atributo adicional (`id`, `name`, `placeholder`, `autocomplete`, `maxl
 @use 'bedrock-config' as *;
 @use '@bedrock/core/input';
 
-.c-input {
+.b-input {
   @include typeset(input);
   width: 100%;
   height: spacing(10);

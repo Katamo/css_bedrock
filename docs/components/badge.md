@@ -1,8 +1,8 @@
-# Badge
+﻿# Badge
 
-`CBadge` es una etiqueta de categoría o estado sin estilos visuales propios. Proporciona la estructura y los atributos de datos necesarios para que el proyecto consumidor defina el aspecto mediante SASS.
+`BBadge` es una etiqueta de categoría o estado sin estilos visuales propios. Proporciona la estructura y los atributos de datos necesarios para que el proyecto consumidor defina el aspecto mediante SASS.
 
-Opcionalmente acepta `href` o `@click` para convertirse en accionable, delegando en `CClickableArea`.
+Opcionalmente acepta `href` o `@click` para convertirse en accionable, delegando en `BClickableArea`.
 
 ---
 
@@ -11,13 +11,13 @@ Opcionalmente acepta `href` o `@click` para convertirse en accionable, delegando
 ### JavaScript (Vue 3)
 
 ```js
-import { CBadge } from '@bedrock/core/vue';
+import { BBadge } from '@bedrock/core/vue';
 ```
 
 ### SCSS
 
 ```scss
-// Emite los estilos base de .c-badge
+// Emite los estilos base de .b-badge
 @use '@bedrock/core/badge';
 ```
 
@@ -55,48 +55,48 @@ import { CBadge } from '@bedrock/core/vue';
 ### Badge básico
 
 ```html
-<CBadge>Oferta</CBadge>
+<BBadge>Oferta</BBadge>
 ```
 
 ### Como enlace
 
 ```html
-<CBadge href="/categoria/ofertas">Ofertas</CBadge>
+<BBadge href="/categoria/ofertas">Ofertas</BBadge>
 ```
 
 ### Con icono
 
 ```html
-<CBadge>
+<BBadge>
   <template #icon><img src="./star.svg" alt="" /></template>
   Destacado
-</CBadge>
+</BBadge>
 ```
 
 ### Con acción
 
 ```html
-<CBadge @click="removeFilter">Filtro activo ✕</CBadge>
+<BBadge @click="removeFilter">Filtro activo ✕</BBadge>
 ```
 
 ### Deshabilitado
 
 ```html
-<CBadge :disabled="true">No disponible</CBadge>
+<BBadge :disabled="true">No disponible</BBadge>
 ```
 
 ---
 
 ## Estilos en el proyecto consumidor
 
-`CBadge` no impone ningún estilo visual. El proyecto consumidor define padding, color, tipografía y variantes en su propio SASS.
+`BBadge` no impone ningún estilo visual. El proyecto consumidor define padding, color, tipografía y variantes en su propio SASS.
 
 ```scss
 // src/components/info/_badge.scss
 @use 'bedrock-config' as *;
 @use '@bedrock/core/badge';
 
-.c-badge {
+.b-badge {
   @include typeset(badge);
   padding-block: spacing(1);
   padding-inline: spacing(3);
@@ -135,11 +135,11 @@ import { CBadge } from '@bedrock/core/vue';
 
 ## Patrón: badge con variante de color via prop personalizada
 
-Si no necesitas tipado, puedes pasar el atributo `data-color` directamente a `CBadge` sin crear ningún envoltorio:
+Si no necesitas tipado, puedes pasar el atributo `data-color` directamente a `BBadge` sin crear ningún envoltorio:
 
 ```html
-<CBadge data-color="primary">Nuevo</CBadge>
-<CBadge data-color="secondary">En revisión</CBadge>
+<BBadge data-color="primary">Nuevo</BBadge>
+<BBadge data-color="secondary">En revisión</BBadge>
 ```
 
 Si tu proyecto usa badges con variantes tipadas y quieres una prop con validación, crea un envoltorio:
@@ -147,17 +147,17 @@ Si tu proyecto usa badges con variantes tipadas y quieres una prop con validaci�
 ```js
 // src/components/info/AppBadge.js
 import { h } from 'vue';
-import { CBadge } from '@bedrock/core/vue';
+import { BBadge } from '@bedrock/core/vue';
 
 export default {
   name: 'AppBadge',
   inheritAttrs: false,
   props: {
-    ...CBadge.props,
+    ...BBadge.props,
     color: { type: String, default: null },
   },
   setup(props, { slots, attrs }) {
-    return () => h(CBadge, {
+    return () => h(BBadge, {
       href: props.href,
       disabled: props.disabled,
       ...attrs,

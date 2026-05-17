@@ -1,3 +1,3 @@
-import CClickableArea from './CClickableArea.js';
+﻿import BClickableArea from './BClickableArea.js';
 
-export { CClickableArea, CClickableArea as default };
+export { BClickableArea, BClickableArea as default };

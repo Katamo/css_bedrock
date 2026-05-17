@@ -1,3 +1,3 @@
-import CPagination from './CPagination.js';
+﻿import BPagination from './BPagination.js';
 
-export { CPagination, CPagination as default };
+export { BPagination, BPagination as default };

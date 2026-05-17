@@ -1,4 +1,4 @@
-# Sistema de Layout y Grid
+﻿# Sistema de Layout y Grid
 
 Bedrock incluye un sistema de layout fluido y predecible, pensado para trabajar con componentes primitivos estructurales (como contenedores y celdas). Todo el comportamiento de este layout se controla mediante variables y mapas SASS configurables.
 
@@ -43,7 +43,7 @@ El patrón recomendado es un **archivo dedicado** `_wrappers.scss` dentro de tu 
 @use 'setup/bedrock-config' as *;
 @use 'setup/wrappers';
 
-@use '@bedrock/core/wrapper'; // estilos base de CWrapper
+@use '@bedrock/core/wrapper'; // estilos base de BWrapper
 ```
 
 ---
@@ -87,25 +87,25 @@ Para aplicar estas capas en tus estilos, puedes utilizar la función de utilidad
 
 ## 4. Componentes de layout en Vue 3
 
-Bedrock proporciona tres componentes primitivos de layout para Vue 3: `CWrapper`, `CGridLayout` y `CGridArea`. No emiten estilos visuales por sí solos — su apariencia la define el proyecto consumidor mediante SASS.
+Bedrock proporciona tres componentes primitivos de layout para Vue 3: `BWrapper`, `BGridLayout` y `BGridArea`. No emiten estilos visuales por sí solos — su apariencia la define el proyecto consumidor mediante SASS.
 
-### CWrapper
+### BWrapper
 
 Aplica el padding horizontal configurado con `setup-wrappers()`. El prop `type` selecciona qué configuración usar.
 
 ```vue
 <template>
-  <CWrapper type="default">
+  <BWrapper type="default">
     <div class="m-hero">...</div>
-  </CWrapper>
+  </BWrapper>
 
-  <CWrapper type="full">
+  <BWrapper type="full">
     <div class="m-banner">...</div>
-  </CWrapper>
+  </BWrapper>
 </template>
 
 <script setup>
-import { CWrapper } from '@bedrock/core/vue';
+import { BWrapper } from '@bedrock/core/vue';
 </script>
 ```
 
@@ -113,24 +113,24 @@ El `type` debe coincidir con una clave definida en `setup-wrappers()`. Ver [secc
 
 ---
 
-### CGridLayout y CGridArea
+### BGridLayout y BGridArea
 
-`CGridLayout` define un contenedor de CSS Grid identificado por nombre. `CGridArea` ubica su contenido en un área concreta de ese grid.
+`BGridLayout` define un contenedor de CSS Grid identificado por nombre. `BGridArea` ubica su contenido en un área concreta de ese grid.
 
 ```vue
 <template>
-  <CGridLayout layout="header">
-    <CGridArea area="logo">
-      <CLogo src="/logo.svg" href="/" />
-    </CGridArea>
-    <CGridArea area="nav">
-      <CMenu>...</CMenu>
-    </CGridArea>
-  </CGridLayout>
+  <BGridLayout layout="header">
+    <BGridArea area="logo">
+      <BLogo src="/logo.svg" href="/" />
+    </BGridArea>
+    <BGridArea area="nav">
+      <BMenu>...</BMenu>
+    </BGridArea>
+  </BGridLayout>
 </template>
 
 <script setup>
-import { CGridLayout, CGridArea, CLogo, CMenu } from '@bedrock/core/vue';
+import { BGridLayout, BGridArea, BLogo, BMenu } from '@bedrock/core/vue';
 </script>
 ```
 
@@ -158,11 +158,11 @@ El layout se define completamente en SASS mediante los mixins `grid-layout()` y 
 }
 ```
 
-Cada módulo define su propio layout con un nombre único. Varios módulos pueden usar `CGridLayout` con layouts distintos sin interferir entre sí.
+Cada módulo define su propio layout con un nombre único. Varios módulos pueden usar `BGridLayout` con layouts distintos sin interferir entre sí.
 
 ---
 
 Para la referencia completa de props, slots y atributos generados consulta:
 
-- [CWrapper](/components/wrapper)
-- [CGridLayout + CGridArea](/components/grid-layout)
+- [BWrapper](/components/wrapper)
+- [BGridLayout + BGridArea](/components/grid-layout)

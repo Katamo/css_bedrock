@@ -29,8 +29,8 @@
     "bedrock-init": "./scripts/init.js"
   },
   "scripts": {
-    "docs:dev":     "vitepress dev docs",
-    "docs:build":   "node -e \"require('fs').copyFileSync('CHANGELOG.md','docs/changelog.md')\" && vitepress build docs",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "node -e \"require('fs').copyFileSync('CHANGELOG.md','docs/changelog.md')\" && vitepress build docs",
     "docs:preview": "vitepress preview docs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -45,6 +45,7 @@
     "@vueuse/core": "^14.3.0"
   },
   "devDependencies": {
+    "prettier": "^3.8.3",
     "vitepress": "^1.6.4"
   }
 }

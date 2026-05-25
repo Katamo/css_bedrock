@@ -1,28 +1,29 @@
-﻿import { h, defineComponent } from 'vue';
+﻿import { h, defineComponent, Fragment } from 'vue';
 
-/**
- * BMenu
- * Navigation menu component for Bedrock.
- * Provides the structural shell: div.b-menu > nav > ul.links
- *
- * The consumer renders <li> elements in the default slot,
- * using native <a> or BLink for each item.
- *
- * Mark active items with data-active on the <li> element.
- */
 export default defineComponent({
   name: 'BMenu',
   inheritAttrs: false,
   props: {
-    tag: { type: String, default: 'div' },
+    tag:       { type: String, default: 'nav' },
+    direction: { type: String, default: null },
   },
   setup(props, { slots, attrs }) {
-    return () => h(
-      props.tag,
-      { ...attrs, class: ['b-menu', attrs.class] },
-      h('nav', {},
-        h('ul', { class: 'links' }, slots.default?.())
-      )
-    );
+    return () => {
+      const vnodes = (slots.default?.() ?? []).flatMap(vnode =>
+        vnode.type === Fragment ? (vnode.children ?? []) : [vnode]
+      );
+
+      return h(
+        props.tag,
+        {
+          ...attrs,
+          class: ['b-menu', attrs.class],
+          ...(props.direction && { 'data-direction': props.direction }),
+        },
+        h('ul', { class: 'b-menu__links' },
+          vnodes.map(item => h('li', null, [item]))
+        )
+      );
+    };
   },
 });

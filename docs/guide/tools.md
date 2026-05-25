@@ -474,6 +474,29 @@ Aplica transiciones CSS de forma semántica. Solo genera código si las animacio
 
 ---
 
+### `@include blink-keyframes`
+
+Define el `@keyframes blink` en el ámbito donde se llama. Debe incluirse **una sola vez** en los estilos globales del proyecto, no en componentes individuales.
+
+```scss
+// main.scss — una sola vez en el proyecto
+@use 'bedrock-config' as *;
+
+@include blink-keyframes;
+```
+
+Una vez incluido, cualquier componente puede referenciar la animación directamente con `animation: blink`:
+
+```scss
+.c-cursor {
+  animation: blink speed(slow) infinite;
+}
+```
+
+> **Por qué es un mixin y no CSS directo:** los `@keyframes` son CSS de salida global, no definiciones SCSS. En proyectos con componentes (Vue SFCs, CSS Modules…) cada archivo se compila de forma independiente, lo que duplicaría el bloque en cada componente que importase bedrock. Al envolverlo en un mixin, el keyframe solo se emite donde se llama explícitamente. Ver [CSS global en componentes](../guides/css-global.md).
+
+---
+
 ### `@include transition-reveal`
 
 Aplica una transición de aparición por opacidad (fade-in). Se integra con el contexto `data-not-revealed` para el estado inicial de animaciones de scroll.

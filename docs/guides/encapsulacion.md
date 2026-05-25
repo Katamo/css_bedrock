@@ -130,3 +130,113 @@ Lo único que un módulo puede hacer con un componente directamente es **posicio
   align-self: center;
 }
 ```
+
+---
+
+## Variantes visuales — el componente gestiona su propio aspecto en cada contexto
+
+### El caso
+
+Un mismo componente (`CAudioPlayer`, por ejemplo) se usa en dos módulos distintos: el header del mix y un player fijo en el footer. En el footer el player necesita botones más pequeños y sin bloque de tiempo. El módulo intenta resolver esto sobreescribiendo las clases internas del componente.
+
+### Anti-patrón — el módulo fuerza el estilado desde fuera
+
+```scss
+// ❌ MBottomPlayer.vue — el módulo conoce y sobreescribe los internos del componente
+.m-bottom-player__inner {
+    .c-audio-player {
+        padding: spacing(4) 0;
+    }
+    .c-audio-player__btn {
+        width: spacing(11);
+        height: spacing(11);
+    }
+    .c-audio-player__time {
+        display: none;
+    }
+}
+```
+
+Problemas:
+
+- El módulo está acoplado a los nombres de clase internos del componente.
+- Si el componente renombra o reestructura sus internos, el módulo se rompe en silencio.
+- El comportamiento visual del componente queda repartido entre dos ficheros: imposible razonarlo de forma aislada.
+- El componente no puede ser reutilizado en un tercer contexto sin añadir más overrides en otro módulo.
+
+### Patrón correcto — el componente expone una prop `variant`
+
+El componente define una prop `variant` que se mapea a un atributo `data-variant`. Es el propio componente quien declara, internamente, cómo se comporta en cada variante.
+
+**1. El componente expone la prop y la vincula al atributo:**
+
+```vue
+<!-- CAudioPlayer.vue -->
+<script setup>
+defineProps({
+    mix: { type: Object, required: true },
+    variant: { type: String, default: null }
+})
+</script>
+
+<template>
+    <div class="c-audio-player" :data-variant="variant || undefined">
+        <!-- ... -->
+    </div>
+</template>
+```
+
+**2. El componente se estila a sí mismo para cada variante:**
+
+```scss
+// CAudioPlayer.vue — <style>
+.c-audio-player {
+    @include attr(variant, footer) {
+        .c-audio-player__btn {
+            width: spacing(11);
+            height: spacing(11);
+        }
+        .c-audio-player__time {
+            display: none;
+        }
+
+        @include bpFrom(md) {
+            .c-audio-player__btn {
+                width: spacing(14);
+                height: spacing(14);
+            }
+            .c-audio-player__time {
+                display: flex;
+            }
+        }
+    }
+}
+```
+
+**3. El módulo solo declara qué variante necesita:**
+
+```vue
+<!-- MBottomPlayer.vue -->
+<CAudioPlayer :mix="mix" variant="footer" />
+```
+
+```scss
+// ✅ MBottomPlayer no toca ningún interno de CAudioPlayer
+.m-bottom-player {
+    position: fixed;
+    bottom: 0;
+}
+```
+
+### Resumen
+
+| | Anti-patrón | Patrón correcto |
+|---|---|---|
+| ¿Quién define el aspecto del componente en cada contexto? | El módulo que lo usa | El propio componente |
+| ¿Cómo comunica el módulo sus necesidades visuales? | Sobreescribiendo clases internas | Pasando `variant` como prop |
+| ¿Dónde vive la lógica visual de todas las variantes? | Repartida entre módulos | Centralizada en el componente |
+| ¿El componente es portable a un tercer contexto? | No, hay que añadir más overrides | Sí, basta con pasar otra variante |
+
+### Cuándo crear una variante vs. cuándo crear un wrapper
+
+Usa **`variant`** cuando el componente mantiene la misma funcionalidad pero cambia su presentación visual (tamaños, visibilidad de partes, densidad). Crea un **wrapper** cuando el componente necesita estructura HTML diferente, slots adicionales o lógica de comportamiento distinta.

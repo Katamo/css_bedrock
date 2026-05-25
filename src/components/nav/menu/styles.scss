@@ -3,14 +3,26 @@
 .b-menu {
   position: relative;
 
-  .links {
+  .b-menu__links {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     list-style: none;
 
     > li > a {
       display: flex;
       align-items: center;
+    }
+  }
+
+  @include attr(direction, vertical) {
+    .b-menu__links {
+      flex-direction: column;
+    }
+  }
+
+  @include attr(direction, horizontal) {
+    .b-menu__links {
+      flex-direction: row;
     }
   }
 }

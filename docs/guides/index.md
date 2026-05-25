@@ -15,3 +15,5 @@ No son reglas estrictas, pero sí decisiones de diseño intencionadas: cada guí
 - [Encapsulación de estilos](./encapsulacion) — cómo aislar los estilos de un componente y evitar que un módulo estilice sus hijos directamente.
 - [Propiedades lógicas](./propiedades-logicas) — uso de `padding-inline`, `margin-block` y equivalentes para compatibilidad RTL/LTR.
 - [Tipografía con typesets](./tipografia) — por qué no usar propiedades tipográficas sueltas y cómo definir y aplicar typesets en su lugar.
+- [Orden de declaraciones](./ordenacion) — cómo ordenar `@include`, propiedades CSS y breakpoints dentro de un selector.
+- [CSS global en componentes](./css-global) — cómo manejar `@keyframes`, `@font-face` y otras reglas globales en proyectos con estilos encapsulados.

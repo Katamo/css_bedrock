@@ -20,7 +20,7 @@ import { BLogo } from '@bedrock/core/vue';
 
 | Prop       | Tipo      | Default | Descripción |
 |------------|-----------|---------|-------------|
-| `src`      | `String`  | —       | **Requerido.** URL de la imagen del logo. |
+| `src`      | `String`  | `null`  | URL de la imagen del logo. Si no se pasa, no se renderiza `BImage`. |
 | `alt`      | `String`  | `''`    | Texto alternativo de la imagen. |
 | `href`     | `String`  | `null`  | Si se pasa, el interior renderiza como `<a>` en lugar de `<div>`. Aplica `data-has-pointer`. |
 | `disabled` | `Boolean` | `false` | Aplica `data-disabled`. |
@@ -66,6 +66,13 @@ import { BLogo } from '@bedrock/core/vue';
     <span>LeMenu</span>
   </a>
 </div>
+
+<!-- Sin src: solo slot, sin BImage -->
+<div class="b-logo" data-has-text>
+  <div class="logo">
+    <span>Mi marca</span>
+  </div>
+</div>
 ```
 
 ---
@@ -76,6 +83,14 @@ import { BLogo } from '@bedrock/core/vue';
 
 ```html
 <BLogo src="/logo.svg" alt="Mi marca" />
+```
+
+### Solo texto, sin imagen
+
+```html
+<BLogo href="/">
+  <span class="brand-name">Mi marca</span>
+</BLogo>
 ```
 
 ### Logo como enlace a la home

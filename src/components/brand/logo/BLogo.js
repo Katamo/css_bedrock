@@ -5,7 +5,7 @@ export default defineComponent({
   name: 'BLogo',
   inheritAttrs: false,
   props: {
-    src:      { type: String, required: true },
+    src:      { type: String, default: null },
     alt:      { type: String, default: '' },
     href:     { type: String, default: null },
     disabled: { type: Boolean, default: false },
@@ -27,12 +27,12 @@ export default defineComponent({
           class: 'logo',
           ...(isLink && { href: props.href }),
         }, [
-          h(BImage, {
+          ...(props.src ? [h(BImage, {
             src:     props.src,
             alt:     props.alt,
             loading: 'eager',
             fit:     'contain',
-          }),
+          })] : []),
           ...(hasText ? slots.default() : []),
         ])
       );

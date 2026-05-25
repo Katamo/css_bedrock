@@ -13,21 +13,24 @@ export default defineComponent({
       const { class: extraClass, ...restAttrs } = attrs;
       const hasIcon = !!slots.icon;
 
+      const isLink = !!props.href;
+      const children = [
+        hasIcon ? h('span', { class: 'icon' }, slots.icon()) : null,
+        h('span', { class: 'text' }, slots.default?.()),
+      ];
+
       return h('span', {
         class: ['b-badge', extraClass],
         ...(props.disabled && { 'data-disabled': '' }),
         ...(hasIcon && { 'data-has-icon': '' }),
       },
-        h(BClickableArea, {
-          ...restAttrs,
-          href: props.href,
-          disabled: props.disabled,
-        }, {
-          default: () => [
-            hasIcon ? h('span', { class: 'icon' }, slots.icon()) : null,
-            h('span', { class: 'text' }, slots.default?.()),
-          ],
-        })
+        isLink
+          ? h(BClickableArea, {
+              ...restAttrs,
+              href: props.href,
+              disabled: props.disabled,
+            }, { default: () => children })
+          : children
       );
     };
   },

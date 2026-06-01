@@ -9,6 +9,26 @@ El versionado sigue [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [0.4.1] — 2026-06-01
+
+### Fixed
+- `BBadge` — los atributos externos (`data-*`, clases adicionales, etc.) ahora se propagan correctamente al elemento raíz
+- `BMenu` — `flatten` ahora desenrolla todos los niveles de Fragment anidados, independientemente de la profundidad de slot-forwarding
+
+---
+
+## [0.4.0] — 2026-06-01
+
+### Changed
+- `BField` — gap entre elementos (`spacing(1)`), tipografía en `.label` (`typeset(label)`)
+- `BField` — añadidos estilos para `.hint` y `.error` (tipografía + color semántico)
+- `BField` — estado `disabled` con `opacity: 0.6`
+- `BInput` — añadidos estilos por defecto: tipografía (`typeset(input)`), padding, fondo, borde, border-radius y color de texto
+- `BInput` — estilos de placeholder, foco (outline con color primario) y estado disabled
+- `BInput` — transición animada sobre `border-color` y `background-color`
+
+---
+
 ## [0.3.0] — 2026-06-01
 
 ### Changed

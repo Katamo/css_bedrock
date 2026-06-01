@@ -9,9 +9,10 @@ export default defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () => {
-      const vnodes = (slots.default?.() ?? []).flatMap(vnode =>
-        vnode.type === Fragment ? (vnode.children ?? []) : [vnode]
+      const flatten = (vnodes) => vnodes.flatMap(vnode =>
+        vnode.type === Fragment ? flatten(vnode.children ?? []) : [vnode]
       );
+      const vnodes = flatten(slots.default?.() ?? []);
 
       return h(
         props.tag,

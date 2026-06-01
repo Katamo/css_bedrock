@@ -21,6 +21,7 @@ export default defineComponent({
 
       return h('span', {
         class: ['b-badge', extraClass],
+        ...restAttrs,
         ...(props.disabled && { 'data-disabled': '' }),
         ...(hasIcon && { 'data-has-icon': '' }),
       },

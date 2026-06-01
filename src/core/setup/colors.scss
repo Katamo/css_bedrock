@@ -22,6 +22,13 @@ $colors: (
     inverted: #ffffff,
   ),
 
+  // Acento (se sobreescribe en el proyecto consumidor)
+  primary: (
+    base:  #2563eb,
+    light: #93c5fd,
+    dark:  #1d4ed8,
+  ),
+
   // Feedback
   error:   ( base: #dc3545 ),
   success: ( base: #28a745 ),

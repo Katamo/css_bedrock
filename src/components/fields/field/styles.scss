@@ -1,10 +1,12 @@
-﻿@use '../../../core' as *;
+@use '../../../core' as *;
 
 .b-field {
   display: flex;
   flex-direction: column;
+  gap: spacing(1);
 
   .label {
+    @include typeset(label);
     display: block;
   }
 
@@ -12,7 +14,18 @@
     display: block;
   }
 
+  .hint {
+    @include typeset(label);
+    color: color(text, muted);
+  }
+
+  .error {
+    @include typeset(label);
+    color: color(error);
+  }
+
   @include attr(disabled) {
     pointer-events: none;
+    opacity: 0.6;
   }
 }

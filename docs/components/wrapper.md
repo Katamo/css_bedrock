@@ -26,6 +26,23 @@ import { BWrapper } from '@bedrock/core/vue';
 **Propiedades:**
 - `type`: El tipo de wrapper definido en tu `$wrappers` config (ej: `default`, `full`, `static`). Por defecto es `default`.
 - `tag`: La etiqueta HTML a renderizar (ej: `div`, `section`, `header`). Por defecto es `div`.
+- `height`: Variante de altura. Valor aceptado: `auto` — sobrescribe el `height: 100%` por defecto.
+
+---
+
+## Variantes
+
+### `height="auto"`
+
+Por defecto `BWrapper` ocupa el 100% de la altura de su contenedor (`height: 100%`). Usa la variante `auto` cuando el wrapper debe ajustarse a la altura de su contenido.
+
+```html
+<BWrapper height="auto">
+  <p>El wrapper se adapta al alto del contenido.</p>
+</BWrapper>
+```
+
+Esto emite el atributo `data-height="auto"` en el elemento raíz y aplica `height: auto` vía el mixin `@include attr(height, auto)` en los estilos del componente.
 
 ---
 

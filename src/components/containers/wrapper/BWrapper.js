@@ -15,7 +15,11 @@ export default defineComponent({
     },
     tag: {
       type: String,
-      default: 'div' // Default to Bedrock's custom tag for styling
+      default: 'div'
+    },
+    height: {
+      type: String,
+      default: null
     }
   },
   setup(props, { slots, attrs }) {
@@ -24,6 +28,7 @@ export default defineComponent({
       {
         ...attrs,
         'type': props.type,
+        ...(props.height ? { 'data-height': props.height } : {}),
         class: ['b-wrapper', attrs.class]
       },
       slots.default ? slots.default() : []

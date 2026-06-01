@@ -1,16 +1,29 @@
-﻿@use '../../../core' as *;
+@use '../../../core' as *;
 @use 'mixins' as *;
 
 .b-button {
+  @include typeset(button);
+  @include transition((background-color, border-color, color), fast);
   position: relative;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
   white-space: nowrap;
+  padding: spacing(2) spacing(4);
+  background: color(surface);
+  border: 1px solid color(line, dark);
+  border-radius: 6px;
+  color: color(text);
 
-  // State — disabled
+  @include hover {
+    background: color(bg, raised);
+    border-color: color(greys, base);
+  }
+
   @include attr(disabled) {
     pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 }

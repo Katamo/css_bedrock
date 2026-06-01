@@ -1,11 +1,32 @@
-﻿@use '../../../core' as *;
+@use '../../../core' as *;
 
 .b-input {
+  @include typeset(input);
+  @include transition((border-color, background-color), fast);
   display: block;
   width: 100%;
   box-sizing: border-box;
+  padding: spacing(2) spacing(3);
+  background: color(surface);
+  border: 1px solid color(line, dark);
+  border-radius: 6px;
+  color: color(text);
+  appearance: none;
+
+  &::placeholder {
+    color: color(text, subtle);
+  }
+
+  &:focus {
+    outline: 2px solid color(primary);
+    outline-offset: 2px;
+    border-color: color(primary);
+  }
 
   &:disabled {
     pointer-events: none;
+    opacity: 0.5;
+    background: color(surface, alt);
+    cursor: not-allowed;
   }
 }

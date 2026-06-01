@@ -27,7 +27,37 @@ $font-weight: (
 $font-size: () !default;
 
 // MAPA TIPOGRÁFICO BASE (Occidental / Default)
-$font-typeset: () !default;
+// Incluye el typeset 'label' como mínimo necesario para BField.
+// Los proyectos pueden sobreescribirlo en su bedrock-config.
+$font-typeset: (
+  label: (
+    bps: (
+      xxs: (
+        font-size: 13px,
+        font-weight: 600,
+        line-height: 18px,
+      )
+    )
+  ),
+  input: (
+    bps: (
+      xxs: (
+        font-size: 14px,
+        font-weight: 400,
+        line-height: 20px,
+      )
+    )
+  ),
+  button: (
+    bps: (
+      xxs: (
+        font-size: 14px,
+        font-weight: 500,
+        line-height: 20px,
+      )
+    )
+  ),
+) !default;
 
 // MAPAS TIPOGRÁFICOS ÁRABES (RTL)
 $font-typeset-ar: () !default;

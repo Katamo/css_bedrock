@@ -9,6 +9,44 @@ El versionado sigue [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [0.3.0] — 2026-06-01
+
+### Changed
+- `BButton` — añadidos estilos por defecto: tipografía (`typeset(button)`), padding, fondo, borde, border-radius y color de texto
+- `BButton` — estado hover con cambio de fondo y borde (solo dispositivos no táctiles)
+- `BButton` — estado `disabled` completo: `opacity: 0.5` y `cursor: not-allowed`
+- `BButton` — transición animada sobre `background-color`, `border-color` y `color`
+
+---
+
+## [0.2.1] — 2026-06-01
+
+### Added
+- `BWrapper` — prop `height` con variante `auto` (`data-height="auto"`) para sobrescribir el `height: 100%` por defecto
+
+---
+
+## [0.2.0] — 2026-05-25
+
+### Changed
+- Todos los componentes Vue renombrados de prefijo `C` a prefijo `B`
+  (`CMenu` → `BMenu`, `CPagination` → `BPagination`, etc.)
+
+### Added
+- `@include visuallyHidden` — mixin para ocultar visualmente manteniendo accesibilidad
+- Guías de buenas prácticas: encapsulación, orden de declaraciones, CSS global
+- Prettier con formato automático al guardar para archivos SCSS
+
+### Fixed
+- `BBadge` — correcciones de estructura
+- `BLogo` — correcciones menores
+- `BMenu` — correcciones de comportamiento y estilos
+
+### Docs
+- Documentación de componentes actualizada y ampliada
+
+---
+
 ## [0.1.0] — 2026-05-15
 
 Versión inicial del framework. Establece la arquitectura base, las herramientas SASS y el catálogo de componentes Vue 3.

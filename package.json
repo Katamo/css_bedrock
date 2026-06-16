@@ -36,6 +36,7 @@
   },
   "files": [
     "src/_core.scss",
+    "src/vue.js",
     "src/core",
     "src/components",
     "scripts",

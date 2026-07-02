@@ -21,8 +21,15 @@ export default defineComponent({
     return () => {
       const isLink = !!props.href;
 
+      // role="button" debe responder a Enter y a Space (convención ARIA);
+      // preventDefault evita el scroll de página con Space
       const onKeydown = !isLink && !props.disabled
-        ? (e) => { if (e.key === 'Enter') e.currentTarget.click(); }
+        ? (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              e.currentTarget.click();
+            }
+          }
         : undefined;
 
       const domProps = {

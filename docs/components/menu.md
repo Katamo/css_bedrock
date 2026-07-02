@@ -37,6 +37,21 @@ import { BMenu } from '@bedrock/core/vue';
 
 ---
 
+## Ítem activo
+
+Si un ítem del slot lleva `aria-current` o `data-active`, su `<li>` recibe `data-active` — estilable desde el consumidor con `@include attr(active)`:
+
+```html
+<BMenu>
+  <a href="/posts" aria-current="page">Posts</a>
+  <a href="/about">About</a>
+</BMenu>
+```
+
+> Nota: `RouterLink`/`NuxtLink` aplican `aria-current` en runtime sobre el `<a>` renderizado, no en el vnode — con ellos usa `data-active` explícito (`:data-active="isActive || null"`) o estila directamente `a[aria-current]` en tu CSS.
+
+---
+
 ## Estructura renderizada
 
 ```html

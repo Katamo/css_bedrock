@@ -30,7 +30,7 @@ import { BButton } from '@bedrock/core/vue';
 | `color`    | `String`  | `null`     | Aplica `data-color` al elemento. Úsalo para variantes de color. |
 | `width`    | `String`  | `null`     | Aplica `data-width` al elemento. |
 | `height`   | `String`  | `null`     | Aplica `data-height` al elemento. |
-| `disabled` | `Boolean` | `false`    | Aplica `data-disabled`. Desactiva pointer-events. |
+| `disabled` | `Boolean` | `false`    | Aplica `data-disabled` y el atributo nativo `disabled` en `<button>`. En modo enlace, omite el `href` y aplica `aria-disabled`. |
 | `href`     | `String`  | `null`     | Si se pasa, el elemento raíz es `<a>` en lugar de `<button>`. |
 | `type`     | `String`  | `'button'` | Atributo `type` del `<button>`. Ignorado si se usa `href`. |
 | `id`       | `String`  | `null`     | Atributo `id` del elemento raíz. |
@@ -42,8 +42,8 @@ import { BButton } from '@bedrock/core/vue';
 | Slot      | Descripción |
 |-----------|-------------|
 | `default` | Contenido principal (texto del botón). |
-| `icon`    | Icono delantero (antes del texto). |
-| `arrow`   | Icono trasero (después del texto, típicamente una flecha). |
+| `icon`    | Icono delantero (antes del texto). Se envuelve en `span.icon`. |
+| `arrow`   | Icono trasero (después del texto, típicamente una flecha). Se envuelve en `span.arrow`. |
 
 ```html
 <BButton color="primary">

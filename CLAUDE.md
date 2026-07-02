@@ -178,10 +178,13 @@ Siempre que exista un componente Bedrock equivalente, usarlo en lugar del elemen
 |---|---|
 | `<button class="b-button" type="button">` | `<BButton>` |
 | `<input class="b-input" :value="..." @input="...">` | `<BInput :model-value="..." @update:model-value="...">` |
-| `<label> + <input>` / `<label> + <select>` | `<BField field-id="..."><template #label>...</template> ... </BField>` |
+| `<select>` nativo | `<BSelect :model-value="..." :options="...">` |
+| `<textarea>` nativo | `<BTextarea :model-value="...">` |
+| `<input type="radio">` | `<BRadioGroup v-model="..."><BRadio value="...">` |
+| Toggle/interruptor | `<BSwitch v-model="...">` |
+| `<label> + <input>` / `<label> + <select>` | `<BField><template #label>...</template> ... </BField>` — el control del slot hereda id/aria-describedby/aria-invalid automáticamente |
 
 Excepciones aceptadas:
-- `<select class="b-input">` — BInput solo renderiza `<input>`, no `<select>`. El select nativo con clase `b-input` es el patrón correcto.
 - Elementos sin equivalente en Bedrock (`<table>`, `<p>`, elementos semánticos de contenido).
 
 ---

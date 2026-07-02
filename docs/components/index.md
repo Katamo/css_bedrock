@@ -20,7 +20,11 @@ Los componentes de Bedrock están diseñados para ser:
 | [Badge](badge.md) | Etiqueta de estado o categoría con contenido por slot. |
 | [Field](field.md) | Contenedor de campo de formulario con label, descripción y mensaje de error. |
 | [Input](input.md) | Campo de texto nativo con soporte para tipos, estados y accesibilidad. |
+| [Select](select.md) | Select nativo con opciones por prop o por slot y chevron embebido. |
+| [Textarea](textarea.md) | Área de texto nativa con control de redimensionado. |
 | [Checkbox](checkbox.md) | Checkbox nativo accesible con label integrado. |
+| [Radio](radio.md) | Radio buttons agrupables con `BRadioGroup` y v-model compartido. |
+| [Switch](switch.md) | Interruptor on/off accesible (`role="switch"`) con v-model booleano. |
 | [Pagination](pagination.md) | Navegación por páginas con control de página actual y total. |
 | [Image](image.md) | Imagen responsiva con soporte para aspect ratio y carga lazy. |
 | [Logo](logo.md) | Logotipo con imagen y slot opcional para texto o tagline. |

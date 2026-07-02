@@ -9,6 +9,32 @@ El versionado sigue [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [0.5.0] — 2026-07-02
+
+### Added
+- `BSelect` — select nativo con v-model, opciones por prop u slot, y chevron embebido
+- `BTextarea` — textarea nativo con v-model y variante `data-resize`
+- `BRadio` / `BRadioGroup` — radio buttons agrupables con name autogenerado y v-model compartido
+- `BSwitch` — interruptor on/off accesible (`role="switch"`) con v-model booleano
+- `BField` — cableado automático de accesibilidad: provee id, `aria-describedby`, `aria-invalid`, `required` y `disabled` a los controles Bedrock de su slot via provide/inject (requiere Vue ≥ 3.5)
+- `BPagination` — prop `siblings` para truncar la lista de páginas con elipsis (slot `ellipsis` personalizable)
+- `BMenu` — el `<li>` de un ítem con `aria-current` o `data-active` recibe `data-active`
+- `BButton` — los slots `icon` y `arrow` se envuelven en `span.icon` / `span.arrow`
+- Tokens por defecto nuevos: grupos de color `surface` y `bg`, variante `text.subtle`, typesets `label`, `input` y `button`
+
+### Changed
+- **Breaking:** `BWrapper` emite `data-type` en lugar del atributo HTML inválido `type`; `setup-wrappers()` genera `[data-type="..."]`
+- **Breaking:** `setup-wrappers()` envuelve los selectores de tipo en `:where()` — las variantes del componente (`data-height`) ganan siempre; los estilos base deben importarse antes que la configuración
+- `BButton` — `disabled` aplica el atributo nativo `disabled` en `<button>`; en modo enlace omite el `href` y aplica `aria-disabled`
+- `BPagination` — prev/next son ahora `<button>` nativos (soporte completo de teclado)
+
+### Fixed
+- Los defaults de `_core.scss` estaban desincronizados con `core/setup`: el relay machacaba los typesets por defecto y omitía el grupo `primary` — los componentes no compilaban sin configuración explícita
+- `BClickableArea` — la tecla Space ahora activa el elemento (convención ARIA para `role="button"`)
+- `bedrock-init` — el starter incluye los grupos de color y typesets que los componentes requieren
+
+---
+
 ## [0.4.1] — 2026-06-01
 
 ### Fixed

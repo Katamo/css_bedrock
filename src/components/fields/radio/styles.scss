@@ -1,0 +1,36 @@
+@use '../../../core' as *;
+
+.b-radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  input[type='radio'] {
+    flex-shrink: 0;
+    cursor: inherit;
+  }
+
+  .label {
+    display: inline-block;
+  }
+
+  @include attr(disabled) {
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.b-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: spacing(2);
+
+  @include attr(direction, horizontal) {
+    flex-direction: row;
+    gap: spacing(4);
+  }
+
+  @include attr(disabled) {
+    pointer-events: none;
+  }
+}

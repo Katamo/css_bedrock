@@ -107,7 +107,26 @@
   //
   // Ver: docs/05-typography.md
   //
+  // ⚠️  Los componentes de Bedrock requieren los typesets `label`, `input` y
+  //     `button`. SASS reemplaza el mapa entero (no hace merge): mantenlos
+  //     siempre presentes, ajustando sus valores a tu proyecto.
   $font-typeset: (
+    label: (
+      bps: (
+        xxs: ( font-size: 13px, font-weight: 600, line-height: 18px ),
+      )
+    ),
+    input: (
+      bps: (
+        xxs: ( font-size: 14px, font-weight: 400, line-height: 20px ),
+      )
+    ),
+    button: (
+      bps: (
+        xxs: ( font-size: 14px, font-weight: 500, line-height: 20px ),
+      )
+    ),
+
     // Añade tus typesets aquí. Ejemplo:
     //
     // h1: (
@@ -183,6 +202,8 @@
     // ),
 
     // ── Semántica de UI ─────────────────────────────────────────────────────
+    // ⚠️  Los componentes de Bedrock usan los grupos `line`, `text`, `surface`
+    //     y `bg` — mantenlos siempre presentes (SASS no hace merge del mapa).
     line: (
       base: #e6e6e6,
       dark: #cccccc,
@@ -190,7 +211,16 @@
     text: (
       base:     #333333,
       muted:    #666666,
+      subtle:   #999999,
       inverted: #ffffff,
+    ),
+    surface: (
+      base: #ffffff,
+      alt:  #f5f5f5,
+    ),
+    bg: (
+      base:   #f5f5f5,
+      raised: #ffffff,
     ),
 
     // ── Feedback ────────────────────────────────────────────────────────────

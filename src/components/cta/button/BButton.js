@@ -30,7 +30,8 @@ export default defineComponent({
   },
   setup(props, { slots, attrs }) {
     return () => {
-      const tag = props.href ? 'a' : 'button';
+      const isLink = !!props.href;
+      const tag = isLink ? 'a' : 'button';
 
       const domProps = {
         ...attrs,
@@ -40,13 +41,19 @@ export default defineComponent({
         ...(props.width    && { 'data-width':  props.width }),
         ...(props.height   && { 'data-height': props.height }),
         ...(props.disabled && { 'data-disabled': '' }),
-        ...(props.href     ? { href: props.href } : { type: props.type }),
+        ...(isLink
+          // Un enlace deshabilitado pierde el href para quedar fuera del
+          // orden de tabulación y no ser anunciado como navegable
+          ? (props.disabled
+              ? { 'aria-disabled': 'true' }
+              : { href: props.href })
+          : { type: props.type, disabled: props.disabled || undefined }),
       };
 
       return h(tag, domProps, [
-        slots.icon?.(),
+        slots.icon  ? h('span', { class: 'icon' },  slots.icon())  : null,
         slots.default?.(),
-        slots.arrow?.(),
+        slots.arrow ? h('span', { class: 'arrow' }, slots.arrow()) : null,
       ]);
     };
   },

@@ -84,10 +84,11 @@ src/styles/
 ```scss
 // main.scss
 @use 'setup/bedrock-config' as *;
-@use 'setup/wrappers';           // ← aplica los estilos al importar
-
-@use '@bedrock/core/wrapper';    // ← estilos base del componente
+@use '@bedrock/core/wrapper';    // ← estilos base del componente (primero)
+@use 'setup/wrappers';           // ← configuración de tipos (después, para sobreescribir la base)
 ```
+
+> ⚠️ El orden importa: los estilos base (`@bedrock/core/wrapper`) deben importarse **antes** que el archivo que llama a `setup-wrappers()`, para que la configuración de cada tipo sobreescriba la base. Las variantes del componente (`data-height`) tienen mayor especificidad y ganan siempre, independientemente del orden.
 
 El archivo `_wrappers.scss` importa `bedrock-config` por su cuenta — no depende de que `main.scss` lo haya importado antes.
 
@@ -95,5 +96,5 @@ El archivo `_wrappers.scss` importa `bedrock-config` por su cuenta — no depend
 
 ## 3. Referencia de Mixins
 
-### `wrapper($type)`
-Aplica los estilos base de contenedor (`margin-inline: auto`, `width: 100%`) y las propiedades responsivas definidas para ese `$type` en la configuración. Busca el atributo `data-wrapper-type="$type"` tanto en el elemento actual como en sus hijos.
+### `setup-wrappers($config)`
+Genera, para cada tipo definido en `$config`, un selector `.b-wrapper[data-type="$type"]` con las propiedades responsivas de ese tipo (envuelto en `:where()` para mantener la especificidad baja). El tipo `default` se aplica también a los wrappers sin `data-type`.

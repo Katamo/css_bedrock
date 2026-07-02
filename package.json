@@ -1,6 +1,6 @@
 {
   "name": "@bedrock/core",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "description": "SASS framework for modular UI components",
   "main": "src/_core.scss",
   "sass": "src/_core.scss",
@@ -22,7 +22,11 @@
     "./logo": "./src/components/brand/logo/styles.scss",
     "./field": "./src/components/fields/field/styles.scss",
     "./input": "./src/components/fields/input/styles.scss",
+    "./select": "./src/components/fields/select/styles.scss",
+    "./textarea": "./src/components/fields/textarea/styles.scss",
     "./checkbox": "./src/components/fields/checkbox/styles.scss",
+    "./radio": "./src/components/fields/radio/styles.scss",
+    "./switch": "./src/components/fields/switch/styles.scss",
     "./*": "./src/*"
   },
   "bin": {

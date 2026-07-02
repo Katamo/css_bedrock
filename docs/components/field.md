@@ -20,9 +20,22 @@ import { BField } from '@bedrock/core/vue';
 
 | Prop       | Tipo      | Default | Descripción |
 |------------|-----------|---------|-------------|
-| `fieldId`  | `String`  | `null`  | Enlaza el `<label>` con el control mediante `for`/`id`. Debe coincidir con el `id` del control interior. |
-| `disabled` | `Boolean` | `false` | Aplica `data-disabled` al campo completo. |
-| `required` | `Boolean` | `false` | Aplica `data-required` al campo completo. |
+| `fieldId`  | `String`  | auto    | `id` que enlaza label y control. Si no se indica, se genera uno único automáticamente. |
+| `disabled` | `Boolean` | `false` | Aplica `data-disabled` al campo y deshabilita el control Bedrock del slot. |
+| `required` | `Boolean` | `false` | Aplica `data-required` al campo y `required` al control Bedrock del slot. |
+
+---
+
+## Cableado automático de accesibilidad
+
+`BField` provee un contexto (via provide/inject) que los controles Bedrock del slot (`BInput`, `BSelect`, `BTextarea`, `BCheckbox`, `BRadioGroup`, `BSwitch`) consumen automáticamente:
+
+- **`id`/`for`** — el label queda enlazado al control sin pasar ids a mano.
+- **`aria-describedby`** — apunta al hint y/o error cuando existen.
+- **`aria-invalid`** — se aplica cuando el slot `error` está presente.
+- **`disabled` / `required`** — se heredan del campo.
+
+Los atributos explícitos del consumidor siempre tienen prioridad sobre los heredados. Requiere Vue ≥ 3.5.
 
 ---
 
@@ -67,18 +80,20 @@ import { BField } from '@bedrock/core/vue';
 ### Campo básico con BInput
 
 ```html
-<BField field-id="email">
+<BField>
   <template #label>Email</template>
-  <BInput id="email" v-model="email" type="email" />
+  <BInput v-model="email" type="email" />
 </BField>
 ```
+
+El label y el input quedan enlazados automáticamente — no hace falta pasar ids.
 
 ### Con hint
 
 ```html
-<BField field-id="password">
+<BField>
   <template #label>Contraseña</template>
-  <BInput id="password" v-model="password" type="password" />
+  <BInput v-model="password" type="password" />
   <template #hint>Mínimo 8 caracteres.</template>
 </BField>
 ```
@@ -86,9 +101,9 @@ import { BField } from '@bedrock/core/vue';
 ### Con error
 
 ```html
-<BField field-id="username" :required="true">
+<BField :required="true">
   <template #label>Usuario</template>
-  <BInput id="username" v-model="username" />
+  <BInput v-model="username" />
   <template #error>El nombre de usuario ya existe.</template>
 </BField>
 ```

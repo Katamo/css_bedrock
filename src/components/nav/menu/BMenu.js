@@ -14,6 +14,12 @@ export default defineComponent({
       );
       const vnodes = flatten(slots.default?.() ?? []);
 
+      // El ítem activo se detecta por aria-current (RouterLink/NuxtLink lo
+      // ponen solos) o data-active manual, y se refleja en su <li>
+      const isActive = (item) =>
+        item.props != null &&
+        (item.props['aria-current'] != null || item.props['data-active'] != null);
+
       return h(
         props.tag,
         {
@@ -22,7 +28,10 @@ export default defineComponent({
           ...(props.direction && { 'data-direction': props.direction }),
         },
         h('ul', { class: 'b-menu__links' },
-          vnodes.map(item => h('li', null, [item]))
+          vnodes.map((item, index) => h('li', {
+            key: item.key ?? index,
+            ...(isActive(item) && { 'data-active': '' }),
+          }, [item]))
         )
       );
     };

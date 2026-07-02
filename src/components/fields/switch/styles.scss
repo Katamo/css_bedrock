@@ -1,0 +1,57 @@
+@use '../../../core' as *;
+
+.b-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: spacing(2);
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    @include visuallyHidden;
+  }
+
+  .track {
+    @include transition((background-color), fast);
+    position: relative;
+    flex-shrink: 0;
+    width: spacing(10);
+    height: spacing(5.5);
+    background: color(greys, light);
+    border-radius: 999px;
+  }
+
+  .thumb {
+    @include transition((inset-inline-start), fast);
+    position: absolute;
+    inset-block-start: 2px;
+    inset-inline-start: 2px;
+    width: calc(#{spacing(5.5)} - 4px);
+    height: calc(#{spacing(5.5)} - 4px);
+    background: color(surface);
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .label {
+    display: inline-block;
+  }
+
+  input:checked + .track {
+    background: color(primary);
+
+    .thumb {
+      inset-inline-start: calc(100% - #{spacing(5.5)} + 2px);
+    }
+  }
+
+  input:focus-visible + .track {
+    outline: 2px solid color(primary);
+    outline-offset: 2px;
+  }
+
+  @include attr(disabled) {
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

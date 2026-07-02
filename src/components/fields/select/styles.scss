@@ -1,0 +1,33 @@
+@use '../../../core' as *;
+
+.b-select {
+  @include typeset(input);
+  @include transition((border-color, background-color), fast);
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: spacing(2) spacing(8) spacing(2) spacing(3);
+  background: color(surface);
+  border: 1px solid color(line, dark);
+  border-radius: 6px;
+  color: color(text);
+  appearance: none;
+  cursor: pointer;
+  // chevron neutro embebido (currentColor no funciona en background-image)
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%23666666' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right spacing(3) center;
+
+  &:focus {
+    outline: 2px solid color(primary);
+    outline-offset: 2px;
+    border-color: color(primary);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    background-color: color(surface, alt);
+    cursor: not-allowed;
+  }
+}

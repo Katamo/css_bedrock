@@ -15,15 +15,20 @@
 
 // Call this mixin in your entry point (main.scss) after importing bedrock-config,
 // where spacing(), color(), font() and all other functions are available.
+// Import order matters: '@bedrock/core/wrapper' (base styles) must come BEFORE
+// the file that calls this mixin, so type configs override the base.
+//
+// :where() keeps type selectors at specificity (0,1,0) so component variants
+// like [data-height="auto"] (0,2,0) always win regardless of import order.
 @mixin setup-wrappers($config) {
   .b-wrapper {
     @each $type, $type-config in $config {
-      &[type="#{$type}"] {
+      &:where([data-type="#{$type}"]) {
         @include apply-wrapper-props($type-config);
       }
     }
     @if map.has-key($config, default) {
-      &:not([type]) {
+      &:where(:not([data-type])) {
         @include apply-wrapper-props(map.get($config, default));
       }
     }

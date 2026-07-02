@@ -32,12 +32,32 @@ $font-weight: (
   extra-bold:  800,
   black:       900,
 ) !default;
-$font-typeset:            () !default;
+// Debe mantenerse en sync con core/setup/typography.scss — este relay
+// sobreescribe los defaults de setup, así que si aquí queda vacío los
+// componentes (BField, BInput, BButton) no compilan.
+$font-typeset: (
+  label: (
+    bps: (
+      xxs: ( font-size: 13px, font-weight: 600, line-height: 18px ),
+    )
+  ),
+  input: (
+    bps: (
+      xxs: ( font-size: 14px, font-weight: 400, line-height: 20px ),
+    )
+  ),
+  button: (
+    bps: (
+      xxs: ( font-size: 14px, font-weight: 500, line-height: 20px ),
+    )
+  ),
+) !default;
 $font-typeset-ar:         () !default;
 $font-typeset-elastic:    () !default;
 $font-typeset-elastic-ar: () !default;
 
-// colors
+// colors — mantener en sync con core/setup/colors.scss (este relay
+// sobreescribe los defaults de setup)
 $colors: (
   white: ( base: #ffffff ),
   black: ( base: #000000 ),
@@ -54,7 +74,21 @@ $colors: (
   text: (
     base:     #333333,
     muted:    #666666,
+    subtle:   #999999,
     inverted: #ffffff,
+  ),
+  surface: (
+    base: #ffffff,
+    alt:  #f5f5f5,
+  ),
+  bg: (
+    base:   #f5f5f5,
+    raised: #ffffff,
+  ),
+  primary: (
+    base:  #2563eb,
+    light: #93c5fd,
+    dark:  #1d4ed8,
   ),
   error:   ( base: #dc3545 ),
   success: ( base: #28a745 ),

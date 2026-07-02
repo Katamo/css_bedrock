@@ -23,6 +23,14 @@ import { BPagination } from '@bedrock/core/vue';
 | `currentPage` | `Number`  | —       | **Requerido.** Página activa. Vinculada con `v-model`. |
 | `totalPages`  | `Number`  | —       | **Requerido.** Número total de páginas. |
 | `disabled`    | `Boolean` | `false` | Desactiva toda la paginación. |
+| `siblings`    | `Number`  | `null`  | Páginas visibles a cada lado de la actual. Los huecos se truncan con elipsis (personalizable via slot `ellipsis`); la primera y la última siempre se muestran. `null` renderiza todas. |
+
+Los botones prev/next son `<button>` nativos con `aria-label`, deshabilitados automáticamente en los extremos.
+
+```html
+<!-- 1 … 4 5 6 … 20 -->
+<BPagination v-model:current-page="page" :total-pages="20" :siblings="1" />
+```
 
 ---
 
@@ -41,6 +49,7 @@ import { BPagination } from '@bedrock/core/vue';
 | `page` | `{ page, current }` | Contenido de cada botón de página. Por defecto muestra el número. |
 | `prev` | —                            | Contenido del botón anterior. Por defecto muestra `‹`. |
 | `next` | —                            | Contenido del botón siguiente. Por defecto muestra `›`. |
+| `ellipsis` | —                        | Contenido del truncado cuando se usa `siblings`. Por defecto muestra `…`. |
 
 ---
 

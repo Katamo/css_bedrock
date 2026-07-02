@@ -27,7 +27,7 @@ export default defineComponent({
       props.tag,
       {
         ...attrs,
-        'type': props.type,
+        'data-type': props.type,
         ...(props.height ? { 'data-height': props.height } : {}),
         class: ['b-wrapper', attrs.class]
       },

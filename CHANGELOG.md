@@ -9,6 +9,14 @@ El versionado sigue [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [0.5.1] — 2026-07-03
+
+### Fixed
+- `BSelect` — el v-model preserva los valores tipados de las `<option>` (numbers, `null`…) leyendo `option._value` como hace el v-model nativo de Vue; antes siempre emitía string
+- `BSelect` — la prop `modelValue` deja de restringir el tipo a `String|Number`
+
+---
+
 ## [0.5.0] — 2026-07-02
 
 ### Added

@@ -17,7 +17,9 @@ export default defineComponent({
   name: 'BSelect',
   inheritAttrs: false,
   props: {
-    modelValue: { type: [String, Number], default: '' },
+    // Sin restricción de tipo: el v-model puede llevar valores tipados
+    // (number, null…) igual que el select nativo de Vue
+    modelValue: { default: '' },
     options:    { type: Array,   default: null },
     disabled:   { type: Boolean, default: false },
   },
@@ -52,7 +54,13 @@ export default defineComponent({
         ref: el,
         class:    ['b-select', attrs.class],
         disabled: props.disabled || field?.disabled || undefined,
-        onChange: (e) => emit('update:modelValue', e.target.value),
+        // Vue guarda el valor tipado del <option> en `_value` (runtime-dom):
+        // preferirlo preserva numbers/null en el v-model, como hace el
+        // v-model nativo de Vue sobre <select>
+        onChange: (e) => {
+          const opt = e.target.selectedOptions[0];
+          emit('update:modelValue', opt && '_value' in opt ? opt._value : e.target.value);
+        },
       }, children);
     };
   },

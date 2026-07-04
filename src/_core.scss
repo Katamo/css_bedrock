@@ -58,6 +58,9 @@ $font-typeset-elastic-ar: () !default;
 
 // colors — mantener en sync con core/setup/colors.scss (este relay
 // sobreescribe los defaults de setup)
+// Con el flag activo color() devuelve custom properties (var(--color-…))
+// en lugar de valores fijos; el proyecto las emite con color-props()
+$colors-custom-props: false !default;
 $colors: (
   white: ( base: #ffffff ),
   black: ( base: #000000 ),
@@ -165,6 +168,7 @@ $grid-gutters: (
   $font-typeset-elastic:    $font-typeset-elastic,
   $font-typeset-elastic-ar: $font-typeset-elastic-ar,
   $colors:                  $colors,
+  $colors-custom-props:     $colors-custom-props,
   $breakpoints:             $breakpoints,
   $transition-times:        $transition-times,
   $transition-curves:       $transition-curves,

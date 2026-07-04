@@ -1,5 +1,13 @@
 // Colores de marca (primary, secondary…) se definen en el proyecto consumidor.
 // Ejecuta `bedrock-init` para generar un archivo de configuración con ejemplos.
+
+// Con el flag activo, color() deja de compilar a valores fijos y devuelve
+// custom properties (`var(--color-bg-raised)`). El proyecto es responsable de
+// emitirlas con el mixin color-props() — típicamente en :root y en cada
+// selector de theme ([data-theme="light"]). Permite theming en runtime sin
+// tocar ningún componente.
+$colors-custom-props: false !default;
+
 $colors: (
   // Neutros universales
   white: ( base: #ffffff ),

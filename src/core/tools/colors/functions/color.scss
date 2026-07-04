@@ -15,7 +15,17 @@
 
   @if not map.has-key($colorSet, $variation) {
     @warn "Unknown #{$variation} variation in #{$color}";
-    @return map.get($colorSet, base);
+    $variation: base;
+  }
+
+  // Modo custom properties (ver setup/colors): el valor vive en la variable
+  // que emite el proyecto con color-props(); la validación de arriba sigue
+  // cazando tokens inexistentes en compilación
+  @if $colors-custom-props {
+    @if $variation == base {
+      @return var(--color-#{$color});
+    }
+    @return var(--color-#{$color}-#{$variation});
   }
 
   @return map.get($colorSet, $variation);

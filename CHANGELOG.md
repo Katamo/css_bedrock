@@ -9,6 +9,15 @@ El versionado sigue [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [0.6.0] — 2026-07-03
+
+### Added
+- **Theming en runtime**: nuevo flag de setup `$colors-custom-props` (default `false`). Activo, `color()` compila a custom properties (`var(--color-bg-raised)`) en lugar de valores fijos — todos los `color()` del proyecto y de los componentes Bedrock pasan a ser conmutables sin tocarlos
+- Nuevo mixin `color-props($map)`: emite un mapa de colores como custom properties en el selector actual (`:root` para la paleta base, `[data-theme="…"]` para cada theme; los mapas de theme pueden ser parciales). Convención: la variación `base` no lleva sufijo (`--color-bg`), el resto sí (`--color-bg-raised`)
+- La validación de tokens de `color()` (color desconocido → error, variación desconocida → warn) se mantiene también en modo custom properties
+
+---
+
 ## [0.5.1] — 2026-07-03
 
 ### Fixed

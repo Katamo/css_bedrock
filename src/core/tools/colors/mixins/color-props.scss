@@ -1,0 +1,34 @@
+@use '../../../setup/colors' as setup;
+@use 'sass:map';
+@use 'sass:meta';
+
+/// Emite un mapa de colores como custom properties en el selector actual.
+/// Es la pareja del flag `$colors-custom-props`: color() devuelve
+/// `var(--color-…)` y este mixin escribe los valores.
+///
+/// Convención de nombres: la variación `base` no lleva sufijo.
+///   bg: (base: #0e0f13, raised: #1f242e)
+///   → --color-bg: #0e0f13; --color-bg-raised: #1f242e;
+///
+/// Uso típico (theming por data-theme en un ancestro):
+///
+///   :root                { @include color-props(); }          // paleta del setup
+///   [data-theme='light'] { @include color-props($light); }    // overrides
+///
+/// El mapa de un theme alternativo puede ser parcial: las variables no
+/// redefinidas conservan el valor de :root.
+@mixin color-props($colors: setup.$colors) {
+  @each $name, $set in $colors {
+    @if meta.type-of($set) == map {
+      @each $variation, $value in $set {
+        @if $variation == base {
+          --color-#{$name}: #{$value};
+        } @else {
+          --color-#{$name}-#{$variation}: #{$value};
+        }
+      }
+    } @else {
+      --color-#{$name}: #{$set};
+    }
+  }
+}

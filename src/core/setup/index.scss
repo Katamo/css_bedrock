@@ -21,6 +21,7 @@ $font-typeset:            () !default;
 $font-typeset-ar:         () !default;
 $font-typeset-elastic:    () !default;
 $font-typeset-elastic-ar: () !default;
+$colors-custom-props:     false !default;
 $colors: (
   white: ( base: #ffffff ),
   black: ( base: #000000 ),
@@ -74,7 +75,7 @@ $grid-gutters: (
   $transition-curves: $transition-curves,
 );
 @forward 'breakpoints' with ($breakpoints: $breakpoints);
-@forward 'colors' with ($colors: $colors);
+@forward 'colors' with ($colors: $colors, $colors-custom-props: $colors-custom-props);
 @forward 'z-index' with ($z-layers: $z-layers);
 
 // Setups that depend on tools (must come after the above)
